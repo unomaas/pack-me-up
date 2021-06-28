@@ -1,38 +1,39 @@
-import React, { useEffect } from 'react';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
-
-import { useDispatch } from 'react-redux';
-
+//#region ⬇⬇ All document setup, below:
+// ⬇ File Imports: 
+import './App.css';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+// ⬇ Dependent Functionality:
+import React, { useEffect } from 'react';
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+//#endregion ⬆⬆ All document setup above.
 
-import './App.css';
 
 function App() {
+  //#region ⬇⬇ All state variables below:
   const dispatch = useDispatch();
-
+  // ⬇ Runs on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
+  //#endregion ⬆⬆ All state variables above. 
 
+
+  // ⬇ Rendering:
   return (
     <Router>
-      <div className="App"> 
+      <div className="App">
+
         <Nav />
+
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -107,7 +108,9 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+
         <Footer />
+
       </div>
     </Router>
   );
