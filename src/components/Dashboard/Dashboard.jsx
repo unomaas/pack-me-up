@@ -72,14 +72,14 @@ export default function Dashboard() {
       <div className="Dashboard-kitlist">
         <h2>Kit Data Here</h2>
         {kits.map(kit => {
-          return <KitItem key={kit.id} kit={kit}/>
+          return <KitItem key={kit.id} kit={kit} />
         })}
       </div>
 
       <div className="Dashboard-eventlist">
         <h2>Event Data Here</h2>
         {events.map(event => {
-          return <EventItem key={event.id} event={event}/>
+          return <EventItem key={event.id} event={event} />
         })}
       </div>
 

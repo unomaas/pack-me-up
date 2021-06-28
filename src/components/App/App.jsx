@@ -10,6 +10,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Dashboard from '../Dashboard/Dashboard';
+import CreateKits from '../CreateKits/CreateKits';
+import CreateEvents from '../CreateEvents/CreateEvents';
+import Packing from '../Packing/Packing';
 // ⬇ Dependent Functionality:
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
@@ -40,11 +43,8 @@ function App() {
           <Redirect exact from="/" to="/home" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
+          {/* // shows AboutPage at all times (logged in or not) */}
+          <Route exact path="/about">
             <AboutPage />
           </Route>
 
@@ -53,13 +53,24 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user 
             logged in shows UserPage else shows LoginPage */}
-
           <ProtectedRoute exact path="/user">
             <UserPage />
           </ProtectedRoute>
 
           <ProtectedRoute exact path="/dashboard">
             <Dashboard />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/createkit">
+            <CreateKits />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/createevent">
+            <CreateEvents />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/packing">
+            <Packing />
           </ProtectedRoute>
 
           {/* // logged in shows InfoPage else shows LoginPage */}
@@ -70,36 +81,24 @@ function App() {
           {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
-          <ProtectedRoute
-            // with authRedirect:
+          {/* // with authRedirect:
             // - if logged in, redirects to "/dashboard"
-            // - else shows LoginPage at /login
-            exact
-            path="/login"
-            authRedirect="/dashboard"
-          >
+            // - else shows LoginPage at /login */}
+          <ProtectedRoute exact path="/login" authRedirect="/dashboard">
             <LoginPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
-            // with authRedirect:
+          {/* // with authRedirect:
             // - if logged in, redirects to "/dashboard"
-            // - else shows RegisterPage at "/registration"
-            exact
-            path="/registration"
-            authRedirect="/dashboard"
-          >
+            // - else shows RegisterPage at "/registration" */}
+          <ProtectedRoute exact path="/registration" authRedirect="/dashboard">
             <RegisterPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
-            // with authRedirect:
+          {/* // with authRedirect:
             // - if logged in, redirects to "/dashboard"
-            // - else shows LandingPage at "/home"
-            exact
-            path="/home"
-            authRedirect="/dashboard"
-          >
+            // - else shows LandingPage at "/home" */}
+          <ProtectedRoute exact path="/home" authRedirect="/dashboard">
             <LandingPage />
           </ProtectedRoute>
 
