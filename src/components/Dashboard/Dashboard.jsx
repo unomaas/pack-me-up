@@ -3,6 +3,7 @@
 import './Dashboard.css';
 import KitItem from '../KitItem/KitItem';
 import EventItem from '../EventItem/EventItem';
+// ⬇ Dependent functionality:
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -29,6 +30,7 @@ export default function Dashboard() {
 
 
   //#region ⬇⬇ Event handlers below:
+
   // const handleCreateKit = () => {
   //   console.log('In handleCreateKit');
   //   history.push(`/createkit`);
@@ -44,9 +46,9 @@ export default function Dashboard() {
   //   history.push(`/packing`);
   // }; // End handleStartPacking
 
-
   //#endregion ⬆⬆ Event handles above. 
 
+  
   // ⬇ Rendering:
   return (
     <div className="Dashboard-wrapper">
@@ -76,6 +78,9 @@ export default function Dashboard() {
 
       <div className="Dashboard-eventlist">
         <h2>Event Data Here</h2>
+        {events.map(event => {
+          return <EventItem key={event.id} event={event}/>
+        })}
       </div>
 
     </div>
