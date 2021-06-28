@@ -1,7 +1,8 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './Dashboard.css';
-// ⬇ Dependent functionality:
+import KitItem from '../KitItem/KitItem';
+import EventItem from '../EventItem/EventItem';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -17,8 +18,8 @@ export default function Dashboard() {
   const history = useHistory();
   const params = useParams();
   const user = useSelector((store) => store.user);
-  const movieDetail = useSelector((store) => store.movieDetail);
-  const editMovie = useSelector((store) => store.editMovie);
+  const events = useSelector((store) => store.eventsReducer);
+  const kits = useSelector((store) => store.kitsReducer);
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL_KITS' }),
@@ -28,22 +29,23 @@ export default function Dashboard() {
 
 
   //#region ⬇⬇ Event handlers below:
-  const handleCreateKit = () => {
-    console.log('In handleCreateKit');
-    history.push(`/createkit`);
-  }; // End handleCreateKit
+  // const handleCreateKit = () => {
+  //   console.log('In handleCreateKit');
+  //   history.push(`/createkit`);
+  // }; // End handleCreateKit
 
-  const handleCreateEvent = () => {
-    console.log('In handleCreateEvent');
-    history.push(`/createevent`);
-  }; // End handleCreateEvent
+  // const handleCreateEvent = () => {
+  //   console.log('In handleCreateEvent');
+  //   history.push(`/createevent`);
+  // }; // End handleCreateEvent
 
-  const handleStartPacking = () => {
-    console.log('In handleStartPacking');
-    history.push(`/packing`);
-  }; // End handleStartPacking
+  // const handleStartPacking = () => {
+  //   console.log('In handleStartPacking');
+  //   history.push(`/packing`);
+  // }; // End handleStartPacking
+
+
   //#endregion ⬆⬆ Event handles above. 
-
 
   // ⬇ Rendering:
   return (
@@ -54,19 +56,22 @@ export default function Dashboard() {
       <div className="Dashboard-calendar"></div>
 
       <div className="Dashboard-buttons">
-        <button onClick={handleCreateKit}>
+        <button onClick={() => history.push(`/createkit`)}>
           Create New Kits
         </button>
-        <button onClick={handleCreateEvent}>
+        <button onClick={() => history.push(`/createevent`)}>
           Create New Events
         </button>
-        <button onClick={handleStartPacking}>
+        <button onClick={() => history.push(`/packing`)}>
           Start Packing!
         </button>
       </div>
 
       <div className="Dashboard-kitlist">
         <h2>Kit Data Here</h2>
+        {kits.map(kit => {
+          return <KitItem key={kit.id} kit={kit}/>
+        })}
       </div>
 
       <div className="Dashboard-eventlist">

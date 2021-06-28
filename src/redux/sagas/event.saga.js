@@ -14,7 +14,7 @@ function* fetchAllEvents() {
   try {
     // ⬇ Calling to server to load data:
     const response = yield axios.get('/api/events');
-    console.log('fetchAllEvents response :', response.data);
+    console.log('fetchAllEvents response:', response.data);
     // ⬇ Sending the data from the server to the reducer to hold:
     yield put({ type: 'SET_ALL_EVENTS', payload: response.data });
   } // End try
