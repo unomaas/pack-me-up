@@ -20,10 +20,10 @@ export default function Dashboard() {
   const movieDetail = useSelector((store) => store.movieDetail);
   const editMovie = useSelector((store) => store.editMovie);
   // ⬇ GET on page load:
-  // useEffect(() => {
-  //   dispatch({ type: 'FETCH_ALL_KITS' }),
-  //   dispatch({ type: 'FETCH_EVENTS' })
-  // }, [); // ⬅ Will re-run this effect if the URL changes. 
+  useEffect(() => {
+    dispatch({ type: 'FETCH_ALL_KITS' }),
+    dispatch({ type: 'FETCH_ALL_EVENTS' })
+  }, []); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
 
