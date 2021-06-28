@@ -31,7 +31,7 @@ function Nav() {
       </Link>
 
       <div>
-        <h2 className="nav-title">Pack Me Up!</h2>
+        <p className="nav-title">Pack Me Up!</p>
       </div>
 
       <div>
