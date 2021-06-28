@@ -1,0 +1,40 @@
+.App, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'opendyslexicregular', sans-serif;
+}
+
+@font-face {
+  font-family: 'opendyslexicregular';
+  src:
+    url('./fonts/OpenDyslexia/opendyslexic-regular-webfont.woff') format('woff'),
+    url('./fonts/OpenDyslexia/opendyslexic-regular-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'opendyslexicbold';
+  src:
+    url('./fonts/OpenDyslexia/opendyslexic-bold-webfont.woff') format('woff'),
+    url('./fonts/OpenDyslexia/opendyslexic-bold-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'opendyslexicitalic';
+  src:
+    url('./fonts/OpenDyslexia/opendyslexic-italic-webfont.woff') format('woff'),
+    url('./fonts/OpenDyslexia/opendyslexic-italic-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'opendyslexicbold_italic';
+  src:
+    url('./fonts/OpenDyslexia/opendyslexic-bolditalic-webfont.woff') format('woff'),
+    url('./fonts/OpenDyslexia/opendyslexic-bolditalic-webfont.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
