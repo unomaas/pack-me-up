@@ -43,7 +43,7 @@ export default function CreateKits() {
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    dispatch({ type: 'ADD_NEW_EVENT', payload: newEvent });
+    // dispatch({ type: 'ADD_NEW_EVENT', payload: newEvent });
     // ⬇ Send the user back:
     // history.push('/dashboard');
   } // End handleSubmit
@@ -111,16 +111,6 @@ export default function CreateKits() {
           &nbsp;
 
           <br /> <br />
-
-          {/* <TextField
-            label="Add a New Kit Category?"
-            className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
-            required
-            type="search"
-            inputProps={{ maxLength: 50 }}
-          />
-          <br /> <br /> */}
 
           <Button
             name="cancel"
