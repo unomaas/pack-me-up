@@ -4,7 +4,7 @@ import axios from 'axios';
 //#endregion ⬆⬆ All document setup above. 
 
 
-// ⬇ Master itemSaga:
+// ⬇ Root itemSaga:
 function* itemSaga() {
   yield takeEvery('FETCH_ALL_ITEMS', fetchAllItems);
   yield takeEvery('ADD_NEW_ITEM', addNewItem);

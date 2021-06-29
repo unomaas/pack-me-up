@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 const eventsReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_ALL_EVENTS':
@@ -7,4 +9,16 @@ const eventsReducer = (state = [], action) => {
   } // End switch
 }; // End eventsReducer
 
-export default eventsReducer;
+const eventsCategoriesReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_EVENT_CATEGORIES':
+      return action.payload;      
+    default:
+      return state;
+  } // End switch
+}; // End eventsCategoriesReducer
+
+export default combineReducers({
+  eventsReducer,
+  eventsCategoriesReducer,
+});

@@ -8,6 +8,8 @@ import axios from 'axios';
 function* eventSaga() {
   yield takeEvery('FETCH_ALL_EVENTS', fetchAllEvents);
   yield takeEvery('ADD_NEW_EVENT', addNewEvent);
+  yield takeEvery('FETCH_EVENT_CATEGORIES', fetchEventCategories);
+  yield takeEvery('ADD_EVENT_CATEGORY', addEventCategory);
 } // End eventSaga
 
 
@@ -39,6 +41,34 @@ function* addNewEvent(action) {
     console.error('addNewEvent error:', error);
   } // End catch
 } // End addNewEvent
+
+function* fetchEventCategories() {
+  console.log('In fetchEventCategories Saga');
+  try {
+    // ⬇ Calling to server to load data:
+    const response = yield axios.get('/api/events/categories');
+    console.log('fetchEventCategories response:', response.data);
+    // ⬇ Sending the data from the server to the reducer to hold:
+    yield put({ type: 'SET_EVENT_CATEGORIES', payload: response.data });
+  } // End try
+  catch (error) {
+    console.error('fetchEventCategories error:', error);
+  } // End catch
+} // End fetchItemCategories
+
+function* addEventCategory(action) {
+  console.log('In addEventCategory Saga, action:', action.payload);
+  try {
+    // ⬇ Calling to server to load data:
+    const response = yield axios.post('/api/events/categories', action.payload);
+    console.log('addEventCategory response:', response.data);
+    // ⬇ GET to refresh data:
+    yield put({ type: 'FETCH_EVENT_CATEGORIES' });
+  } // End try
+  catch (error) {
+    console.error('addEventCategory error:', error);
+  } // End catch
+} // End addEventCategory
 //#endregion ⬆⬆ eventSaga functions above. 
 
 
