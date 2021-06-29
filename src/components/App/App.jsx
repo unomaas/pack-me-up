@@ -18,16 +18,9 @@ import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
+import { theme } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ All document setup above.
-
-const theme = createMuiTheme({
-  typography: {
-    fontFamily: 'opendyslexicregular',
-    fontSize: 12.5
-  }, 
-
-}) // End theme
 
 
 function App() {

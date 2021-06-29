@@ -5,21 +5,11 @@ import './CreateKits.css';
 import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, MenuItem, TextField, makeStyles, createMuiTheme } from '@material-ui/core';
+import { Button, MenuItem, TextField, makeStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { useStyles } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
-
-// ⬇ Material-ui Styling: 
-const useStyles = makeStyles({
-  input: {
-    width: 225
-  },
-  select: {
-    width: 175
-  }
-}); // End useStyles
-
 
 
 export default function CreateKits() {
