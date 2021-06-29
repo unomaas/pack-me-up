@@ -3,13 +3,15 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 //#endregion ⬆⬆ All document setup above. 
 
+
 // ⬇ Master kitSaga:
 function* kitSaga() {
   yield takeEvery('FETCH_ALL_KITS', fetchAllKits);
   yield takeEvery('ADD_NEW_KIT', addNewKit);
 } // End kitSaga
 
-// ⬇ kitSaga functions:
+
+//#region ⬇⬇ All kitSaga functions below:
 function* fetchAllKits() {
   console.log('In fetchAllKits Saga');
   try {
@@ -34,9 +36,10 @@ function* addNewKit(action) {
     yield put({ type: 'FETCH_ALL_KITS' });
   } // End try
   catch (error) {
-    console.error('Error in addNewKit:', error);
+    console.error('addNewKit error:', error);
   } // End catch
 } // End addNewKit
+//#endregion ⬆⬆ kitSaga functions above. 
 
 
 export default kitSaga;

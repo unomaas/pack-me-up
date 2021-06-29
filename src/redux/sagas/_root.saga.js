@@ -5,6 +5,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import kitSaga from './kit.saga';
 import eventSaga from './event.saga';
+import itemSaga from './item.saga';
 //#endregion ⬆⬆ All document setup above. 
 
 

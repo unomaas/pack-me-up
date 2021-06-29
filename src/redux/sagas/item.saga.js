@@ -3,13 +3,15 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 //#endregion ⬆⬆ All document setup above. 
 
-// ⬇ Master kitSaga:
+
+// ⬇ Master itemSaga:
 function* itemSaga() {
   yield takeEvery('FETCH_ALL_ITEMS', fetchAllItems);
   yield takeEvery('ADD_NEW_ITEM', addNewItem);
-} // End kitSaga
+} // End itemSaga
 
-// ⬇ kitSaga functions:
+
+// #region ⬇⬇ All itemSaga functions below:
 function* fetchAllItems() {
   console.log('In fetchAllItems Saga');
   try {
@@ -34,9 +36,10 @@ function* addNewItem(action) {
     yield put({ type: 'FETCH_ALL_ITEMS' });
   } // End try
   catch (error) {
-    console.error('Error in addNewItem:', error);
+    console.error('addNewItem error:', error);
   } // End catch
 } // End addNewItem
+//#endregion ⬆⬆ itemSaga functions above. 
 
 
 export default itemSaga;
