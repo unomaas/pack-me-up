@@ -8,9 +8,9 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 //#region ⬇⬇ All CRUD routes below:
 /** ⬇ GET /api/kits:
- * Router function to handle the GET part of the server-side logic.  Will send SQL query to pull all of the entries from the DB to update on the DOM.
+ * Router will send SQL query to pull all of the entries from the DB to update on the DOM.
  */
- router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('In /api/kits GET all:', req.body, req.params, req.user);
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
@@ -26,17 +26,78 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
       res.send(result.rows);
     }) // End .then
     .catch(error => {
-      console.error('Error with GET all:', error);
-      res.sendStatus(500)
+      console.error('GET all error:', error);
+      res.sendStatus(500);
     }); // End .catch
 }); // End GET
 
-/**
- * POST route template
+/** ⬇ GET /api/kits/categories:
+ * Router will send SQL query to pull all categories from the DB to update on the DOM.
+ */
+router.get('/categories', rejectUnauthenticated, (req, res) => {
+  console.log('In /api/kits/categories GET');
+  // ⬇ Declaring SQL commands to send to DB: 
+  const query = `SELECT * FROM kit_categories`;
+  // ⬇ Sending query to DB:
+  pool.query(query)
+    .then(result => {
+      console.log('GET categories result:', result.rows);
+      // ⬇ Sends back the results in an object, we always want rows:
+      res.send(result.rows);
+    }) // End .then
+    .catch(error => {
+      console.error('GET categories error:', error);
+      res.sendStatus(500);
+    }); // End .catch
+}); // End GET
+
+/** ⬇ POST /api/kits:
+ * Router will send SQL query to add a new entry to the DB.
  */
 router.post('/', (req, res) => {
-  // POST route code here
-});
+  console.log('In api/kits POST:', req.body, req.params, req.user);
+  // ⬇ Declaring SQL commands to send to DB: 
+  const query = `
+    INSERT INTO "kits" ("name", "description", "kit_category", "event_category", "user_id")
+    VALUES ($1, $2, $3, $4, $5)
+  `; // End query
+  const values = [req.body.name, req.body.description, req.body.kit_category, req.body.event_category, req.user.id];
+  // ⬇ Sending query to DB:
+  pool.query(query, values)
+    .then(result => {
+      console.log('POST kits result:', result);
+      res.sendStatus(201);
+    }) // End .then
+    // ⬇ Catch for first query:
+    .catch(error => {
+      console.error('POST kits error:', error);
+      res.sendStatus(500);
+    }); // End .catch
+}) // End POST
+
+/** ⬇ POST /api/kits/categories:
+ * Router will send SQL query to pull all categories from the DB to update on the DOM.
+ */
+router.post('/categories', rejectUnauthenticated, (req, res) => {
+  console.log('In /api/kits/categories POST');
+  // ⬇ Declaring SQL commands to send to DB: 
+  const query = `
+    INSERT INTO "kit_categories" ("name")
+    VALUES ($1)
+  `;
+  const values = [req.body.name];
+  // ⬇ Sending query to DB:
+  pool.query(query, values)
+    .then(result => {
+      console.log('POST categories result:', result.rows);
+      // ⬇ Sends back the results in an object, we always want rows:
+      res.send(result.rows);
+    }) // End .then
+    .catch(error => {
+      console.error('POST categories error:', error);
+      res.sendStatus(500);
+    }); // End .catch
+}); // End POST
 //#endregion ⬆⬆ All CRUD routes above. 
 
 
