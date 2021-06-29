@@ -19,7 +19,7 @@ export default function CreateKits() {
   const classes = useStyles();
   const kitsCategories = useSelector(store => store.kitsReducer.kitsCategoriesReducer);
   const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
-  const [kit, setKit] = useState({});
+  const [newKit, setNewKit] = useState({});
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_KIT_CATEGORIES' }),
@@ -34,20 +34,20 @@ export default function CreateKits() {
    */
   const handleChange = (key, value) => {
     console.log('In handleChange, key/value:', key, '/', value);
-    setKit({ ...kit, [key]: value });
+    setNewKit({ ...newKit, [key]: value });
   } // End handleChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will post the object to the DB and send the user back to the dashboard. 
    */
   const handleSubmit = event => {
-    console.log('In handleSubmit, kit:', kit);
+    console.log('In handleSubmit, newKit:', newKit);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
     // dispatch({ type: 'ADD_NEW_KIT', payload: kit });
     // ⬇ Send the user back:
-    // history.push('/dashboard');
+    history.push('/dashboard');
   } // End handleSubmit
   //#endregion ⬆⬆ Event handles above. 
 
