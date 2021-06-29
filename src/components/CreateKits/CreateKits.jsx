@@ -2,8 +2,8 @@
 // ⬇ File setup: 
 import './CreateKits.css';
 // ⬇ Dependent functionality:
-import { useDispatch } from 'react-redux';
-import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, MenuItem, TextField, makeStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -18,6 +18,14 @@ export default function CreateKits() {
   const history = useHistory();
   const [kit, setKit] = useState({});
   const classes = useStyles();
+  const kitsCategories = useSelector(store => store.kitsReducer.kitsCategoriesReducer);
+  const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
+
+  // ⬇ GET on page load:
+  useEffect(() => {
+    dispatch({ type: 'FETCH_KIT_CATEGORIES' }),
+    dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
+  }, []); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
 
@@ -26,7 +34,7 @@ export default function CreateKits() {
    * When the user types, this will set their input to the kit object with keys for each field. 
    */
   const handleChange = (key, value) => {
-    console.log('In handleChange, key:', key);
+    console.log('In handleChange, key/value:', key, value);
     setKit({ ...kit, [key]: value });
   } // End handleChange
 
@@ -68,7 +76,7 @@ export default function CreateKits() {
             required
             type="search"
             inputProps={{ maxLength: 50 }}
-            />
+          />
           &nbsp;
 
           <TextField
@@ -79,9 +87,9 @@ export default function CreateKits() {
             select
             width="25%"
           >
-            <MenuItem value='1'>Adventure</MenuItem>
-            <MenuItem value='2'>Animated</MenuItem>
-            <MenuItem value='3'>Biographical</MenuItem>
+            {kitsCategories?.map(category => (
+              <MenuItem value={category.id}>{category.name}</MenuItem>
+            ))}
           </TextField>
           <br /> <br />
 
@@ -103,13 +111,13 @@ export default function CreateKits() {
             select
             width="25%"
           >
-            <MenuItem value='1'>Adventure</MenuItem>
-            <MenuItem value='2'>Animated</MenuItem>
-            <MenuItem value='3'>Biographical</MenuItem>
+            {eventsCategories?.map(event => (
+              <MenuItem value={event.id}>{event.name}</MenuItem>
+            ))}
           </TextField>
           <br /> <br />
 
-          <TextField
+          {/* <TextField
             label="Add a New Kit Category?"
             className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
@@ -117,7 +125,7 @@ export default function CreateKits() {
             type="search"
             inputProps={{ maxLength: 50 }}
           />
-          <br /> <br />
+          <br /> <br /> */}
 
           <Button
             onClick={handleCancel}
