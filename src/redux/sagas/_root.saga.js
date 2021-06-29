@@ -21,6 +21,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     kitSaga(),
-    eventSaga()
+    eventSaga(),
+    itemSaga()
   ]); // End yield all
 } // End rootSaga

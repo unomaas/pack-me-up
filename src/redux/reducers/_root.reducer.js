@@ -14,7 +14,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   kitsReducer,
-  eventsReducer
+  eventsReducer,
+  itemsReducer
 });
 
 export default rootReducer;
