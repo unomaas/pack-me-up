@@ -19,12 +19,12 @@ export default function Dashboard() {
   const history = useHistory();
   const params = useParams();
   const user = useSelector((store) => store.user);
-  const events = useSelector((store) => store.eventsReducer);
-  const kits = useSelector((store) => store.kitsReducer);
+  const events = useSelector((store) => store.eventsReducer.eventsReducer);
+  const kits = useSelector((store) => store.kitsReducer.kitsReducer);
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL_KITS' }),
-    dispatch({ type: 'FETCH_ALL_EVENTS' })
+      dispatch({ type: 'FETCH_ALL_EVENTS' })
   }, []); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -48,7 +48,7 @@ export default function Dashboard() {
 
   //#endregion ⬆⬆ Event handles above. 
 
-  
+
   // ⬇ Rendering:
   return (
     <div className="Dashboard-wrapper">
@@ -58,6 +58,31 @@ export default function Dashboard() {
       <div className="Dashboard-calendar"></div>
 
       <div className="Dashboard-buttons">
+        <Button
+          name="createkit"
+          onClick={() => history.push(`/createkit`)}
+          variant="outlined"
+        >
+          Create Kits
+        </Button>
+
+        <Button
+          name="createevent"
+          onClick={() => history.push(`/createevent`)}
+          variant="outlined"
+        >
+          Create Events
+        </Button>
+
+        <Button
+          name="packing"
+          onClick={() => history.push(`/packing`)}
+          variant="outlined"
+          color="blue"
+        >
+          Start Packing!
+        </Button>
+{/* 
         <button onClick={() => history.push(`/createkit`)}>
           Create New Kits
         </button>
@@ -66,7 +91,7 @@ export default function Dashboard() {
         </button>
         <button onClick={() => history.push(`/packing`)}>
           Start Packing!
-        </button>
+        </button> */}
       </div>
 
       <div className="Dashboard-kitlist">

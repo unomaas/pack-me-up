@@ -45,17 +45,10 @@ export default function CreateKits() {
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    dispatch({ type: 'ADD_NEW_KIT', payload: kit });
+    // dispatch({ type: 'ADD_NEW_KIT', payload: kit });
     // ⬇ Send the user back:
-    history.push('/dashboard');
+    // history.push('/dashboard');
   } // End handleSubmit
-
-  /** ⬇ handleCancel:
-   * When clicked, this will send the user to the home page. 
-   */
-  const handleCancel = () => {
-    history.push('/dashboard');
-  } // End handleCancel
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -86,8 +79,8 @@ export default function CreateKits() {
             select
             width="25%"
           >
-            {kitsCategories?.map(category => (
-              <MenuItem value={category.id}>{category.name}</MenuItem>
+            {kitsCategories?.map(kitCategory => (
+              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
@@ -110,8 +103,8 @@ export default function CreateKits() {
             select
             width="25%"
           >
-            {eventsCategories?.map(event => (
-              <MenuItem value={event.id}>{event.name}</MenuItem>
+            {eventsCategories?.map(eventCategory => (
+              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
@@ -127,7 +120,8 @@ export default function CreateKits() {
           <br /> <br /> */}
 
           <Button
-            onClick={handleCancel}
+            name="cancel"
+            onClick={() => history.push(`/dashboard`)}
             variant="outlined"
             color="secondary"
           >
@@ -135,6 +129,7 @@ export default function CreateKits() {
           </Button> &nbsp;
 
           <Button
+            name="submit"
             type="submit"
             variant="outlined"
             color="primary"
