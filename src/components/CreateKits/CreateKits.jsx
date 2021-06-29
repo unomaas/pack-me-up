@@ -5,10 +5,21 @@ import './CreateKits.css';
 import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, MenuItem, TextField } from '@material-ui/core';
+import { Button, MenuItem, TextField, makeStyles, createMuiTheme } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 //#endregion ⬆⬆ Document setup above. 
+
+// ⬇ Material-ui Styling: 
+const useStyles = makeStyles({
+  input: {
+    width: 225
+  },
+  select: {
+    width: 175
+  }
+}); // End useStyles
+
 
 
 export default function CreateKits() {
@@ -16,6 +27,7 @@ export default function CreateKits() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [kit, setKit] = useState({});
+  const classes = useStyles();
   //#endregion ⬆⬆ All state variables above. 
 
 
@@ -61,18 +73,21 @@ export default function CreateKits() {
         <form onSubmit={handleSubmit}>
           <TextField
             label="Kit Name?"
+            className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
             required
-            variant="outlined"
-          />
+            type="search"
+            inputProps={{ maxLength: 50 }}
+            />
           &nbsp;
 
           <TextField
             label="Kit Category?"
+            className={classes.select}
             onChange={event => handleChange('kit_category', event.target.value)}
             required
-            variant="outlined"
             select
+            width="25%"
           >
             <MenuItem value='1'>Adventure</MenuItem>
             <MenuItem value='2'>Animated</MenuItem>
@@ -82,18 +97,21 @@ export default function CreateKits() {
 
           <TextField
             label="Description?"
+            className={classes.input}
             onChange={event => handleChange('description', event.target.value)}
             required
-            variant="outlined"
+            type="search"
+            inputProps={{ maxLength: 255 }}
           />
           &nbsp;
 
           <TextField
             label="Event Category?"
+            className={classes.select}
             onChange={event => handleChange('event_category', event.target.value)}
             required
-            variant="outlined"
             select
+            width="25%"
           >
             <MenuItem value='1'>Adventure</MenuItem>
             <MenuItem value='2'>Animated</MenuItem>
@@ -102,10 +120,12 @@ export default function CreateKits() {
           <br /> <br />
 
           <TextField
-            label="Add a New Category?"
+            label="Add a New Kit Category?"
+            className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
             required
-            variant="outlined"
+            type="search"
+            inputProps={{ maxLength: 50 }}
           />
           <br /> <br />
 
