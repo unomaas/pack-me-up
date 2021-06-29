@@ -23,8 +23,8 @@ export default function CreateKits() {
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_KIT_CATEGORIES' }),
-    dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
-  }, []); 
+      dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
+  }, []);
   //#endregion ⬆⬆ All state variables above. 
 
 
