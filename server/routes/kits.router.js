@@ -37,7 +37,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/categories', rejectUnauthenticated, (req, res) => {
   console.log('In /api/kits/categories GET');
   // ⬇ Declaring SQL commands to send to DB: 
-  const query = `SELECT * FROM kit_categories`;
+  const query = `
+    SELECT * FROM "kit_categories" 
+    ORDER BY "name" ASC`;
   // ⬇ Sending query to DB:
   pool.query(query)
     .then(result => {

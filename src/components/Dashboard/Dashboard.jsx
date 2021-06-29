@@ -85,16 +85,6 @@ export default function Dashboard() {
           >
           Start Packing!
         </Button>
-{/* 
-        <button onClick={() => history.push(`/createkit`)}>
-          Create New Kits
-        </button>
-        <button onClick={() => history.push(`/createevent`)}>
-          Create New Events
-        </button>
-        <button onClick={() => history.push(`/packing`)}>
-          Start Packing!
-        </button> */}
       </div>
 
       <div className="Dashboard-kitlist">
