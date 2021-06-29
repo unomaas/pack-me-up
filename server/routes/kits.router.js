@@ -34,9 +34,27 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-  // POST route code here
-});
+ router.post('/', (req, res) => {
+  console.log('In api/kits POST:', req.body, req.params, req.user);
+  // ⬇ RETURNING "id" will give us back the id of the created kit:
+  const insertKitQuery = `
+    INSERT INTO "kits" ("name", "description", "kit_category", "event_category", "user_id")
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING "id";
+  `; // End insertMovieQuery
+  const values = [req.body.name, req.body.description, req.body.kit_category, req.body.event_category, req.user.id];
+  // ⬇ FIRST QUERY MAKES KIT:
+  pool.query(insertKitQuery, values)
+    .then(result => {
+      console.log('POST kit result:', result); 
+      res.sendStatus(201); 
+    }) // End .then
+    // ⬇ Catch for first query:
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500)
+    }); // End .catch
+}) // End POST
 //#endregion ⬆⬆ All CRUD routes above. 
 
 

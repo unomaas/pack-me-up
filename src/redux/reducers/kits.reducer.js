@@ -1,7 +1,7 @@
 const kitsReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_ALL_KITS':
-      return action.payload;
+      return action.payload;      
     default:
       return state;
   } // End switch

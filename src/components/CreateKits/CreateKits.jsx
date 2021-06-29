@@ -34,11 +34,11 @@ export default function CreateKits() {
    * When clicked, this will post the object to the DB and send the user back to the dashboard. 
    */
   const handleSubmit = event => {
-    console.log('In handleSubmit, movie:', kit);
+    console.log('In handleSubmit, kit:', kit);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    dispatch({ type: 'ADD_KIT', payload: kit });
+    dispatch({ type: 'ADD_NEW_KIT', payload: kit });
     // ⬇ Send the user back:
     // history.push('/dashboard');
   } // End handleSubmit
@@ -118,7 +118,6 @@ export default function CreateKits() {
             inputProps={{ maxLength: 50 }}
           />
           <br /> <br />
-
 
           <Button
             onClick={handleCancel}
