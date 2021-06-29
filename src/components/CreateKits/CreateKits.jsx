@@ -77,7 +77,6 @@ export default function CreateKits() {
             onChange={event => handleChange('kit_category', event.target.value)}
             required
             select
-            width="25%"
           >
             {kitsCategories?.map(kitCategory => (
               <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
@@ -101,7 +100,6 @@ export default function CreateKits() {
             onChange={event => handleChange('event_category', event.target.value)}
             required
             select
-            width="25%"
           >
             {eventsCategories?.map(eventCategory => (
               <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
@@ -124,6 +122,7 @@ export default function CreateKits() {
             onClick={() => history.push(`/dashboard`)}
             variant="outlined"
             color="secondary"
+            size="small"
           >
             <ArrowBackIcon />
           </Button> &nbsp;
@@ -133,6 +132,7 @@ export default function CreateKits() {
             type="submit"
             variant="outlined"
             color="primary"
+            size="small"
           >
             <CheckCircleOutlineIcon />
           </Button>

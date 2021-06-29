@@ -62,6 +62,8 @@ export default function Dashboard() {
           name="createkit"
           onClick={() => history.push(`/createkit`)}
           variant="outlined"
+          size="small"
+
         >
           Create Kits
         </Button>
@@ -70,6 +72,7 @@ export default function Dashboard() {
           name="createevent"
           onClick={() => history.push(`/createevent`)}
           variant="outlined"
+          size="small"
         >
           Create Events
         </Button>
@@ -78,8 +81,8 @@ export default function Dashboard() {
           name="packing"
           onClick={() => history.push(`/packing`)}
           variant="outlined"
-          color="blue"
-        >
+          size="small"
+          >
           Start Packing!
         </Button>
 {/* 
