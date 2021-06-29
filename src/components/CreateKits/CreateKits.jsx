@@ -5,7 +5,7 @@ import './CreateKits.css';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, MenuItem, TextField, makeStyles } from '@material-ui/core';
+import { Button, MenuItem, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { useStyles } from '../MuiStyling/MuiStyling';
@@ -16,16 +16,15 @@ export default function CreateKits() {
   //#region ⬇⬇ All state variables below:
   const dispatch = useDispatch();
   const history = useHistory();
-  const [kit, setKit] = useState({});
   const classes = useStyles();
   const kitsCategories = useSelector(store => store.kitsReducer.kitsCategoriesReducer);
   const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
-
+  const [kit, setKit] = useState({});
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_KIT_CATEGORIES' }),
     dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
-  }, []); // ⬅ Will re-run this effect if the URL changes. 
+  }, []); 
   //#endregion ⬆⬆ All state variables above. 
 
 
@@ -34,7 +33,7 @@ export default function CreateKits() {
    * When the user types, this will set their input to the kit object with keys for each field. 
    */
   const handleChange = (key, value) => {
-    console.log('In handleChange, key/value:', key, value);
+    console.log('In handleChange, key/value:', key, '/', value);
     setKit({ ...kit, [key]: value });
   } // End handleChange
 
@@ -48,7 +47,7 @@ export default function CreateKits() {
     // ⬇ Sending newPlant to our reducer: 
     dispatch({ type: 'ADD_NEW_KIT', payload: kit });
     // ⬇ Send the user back:
-    // history.push('/dashboard');
+    history.push('/dashboard');
   } // End handleSubmit
 
   /** ⬇ handleCancel:
