@@ -1,6 +1,6 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
-import './CreateKits.css';
+import './EventCreate.css';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
@@ -17,13 +17,11 @@ export default function CreateKits() {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-  const kitsCategories = useSelector(store => store.kitsReducer.kitsCategoriesReducer);
   const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
-  const [newKit, setNewKit] = useState({});
+  const [newEvent, setNewEvent] = useState({});
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_KIT_CATEGORIES' }),
-      dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
+    dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
   }, []);
   //#endregion ⬆⬆ All state variables above. 
 
@@ -34,63 +32,40 @@ export default function CreateKits() {
    */
   const handleChange = (key, value) => {
     console.log('In handleChange, key/value:', key, '/', value);
-    setNewKit({ ...newKit, [key]: value });
+    setNewEvent({ ...newEvent, [key]: value });
   } // End handleChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will post the object to the DB and send the user back to the dashboard. 
    */
   const handleSubmit = event => {
-    console.log('In handleSubmit, newKit:', newKit);
+    console.log('In handleSubmit, newEvent:', newEvent);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    // dispatch({ type: 'ADD_NEW_KIT', payload: kit });
+    // dispatch({ type: 'ADD_NEW_EVENT', payload: newEvent });
     // ⬇ Send the user back:
-    history.push('/dashboard');
+    // history.push('/dashboard');
   } // End handleSubmit
   //#endregion ⬆⬆ Event handles above. 
 
 
   // ⬇ Rendering:
   return (
-    <div className="CreateKits-wrapper">
+    <div className="CreateEvents-wrapper">
 
-      <h2>Add a New Kit</h2>
+      <h2>Add a New Event</h2>
 
-      <div className="CreateKits-form">
+      <div className="CreateEvents-form">
 
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Kit Name?"
+            label="Event Name?"
             className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
-          />
-          &nbsp;
-
-          <TextField
-            label="Kit Category?"
-            className={classes.select}
-            onChange={event => handleChange('kit_category', event.target.value)}
-            required
-            select
-          >
-            {kitsCategories?.map(kitCategory => (
-              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
-            ))}
-          </TextField>
-          <br /> <br />
-
-          <TextField
-            label="Description?"
-            className={classes.input}
-            onChange={event => handleChange('description', event.target.value)}
-            required
-            type="search"
-            inputProps={{ maxLength: 255 }}
           />
           &nbsp;
 
@@ -107,15 +82,35 @@ export default function CreateKits() {
           </TextField>
           <br /> <br />
 
-          {/* <TextField
-            label="Add a New Kit Category?"
+          <TextField
+            label="Description?"
             className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
+            onChange={event => handleChange('description', event.target.value)}
             required
             type="search"
-            inputProps={{ maxLength: 50 }}
+            inputProps={{ maxLength: 50 }} 
           />
-          <br /> <br /> */}
+          <br /> <br />
+
+          <TextField
+            helperText="Start Date?"
+            onChange={event => handleChange('date_start', event.target.value)}
+            required
+            type="date"
+            defaultValue="1/1/1111"
+          />
+          &nbsp;
+
+          <TextField
+            helperText="End Date?"
+            onChange={event => handleChange('date_end', event.target.value)}
+            required
+            type="date"
+            // defaultValue={newEvent.date_start}
+          />
+          &nbsp;
+
+          <br /> <br />
 
           <Button
             name="cancel"
@@ -139,7 +134,6 @@ export default function CreateKits() {
         </form>
 
       </div>
-
     </div>
   ) // End return
 } // End CreateKits
