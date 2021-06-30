@@ -24,8 +24,7 @@ export default function EventEdit() {
   const today = new Date().toISOString().substring(0, 10);
   // ⬇ GET on page load:
   useEffect(() => {
-    // dispatch({ type: "CLEAR_DETAIL" }),
-    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } })
+    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } })//,
     // dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 

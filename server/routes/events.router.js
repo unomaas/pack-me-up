@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 //#region ⬇⬇ All CRUD routes below:
-/** ⬇ GET /api/kits:
+/** ⬇ GET /api/events:
  * Router will send SQL query to pull all of the entries from the DB to update on the DOM.
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -139,12 +139,12 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
  */
  router.put('/:id', (req, res) => {
   console.log('In /api/events/:id PUT');
-  // ⬇ Declaring variables to send to SQL: 
+  // ⬇ Declaring variables to send to SQL:  
   const eventId = req.params.id;
   const query = `
     UPDATE "events" 
     SET "name" = $1, "description" = $2, "event_category" = $3, "date_start" = $4, "date_end" = $5
-    WHERE "id" = $6 AND "kits".user_id = $7;
+    WHERE "id" = $6 AND "events".user_id = $7; 
   `; // End query
   const values = [
     req.body.name, // $1
