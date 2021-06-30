@@ -89,6 +89,7 @@ export default function KitEdit() {
             required
             select
             size="small"
+            value={kitsCategories?.id}
           >
             {kitsCategories?.map(kitCategory => (
               <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
@@ -116,6 +117,7 @@ export default function KitEdit() {
             required
             select
             size="small"
+            value={eventsCategories?.id}
           >
             {eventsCategories?.map(eventCategory => (
               <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>

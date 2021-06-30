@@ -11,7 +11,7 @@ const eventsReducer = (state = [], action) => {
 }; // End eventsReducer
 
 // ⬇ eventsCategoriesReducer:
-const eventsCategoriesReducer = (state = [], action) => {
+const eventsCategoriesReducer = (state = [{id: 1, name: "All"}], action) => {
   switch (action.type) {
     case 'SET_EVENT_CATEGORIES':
       return action.payload;

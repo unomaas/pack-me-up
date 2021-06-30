@@ -24,8 +24,8 @@ export default function EventEdit() {
   const today = new Date().toISOString().substring(0, 10);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } })//,
-    // dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
+    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } }),
+    dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -68,6 +68,8 @@ export default function EventEdit() {
         <form onSubmit={handleSubmit}>
           <TextField
             label="Event Name?"
+            // InputProps={eventEdit?.name}
+            // value={eventEdit?.name}
             defaultValue={eventDetail?.name}
             className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
@@ -78,7 +80,7 @@ export default function EventEdit() {
           />
           &nbsp;
 
-          {/* <TextField
+          <TextField
             label="Event Category?"
             defaultValue={eventDetail?.event_category}
             className={classes.select}
@@ -95,7 +97,7 @@ export default function EventEdit() {
 
           <TextField
             label="Description?"
-            defaultValue={eventDetail?.description}
+            // value={eventEdit?.description}
             className={classes.input}
             onChange={event => handleChange('description', event.target.value)}
             required
@@ -107,7 +109,7 @@ export default function EventEdit() {
 
           <TextField
             label="Start Date?"
-            defaultValue={today}
+            value={today}
             // defaultValue={eventDetail?.date_start}
             onChange={event => handleChange('date_start', event.target.value)}
             required
@@ -118,7 +120,7 @@ export default function EventEdit() {
 
           <TextField
             label="End Date?"
-            defaultValue={today}
+            value={today}
             // defaultValue={eventDetail?.date_end}
             onChange={event => handleChange('date_end', event.target.value)}
             required
@@ -126,7 +128,7 @@ export default function EventEdit() {
             size="small"
           // defaultValue={newEvent.date_start}
           />
-          &nbsp; */}
+          &nbsp;
 
           <br /> <br />
 
