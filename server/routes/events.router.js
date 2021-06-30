@@ -88,7 +88,14 @@ router.post('/', (req, res) => {
     INSERT INTO "events" ("name", "description", "event_category", "date_start", "date_end", "user_id")
     VALUES ($1, $2, $3, $4, $5, $6)
   `; // End query
-  const values = [req.body.name, req.body.description, req.body.event_category, req.body.date_start, req.body.date_end, req.user.id];
+  const values = [
+    req.body.name, 
+    req.body.description, 
+    req.body.event_category, 
+    req.body.date_start, 
+    req.body.date_end, 
+    req.user.id
+  ];
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
@@ -125,6 +132,38 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     }); // End .catch
 }); // End POST
+
+/** ⬇ PUT /api/events/id:
+ * Router will send SQL query to edit entries in the DB.
+ */
+ router.put('/:id', (req, res) => {
+  console.log('In /api/events/:id PUT');
+  // ⬇ Declaring variables to send to SQL: 
+  const eventId = req.params.id;
+  const query = `
+    UPDATE "events" 
+    SET "name" = $1, "description" = $2, "event_category" = $3, "date_start" = $4, "date_end" = $5
+    WHERE "id" = $6 AND "kits".user_id = $7;
+  `; // End query
+  const values = [
+    req.body.name, // $1
+    req.body.description, // $2
+    req.body.event_category, // $3
+    req.body.date_start, // $4
+    req.body.date_end, // $5
+    eventId, // $6
+    req.user.id // $7
+  ]; // End values
+  pool.query(query, values)
+    .then(result => {
+      console.log('PUT event result:', result.rows);
+      res.sendStatus(200);
+    }) // End .then
+    .catch(error => {
+      console.error('PUT event error:', error);
+      res.sendStatus(500);
+    }) // End .catch
+}); // End PUT
 //#endregion ⬆⬆ All CRUD routes above. 
 
 

@@ -11,6 +11,7 @@ function* eventSaga() {
   yield takeEvery('FETCH_EVENT_CATEGORIES', fetchEventCategories);
   yield takeEvery('ADD_EVENT_CATEGORY', addEventCategory);
   yield takeEvery('FETCH_SINGLE_EVENT', fetchSingleEvent);
+  yield takeEvery('SUBMIT_EVENT_EDIT', editSingleEvent);
 } // End eventSaga
 
 
@@ -73,7 +74,7 @@ function* addEventCategory(action) {
 
 function* fetchSingleEvent(action) {
   console.log('In fetchSingleEvent Saga, action:', action.payload);
-  // ⬇ Declaring variable to hold kitId:
+  // ⬇ Declaring variable to hold eventId:
   const eventId = action.payload.id;
   console.log('eventId is:', eventId);
   try {
@@ -90,6 +91,24 @@ function* fetchSingleEvent(action) {
     console.error('fetchSingleEvent error:', error);
   } // End catch
 } // End fetchSingleEvent
+
+function* editSingleEvent(action) {
+  console.log('In editSingleEvent Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold eventId:
+  const eventId = action.payload.id;
+  console.log('eventId is:', eventId);
+  try {
+    // ⬇ Sending movieId to server:
+    const response = yield axios.put(`/api/events/${eventId}`, action.payload);
+    // ⬇ Logging the response:
+    console.log('editSingleEvent response:', response.data);
+    // ⬇ Clearing the edit reducer:
+    yield put({ type: 'CLEAR_EDIT' });
+  } // End try
+  catch (error) {
+    console.error('editSingleEvent error:', error);
+  } // End catch
+} // End editSingleEvent
 //#endregion ⬆⬆ eventSaga functions above. 
 
 

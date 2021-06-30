@@ -124,6 +124,38 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     }); // End .catch
 }); // End POST
+
+/** ⬇ PUT /api/kits/id:
+ * Router will send SQL query to edit entries in the DB.
+ */
+ router.put('/:id', (req, res) => {
+  console.log('In /api/kits/:id PUT');
+  // ⬇ Declaring variables to send to SQL: 
+  const kitId = req.params.id;
+  const query = `
+    UPDATE "kits" 
+    SET "name" = $1, "description" = $2, "kit_category" = $3, "event_category" = $4
+    WHERE "id" = $5 AND "kits".user_id = $6;
+  `; // End query
+  const values = [
+    req.body.name, // $1
+    req.body.description, // $2
+    req.body.kit_category, // $3
+    req.body.event_category, // $4
+    kitId, // $5
+    req.user.id // $6
+  ]; // End values
+  pool.query(query, values)
+    .then(result => {
+      console.log('PUT kit result:', result.rows);
+      res.sendStatus(200);
+    }) // End .then
+    .catch(error => {
+      console.error('PUT kit error:', error);
+      res.sendStatus(500);
+    }) // End .catch
+}); // End PUT
+
 //#endregion ⬆⬆ All CRUD routes above. 
 
 
