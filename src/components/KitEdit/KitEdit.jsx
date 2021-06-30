@@ -51,20 +51,22 @@ export default function KitEdit() {
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    dispatch({ type: 'SUBMIT_KIT_EDIT', payload: kitEdit }); 
+    dispatch({ type: 'SUBMIT_KIT_EDIT', payload: kitEdit });
     // ⬇ Send user back to detail view:
     history.push(`/kitdetail/${kitDetail.id}`);
   } // End handleSubmit
   //#endregion ⬆⬆ Event handles above. 
 
 
+
+  console.log('kitDetail is:', kitDetail);
   // ⬇ Rendering:
   return (
     <div className="KitEdit-wrapper" key={kitDetail?.id}>
 
       <h2>Edit This Kit</h2>
 
-      <div className="KitsEdit-form">
+      <div className="KitEdit-form">
 
         <form onSubmit={handleSubmit}>
           <TextField

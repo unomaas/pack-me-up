@@ -15,7 +15,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM events 
-    WHERE events.user_id = $1;
+    WHERE events.user_id = $1
+    ORDER BY "events".id ASC;
   `; // End query
   const values = [req.user.id]
   // ⬇ Sending query to DB:
