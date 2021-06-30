@@ -15,6 +15,8 @@ import EventCreate from '../EventCreate/EventCreate';
 import Packing from '../Packing/Packing';
 import EventDetail from '../EventDetail/EventDetail';
 import KitDetail from '../KitDetail/KitDetail';
+import EventEdit from '../EventEdit/EventEdit';
+import KitEdit from '../KitEdit/KitEdit';
 // ⬇ Dependent Functionality:
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
@@ -80,6 +82,14 @@ function App() {
 
             <ProtectedRoute exact path="/eventdetail/:id">
               <EventDetail />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/kitedit/:id">
+              <KitEdit />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/eventedit/:id">
+              <EventEdit />
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/packing">

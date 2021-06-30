@@ -19,6 +19,7 @@ export default function CreateKits() {
   const classes = useStyles();
   const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
   const [newEvent, setNewEvent] = useState({});
+  const today = new Date().toISOString().substring(0, 10);
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
@@ -66,6 +67,7 @@ export default function CreateKits() {
             required
             type="search"
             inputProps={{ maxLength: 50 }}
+            size="small"
           />
           &nbsp;
 
@@ -75,6 +77,7 @@ export default function CreateKits() {
             onChange={event => handleChange('event_category', event.target.value)}
             required
             select
+            size="small"
           >
             {eventsCategories?.map(eventCategory => (
               <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
@@ -88,25 +91,29 @@ export default function CreateKits() {
             onChange={event => handleChange('description', event.target.value)}
             required
             type="search"
-            inputProps={{ maxLength: 50 }} 
+            inputProps={{ maxLength: 50 }}
+            size="small"
           />
           <br /> <br />
 
           <TextField
-            helperText="Start Date?"
+            label="Start Date?"
+            defaultValue={today}
             onChange={event => handleChange('date_start', event.target.value)}
             required
             type="date"
-            defaultValue="1/1/1111"
+            size="small"
+            defaultValue={today}
           />
           &nbsp;
 
           <TextField
-            helperText="End Date?"
+            label="End Date?"
+            defaultValue={today}
             onChange={event => handleChange('date_end', event.target.value)}
             required
             type="date"
-            // defaultValue={newEvent.date_start}
+            size="small"
           />
           &nbsp;
 

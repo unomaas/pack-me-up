@@ -1,10 +1,10 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
-import './KitCreate.css';
+import './KitEdit.css';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Button, MenuItem, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -12,57 +12,66 @@ import { useStyles } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
 
 
-export default function CreateKits() {
+export default function KitEdit() {
   //#region ⬇⬇ All state variables below:
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
+  const params = useParams();
+  const kitDetail = useSelector((store) => store.kitsReducer.kitsDetailReducer);
+  const kitEdit = useSelector((store) => store.kitsReducer.kitsEditReducer);
   const kitsCategories = useSelector(store => store.kitsReducer.kitsCategoriesReducer);
   const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
-  const [newKit, setNewKit] = useState({});
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_KIT_CATEGORIES' }),
+    dispatch({ type: 'FETCH_SINGLE_KIT', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_KIT_CATEGORIES' }),
       dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
-  }, []);
+  }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
 
   //#region ⬇⬇ Event handlers below:
   /** ⬇ handleChange:
-   * When the user types, this will set their input to the kit object with keys for each field. 
+   * When the user types, this will set their input to the editMovie reducer with keys for each field. 
    */
   const handleChange = (key, value) => {
     console.log('In handleChange, key/value:', key, '/', value);
-    setNewKit({ ...newKit, [key]: value });
-  } // End handleChange
+    dispatch({
+      type: 'KIT_EDIT_ONCHANGE',
+      payload: { key: key, value: value }
+    });
+  }; // End handleChange
 
   /** ⬇ handleSubmit:
-   * When clicked, this will post the object to the DB and send the user back to the dashboard. 
+   * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
    */
   const handleSubmit = event => {
-    console.log('In handleSubmit, newKit:', newKit);
+    console.log('In handleSubmit, kitEdit:', kitEdit);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    // dispatch({ type: 'ADD_NEW_KIT', payload: kit });
-    // ⬇ Send the user back:
-    history.push('/dashboard');
+    dispatch({ type: 'SUBMIT_KIT_EDIT', payload: kitEdit });
+    // ⬇ Send user back to detail view:
+    history.push(`/kitdetail/${kitDetail.id}`);
   } // End handleSubmit
   //#endregion ⬆⬆ Event handles above. 
 
 
+
+  console.log('kitDetail is:', kitDetail);
   // ⬇ Rendering:
   return (
-    <div className="CreateKits-wrapper">
+    <div className="KitEdit-wrapper" key={kitDetail?.id}>
 
-      <h2>Add a New Kit</h2>
+      <h2>Edit This Kit</h2>
 
-      <div className="CreateKits-form">
+      <div className="KitEdit-form">
 
         <form onSubmit={handleSubmit}>
           <TextField
             label="Kit Name?"
+            defaultValue={kitDetail?.name}
             className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
             required
@@ -74,6 +83,7 @@ export default function CreateKits() {
 
           <TextField
             label="Kit Category?"
+            defaultValue={kitDetail?.kit_category}
             className={classes.select}
             onChange={event => handleChange('kit_category', event.target.value)}
             required
@@ -88,6 +98,7 @@ export default function CreateKits() {
 
           <TextField
             label="Description?"
+            defaultValue={kitDetail?.description}
             className={classes.input}
             onChange={event => handleChange('description', event.target.value)}
             required
@@ -99,6 +110,7 @@ export default function CreateKits() {
 
           <TextField
             label="Event Category?"
+            defaultValue={kitDetail?.event_category}
             className={classes.select}
             onChange={event => handleChange('event_category', event.target.value)}
             required
@@ -112,18 +124,18 @@ export default function CreateKits() {
           <br /> <br />
 
           {/* <TextField
-            label="Add a New Kit Category?"
-            className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
-            required
-            type="search"
-            inputProps={{ maxLength: 50 }}
-          />
-          <br /> <br /> */}
+      label="Add a New Kit Category?"
+      className={classes.input}
+      onChange={event => handleChange('name', event.target.value)}
+      required
+      type="search"
+      inputProps={{ maxLength: 50 }}
+    />
+    <br /> <br /> */}
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/dashboard`)}
+            onClick={() => history.push(`/kitdetail/${kitDetail.id}`)}
             variant="outlined"
             color="secondary"
             size="small"
@@ -145,5 +157,5 @@ export default function CreateKits() {
       </div>
 
     </div>
-  ) // End return
-} // End CreateKits
+  )
+}

@@ -31,7 +31,7 @@ export default function KitDetail() {
   
   // ⬇ Rendering:
   return (
-    <div className="KitDetail-wrapper" >
+    <div className="KitDetail-wrapper" key={kitDetail?.id}>
 
       <div>
         <h2>{kitDetail?.id}</h2>
