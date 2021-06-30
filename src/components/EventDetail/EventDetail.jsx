@@ -31,7 +31,7 @@ export default function EventDetail() {
 
   // ⬇ Rendering:
   return (
-    <div className="EventDetail-wrapper" >
+    <div className="EventDetail-wrapper" key={eventDetail?.id}>
 
       <div>
         <h2>{eventDetail?.id}</h2>

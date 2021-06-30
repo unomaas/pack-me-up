@@ -4,7 +4,7 @@ import axios from 'axios';
 //#endregion ⬆⬆ All document setup above. 
 
 
-// ⬇ Master eventSaga:
+// ⬇ Main eventSaga:
 function* eventSaga() {
   yield takeEvery('FETCH_ALL_EVENTS', fetchAllEvents);
   yield takeEvery('ADD_NEW_EVENT', addNewEvent);
@@ -12,7 +12,7 @@ function* eventSaga() {
   yield takeEvery('ADD_EVENT_CATEGORY', addEventCategory);
   yield takeEvery('FETCH_SINGLE_EVENT', fetchSingleEvent);
   yield takeEvery('SUBMIT_EVENT_EDIT', editSingleEvent);
-} // End eventSaga
+} // End Main eventSaga
 
 
 //#region ⬇⬇ All eventSaga functions below:

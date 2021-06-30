@@ -4,7 +4,7 @@ import axios from 'axios';
 //#endregion ⬆⬆ All document setup above. 
 
 
-// ⬇ Master kitSaga:
+// ⬇ Main kitSaga:
 function* kitSaga() {
   yield takeEvery('FETCH_ALL_KITS', fetchAllKits);
   yield takeEvery('ADD_NEW_KIT', addNewKit);
@@ -12,7 +12,7 @@ function* kitSaga() {
   yield takeEvery('ADD_KIT_CATEGORY', addKitCategory);
   yield takeEvery('FETCH_SINGLE_KIT', fetchSingleKit);
   yield takeEvery('SUBMIT_KIT_EDIT', editSingleKit);
-} // End kitSaga
+} // End Main kitSaga
 
 
 //#region ⬇⬇ All kitSaga functions below:

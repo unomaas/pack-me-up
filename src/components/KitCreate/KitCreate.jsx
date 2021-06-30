@@ -68,6 +68,7 @@ export default function CreateKits() {
             required
             type="search"
             inputProps={{ maxLength: 50 }}
+            size="small"
           />
           &nbsp;
 
@@ -77,6 +78,7 @@ export default function CreateKits() {
             onChange={event => handleChange('kit_category', event.target.value)}
             required
             select
+            size="small"
           >
             {kitsCategories?.map(kitCategory => (
               <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
@@ -91,6 +93,7 @@ export default function CreateKits() {
             required
             type="search"
             inputProps={{ maxLength: 255 }}
+            size="small"
           />
           &nbsp;
 
@@ -100,6 +103,7 @@ export default function CreateKits() {
             onChange={event => handleChange('event_category', event.target.value)}
             required
             select
+            size="small"
           >
             {eventsCategories?.map(eventCategory => (
               <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>

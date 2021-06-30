@@ -11,7 +11,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * Router will send SQL query to pull all of the entries from the DB to update on the DOM.
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log('In /api/events GET all:', req.body, req.params, req.user);
+  console.log('In /api/events GET all');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM events 
@@ -82,7 +82,7 @@ router.get('/:id', (req, res) => {
  * Router will send SQL query to add a new entry to the DB.
  */
 router.post('/', (req, res) => {
-  console.log('In api/events POST:', req.body, req.params, req.user);
+  console.log('In api/events POST');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     INSERT INTO "events" ("name", "description", "event_category", "date_start", "date_end", "user_id")

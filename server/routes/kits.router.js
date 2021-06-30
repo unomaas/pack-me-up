@@ -11,7 +11,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * Router will send SQL query to pull all of the entries from the DB to update on the DOM.
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log('In /api/kits GET all:', req.body, req.params, req.user);
+  console.log('In /api/kits GET all');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM "kits" 
@@ -81,7 +81,7 @@ router.get('/:id', (req, res) => {
  * Router will send SQL query to add a new entry to the DB.
  */
 router.post('/', (req, res) => {
-  console.log('In api/kits POST:', req.body, req.params, req.user);
+  console.log('In api/kits POST');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     INSERT INTO "kits" ("name", "description", "kit_category", "event_category", "user_id")
@@ -129,7 +129,7 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
  * Router will send SQL query to edit entries in the DB.
  */
  router.put('/:id', (req, res) => {
-  console.log('In /api/kits/:id PUT');
+  console.log('In /api/kits/:id PUT', req.body, req.params, req.user);
   // ⬇ Declaring variables to send to SQL: 
   const kitId = req.params.id;
   const query = `
