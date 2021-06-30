@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 export default function KitItem({ kit }) {
   //#region ⬇⬇ All state variables below:
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const history = useHistory();
   //#endregion ⬆⬆ All state variables above. 
 

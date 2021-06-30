@@ -54,6 +54,30 @@ router.get('/categories', rejectUnauthenticated, (req, res) => {
     }); // End .catch
 }); // End GET
 
+/** ⬇ GET /api/events/id:
+ * Router will send SQL query to pull JUST ONE of the entries from the DB to update on the DOM for detailed view.
+ */
+router.get('/:id', (req, res) => {
+  console.log('In api/events/:id GET');
+  // ⬇ Declaring SQL commands to send to DB: 
+  const query = `
+    SELECT * FROM "events" 
+    WHERE "events".id = $1 AND "events".user_id = $2;
+  `;
+  const values = [req.params.id, req.user.id];
+  // ⬇ Sending query to DB:
+  pool.query(query, values)
+    .then(result => {
+      console.log('GET events/:id result:', result.rows);
+      // ⬇ Sends back the results in an object, we always want rows:
+      res.send(result.rows);
+    }) // End .then
+    .catch(error => {
+      console.error('GET events/:id error:', error);
+      res.sendStatus(500);
+    }); // End .catch
+}); // End GET
+
 /** ⬇ POST /api/events:
  * Router will send SQL query to add a new entry to the DB.
  */
@@ -81,7 +105,7 @@ router.post('/', (req, res) => {
 /** ⬇ POST /api/events/categories:
  * Router will send SQL query to pull all categories from the DB to update on the DOM.
  */
- router.post('/categories', rejectUnauthenticated, (req, res) => {
+router.post('/categories', rejectUnauthenticated, (req, res) => {
   console.log('In /api/events/categories POST');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `

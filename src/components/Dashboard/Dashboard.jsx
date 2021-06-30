@@ -24,7 +24,9 @@ export default function Dashboard() {
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL_KITS' }),
-      dispatch({ type: 'FETCH_ALL_EVENTS' })
+      dispatch({ type: 'FETCH_ALL_EVENTS' }),
+      dispatch({ type: 'CLEAR_DETAIL' }),
+      dispatch({ type: 'CLEAR_EDIT' })
   }, []); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -82,7 +84,7 @@ export default function Dashboard() {
           onClick={() => history.push(`/packing`)}
           variant="outlined"
           size="small"
-          >
+        >
           Start Packing!
         </Button>
       </div>
