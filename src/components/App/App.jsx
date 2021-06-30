@@ -10,9 +10,11 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Dashboard from '../Dashboard/Dashboard';
-import CreateKits from '../CreateKits/CreateKits';
-import CreateEvents from '../CreateEvents/CreateEvents';
+import KitCreate from '../KitCreate/KitCreate';
+import EventCreate from '../EventCreate/EventCreate';
 import Packing from '../Packing/Packing';
+import EventDetail from '../EventDetail/EventDetail';
+import KitDetail from '../KitDetail/KitDetail';
 // ⬇ Dependent Functionality:
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
@@ -65,11 +67,19 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/createkit">
-              <CreateKits />
+              <KitCreate />
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/createevent">
-              <CreateEvents />
+              <EventCreate />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/kitdetail/:id">
+              <KitDetail />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/eventdetail/:id">
+              <EventDetail />
             </ProtectedRoute>
 
             <ProtectedRoute exact path="/packing">

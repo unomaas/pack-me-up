@@ -10,6 +10,7 @@ function* kitSaga() {
   yield takeEvery('ADD_NEW_KIT', addNewKit);
   yield takeEvery('FETCH_KIT_CATEGORIES', fetchKitCategories);
   yield takeEvery('ADD_KIT_CATEGORY', addKitCategory);
+  yield takeEvery('FETCH_SINGLE_KIT', fetchSingleKit);
 } // End kitSaga
 
 
@@ -69,6 +70,26 @@ function* addKitCategory(action) {
     console.error('addKitCategory error:', error);
   } // End catch
 } // End addKitCategory
+
+function* fetchSingleKit(action) {
+  console.log('In fetchSingleKit Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold kitId:
+  const kitId = action.payload.id;
+  console.log('kitId is:', kitId);
+  try {
+    // ⬇ Sending movieId to server:
+    const response = yield axios.get(`/api/kits/${kitId}`);
+    // ⬇ Logging the response:
+    console.log('fetchSingleKit response:', response.data[0]);
+    // ⬇ Sending the response to our reducers to hold:
+    yield put({ type: 'SET_KIT_DETAIL', payload: response.data[0] });
+    // ⬇ Will also set the edit reducer on page load:
+    yield put({ type: 'SET_KIT_EDIT', payload: response.data[0] });
+  } // End try
+  catch (error) {
+    console.error('fetchSingleKit error:', error);
+  } // End catch
+} // End fetchSingleKit
 //#endregion ⬆⬆ kitSaga functions above. 
 
 

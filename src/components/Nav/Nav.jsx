@@ -5,7 +5,7 @@ import './Nav.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 //#endregion ⬆⬆ Document setup above. 
 
 
@@ -30,8 +30,13 @@ function Nav() {
         <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="50"></img>
       </Link>
 
+      <div className='nav-title'>
+        {/* <p className="nav-title" >Pack Me Up!</p> */}
+        Pack Me Up!
+      </div>
+
       <div>
-        <p className="nav-title">Pack Me Up!</p>
+        <img className='header-logo' src="./images/suitcase-white.png" height="50" />
       </div>
 
       <div>

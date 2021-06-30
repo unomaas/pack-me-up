@@ -14,8 +14,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('In /api/kits GET all:', req.body, req.params, req.user);
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    SELECT * FROM kits 
-    WHERE kits.user_id = $1;
+    SELECT * FROM "kits" 
+    WHERE "kits".user_id = $1;
   `; // End query
   const values = [req.user.id]
   // ⬇ Sending query to DB:
@@ -49,6 +49,30 @@ router.get('/categories', rejectUnauthenticated, (req, res) => {
     }) // End .then
     .catch(error => {
       console.error('GET categories error:', error);
+      res.sendStatus(500);
+    }); // End .catch
+}); // End GET
+
+/** ⬇ GET /api/kits/id:
+ * Router will send SQL query to pull JUST ONE of the entries from the DB to update on the DOM for detailed view.
+ */
+router.get('/:id', (req, res) => {
+  console.log('In api/kits/:id GET');
+  // ⬇ Declaring SQL commands to send to DB: 
+  const query = `
+    SELECT * FROM "kits" 
+    WHERE "kits".id = $1 AND "kits".user_id = $2;
+  `;
+  const values = [req.params.id, req.user.id];
+  // ⬇ Sending query to DB:
+  pool.query(query, values)
+    .then(result => {
+      console.log('GET kits/:id result:', result.rows);
+      // ⬇ Sends back the results in an object, we always want rows:
+      res.send(result.rows);
+    }) // End .then
+    .catch(error => {
+      console.error('GET kits/:id error:', error);
       res.sendStatus(500);
     }); // End .catch
 }); // End GET
