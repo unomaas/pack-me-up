@@ -68,9 +68,9 @@ export default function EventEdit() {
         <form onSubmit={handleSubmit}>
           <TextField
             label="Event Name?"
-            // InputProps={eventEdit?.name}
-            // value={eventEdit?.name}
-            defaultValue={eventDetail?.name}
+            InputProps="defaultValue"
+            value={eventEdit?.name}
+            // defaultValue={eventDetail?.name}
             className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
             required
@@ -82,7 +82,8 @@ export default function EventEdit() {
 
           <TextField
             label="Event Category?"
-            defaultValue={eventDetail?.event_category}
+            value={eventDetail?.event_category}
+            // defaultValue={eventDetail?.event_category}
             className={classes.select}
             onChange={event => handleChange('event_category', event.target.value)}
             required
@@ -97,6 +98,8 @@ export default function EventEdit() {
 
           <TextField
             label="Description?"
+            value={eventEdit?.description}
+            // defaultValue={eventDetail?.description}
             // value={eventEdit?.description}
             className={classes.input}
             onChange={event => handleChange('description', event.target.value)}

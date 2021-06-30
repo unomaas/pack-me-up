@@ -11,7 +11,7 @@ const kitsReducer = (state = [], action) => {
 }; // End kitsReducer
 
 // ⬇ kitsCategoriesReducer:
-const kitsCategoriesReducer = (state = [], action) => {
+const kitsCategoriesReducer = (state = [{id: 1, name: "Cosplay"}], action) => {
   switch (action.type) {
     case 'SET_KIT_CATEGORIES':
       return action.payload;
