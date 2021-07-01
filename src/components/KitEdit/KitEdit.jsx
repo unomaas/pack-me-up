@@ -86,8 +86,6 @@ export default function KitEdit() {
   //#endregion ⬆⬆ Event handles above. 
 
 
-
-  console.log('kitDetail is:', kitDetail);
   // ⬇ Rendering:
   return (
     <div className="KitEdit-wrapper" key={kitDetail?.id}>

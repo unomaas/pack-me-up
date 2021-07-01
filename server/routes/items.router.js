@@ -11,7 +11,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * Router function to handle the GET part of the server-side logic.  Will send SQL query to pull all of the entries from the DB to update on the DOM.
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log('In /api/items GET all', req.body, req.params, req.user);
+  console.log('In GET /api/items:', req.body, req.params, req.user);
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM "items" 
@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
-      console.log('GET all result:', result.rows);
+      console.log('GET all items result:', result.rows);
       // ⬇ Sends back the results in an object, we always want rows:
       res.send(result.rows);
     }) // End .then
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
   `; // End query
   const values = [
     req.body.name,
-    req.body.kit_id,
+    req.params.id,
     req.user.id
   ]; // End values
   // ⬇ Sending query to DB:

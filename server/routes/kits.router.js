@@ -58,7 +58,7 @@ router.get('/categories', rejectUnauthenticated, (req, res) => {
  * Router will send SQL query to pull JUST ONE of the entries from the DB to update on the DOM for detailed view.
  */
 router.get('/:id', (req, res) => {
-  console.log('In api/kits/:id GET');
+  console.log('In api/kits/:id GET', req.body, req.params, req.user);
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM "kits" 
