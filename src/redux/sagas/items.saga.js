@@ -8,6 +8,8 @@ import axios from 'axios';
 function* itemSaga() {
   yield takeEvery('FETCH_ALL_ITEMS', fetchAllItems);
   yield takeEvery('ADD_NEW_ITEM', addNewItem);
+  yield takeEvery('SUBMIT_ITEM_EDIT', editSingleItem);
+  yield takeEvery('DELETE_ITEM', deleteSingleItem);
 } // End itemSaga
 
 
@@ -39,6 +41,41 @@ function* addNewItem(action) {
     console.error('addNewItem error:', error);
   } // End catch
 } // End addNewItem
+
+function* editSingleItem(action) {
+  console.log('In editSingleItem Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold the ID:
+  const itemId = action.payload.id;
+  console.log('itemId is:', itemId);
+  try {
+    // ⬇ Sending the ID to server:
+    const response = yield axios.put(`/api/items/${itemId}`, action.payload);
+    // ⬇ Logging the response:
+    console.log('editSingleItem response:', response.data);
+    // ⬇ Clearing the edit reducer:
+    yield put({ type: 'CLEAR_EDIT' });
+  } // End try
+  catch (error) {
+    console.error('editSingleItem error:', error);
+  } // End catch
+} // End editSingleItem
+
+function* deleteSingleItem(action) {
+  console.log('In deleteSingleItem Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold the ID:
+  const itemId = action.payload.id;
+  try {
+    // ⬇ Sending the ID to server:
+    const response = yield axios.delete(`/api/items/${itemId}`, action.payload);
+    // ⬇ Logging the response:
+    console.log('deleteSingleItem response:', response.data);
+    // ⬇ GET to refresh data:
+    yield put({ type: 'FETCH_ALL_ITEMS' });
+  } // End try
+  catch (error) {
+    console.error('deleteSingleItem error:', error);
+  } // End catch
+} // End deleteSingleItem
 //#endregion ⬆⬆ itemSaga functions above. 
 
 
