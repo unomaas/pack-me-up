@@ -15,10 +15,13 @@ function* itemSaga() {
 
 // #region ⬇⬇ All itemSaga functions below:
 function* fetchAllItems(action) {
-  console.log('In fetchAllItems Saga', action.payload);
+  console.log('In fetchAllItems Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold kitId:
+  const kitId = action.payload.id;
+  console.log('kitId is:', kitId);
   try {
     // ⬇ Calling to server to load data:
-    const response = yield axios.get('/api/items', action.payload);
+    const response = yield axios.get(`/api/items/${kitId}`);
     console.log('fetchAllItems response:', response.data);
     // ⬇ Sending the data from the server to the reducer to hold:
     yield put({ type: 'SET_ALL_ITEMS', payload: response.data });
@@ -28,7 +31,8 @@ function* fetchAllItems(action) {
   } // End catch
 } // End fetchAllItems
 
-function* addNewItem(action) {Í
+function* addNewItem(action) {
+  Í
   console.log('In addNewItem Saga, action:', action.payload);
   try {
     // ⬇ Calling to server to load data:
