@@ -8,6 +8,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Button, MenuItem, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { useStyles } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
 
@@ -50,11 +51,38 @@ export default function KitEdit() {
     console.log('In handleSubmit, kitEdit:', kitEdit);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
-    // ⬇ Sending newPlant to our reducer: 
+    // ⬇ Sending data to our saga: 
     dispatch({ type: 'SUBMIT_KIT_EDIT', payload: kitEdit });
     // ⬇ Send user back to detail view:
     history.push(`/kitdetail/${kitDetail.id}`);
   } // End handleSubmit
+
+  /** ⬇ handleDelete:
+   * When clicked, this will ask the user to confirm deletion then send to the dashboard. 
+   */
+  const handleDelete = event => {
+    console.log('In handleDelete, kit:', kitEdit.name);
+    // ⬇ Don't submit until confirm:
+    event.preventDefault();
+    swal({
+      title: "This will delete this kit!",
+      text: "Are you sure you wish to proceed?",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true,
+    }) // End config
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("This kit has been deleted!", {
+            icon: "success",
+          });
+          // ⬇ Sending data to our saga: 
+          dispatch({ type: 'DELETE_KIT', payload: kitEdit });
+          // ⬇ Send user back to dashboard:
+          history.push(`/dashboard`);
+        } // End if
+      }); // End swal
+  } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -153,6 +181,16 @@ export default function KitEdit() {
             size="small"
           >
             <CheckCircleOutlineIcon />
+          </Button> &nbsp;
+
+          <Button
+            name="delete"
+            onClick={handleDelete}
+            variant="outlined"
+            color="secondary"
+            size="small"
+          >
+            <DeleteForeverIcon />
           </Button>
         </form>
 

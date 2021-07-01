@@ -130,7 +130,7 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
  * Router will send SQL query to edit entries in the DB.
  */
  router.put('/:id', (req, res) => {
-  console.log('In /api/kits/:id PUT', req.body, req.params, req.user);
+  console.log('In /api/kits/:id PUT');
   // ⬇ Declaring variables to send to SQL: 
   const kitId = req.params.id;
   const query = `
@@ -157,6 +157,31 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
     }) // End .catch
 }); // End PUT
 
+/** ⬇ DELETE /api/kits/id:
+ * Router will send SQL query to delete entries in the DB.
+ */
+ router.delete('/:id', (req, res) => {
+  console.log('In /api/kits/:id DELETE');
+  // ⬇ Declaring variables to send to SQL: 
+  const kitId = req.params.id;
+  const query = `
+    DELETE FROM "kits" 
+    WHERE "id" = $1 AND "kits".user_id = $2;
+  `; // End query
+  const values = [
+    kitId,
+    req.user.id
+  ]; // End values
+  pool.query(query, values)
+    .then(result => {
+      console.log('DELETE kit result:', result.rows);
+      res.sendStatus(200);
+    }) // End .then
+    .catch(error => {
+      console.error('DELETE kit error:', error);
+      res.sendStatus(500);
+    }) // End .catch
+}); // End DELETE
 //#endregion ⬆⬆ All CRUD routes above. 
 
 

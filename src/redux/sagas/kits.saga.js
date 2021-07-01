@@ -12,6 +12,7 @@ function* kitSaga() {
   yield takeEvery('ADD_KIT_CATEGORY', addKitCategory);
   yield takeEvery('FETCH_SINGLE_KIT', fetchSingleKit);
   yield takeEvery('SUBMIT_KIT_EDIT', editSingleKit);
+  yield takeEvery('DELETE_KIT', deleteSingleKit);
 } // End Main kitSaga
 
 
@@ -109,6 +110,23 @@ function* editSingleKit(action) {
     console.error('editSingleKit error:', error);
   } // End catch
 } // End editSingleKit
+
+function* deleteSingleKit(action) {
+  console.log('In deleteSingleKit Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold kitId:
+  const kitId = action.payload.id;
+  try {
+    // ⬇ Sending kitId to server:
+    const response = yield axios.delete(`/api/kits/${kitId}`, action.payload);
+    // ⬇ Logging the response:
+    console.log('deleteSingleKit response:', response.data);
+    // ⬇ GET to refresh data:
+    yield put({ type: 'FETCH_ALL_KITS' });
+  } // End try
+  catch (error) {
+    console.error('deleteSingleKit error:', error);
+  } // End catch
+} // End deleteSingleKit
 //#endregion ⬆⬆ kitSaga functions above. 
 
 

@@ -12,6 +12,7 @@ function* eventSaga() {
   yield takeEvery('ADD_EVENT_CATEGORY', addEventCategory);
   yield takeEvery('FETCH_SINGLE_EVENT', fetchSingleEvent);
   yield takeEvery('SUBMIT_EVENT_EDIT', editSingleEvent);
+  yield takeEvery('DELETE_EVENT', deleteSingleEvent);
 } // End Main eventSaga
 
 
@@ -109,6 +110,23 @@ function* editSingleEvent(action) {
     console.error('editSingleEvent error:', error);
   } // End catch
 } // End editSingleEvent
+
+function* deleteSingleEvent(action) {
+  console.log('In deleteSingleEvent Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold kitId:
+  const eventId = action.payload.id;
+  try {
+    // ⬇ Sending kitId to server:
+    const response = yield axios.delete(`/api/events/${eventId}`, action.payload);
+    // ⬇ Logging the response:
+    console.log('deleteSingleEvent response:', response.data);
+    // ⬇ GET to refresh data:
+    yield put({ type: 'FETCH_ALL_EVENTS' });
+  } // End try
+  catch (error) {
+    console.error('deleteSingleEvent error:', error);
+  } // End catch
+} // End deleteSingleEvent
 //#endregion ⬆⬆ eventSaga functions above. 
 
 

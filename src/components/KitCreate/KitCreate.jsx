@@ -45,7 +45,7 @@ export default function CreateKits() {
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    // dispatch({ type: 'ADD_NEW_KIT', payload: kit });
+    dispatch({ type: 'ADD_NEW_KIT', payload: newKit });
     // ⬇ Send the user back:
     history.push('/dashboard');
   } // End handleSubmit

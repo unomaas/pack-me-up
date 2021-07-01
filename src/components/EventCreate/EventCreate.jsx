@@ -44,9 +44,9 @@ export default function CreateKits() {
     // ⬇ Don't refresh until submit:
     event.preventDefault();
     // ⬇ Sending newPlant to our reducer: 
-    // dispatch({ type: 'ADD_NEW_EVENT', payload: newEvent });
+    dispatch({ type: 'ADD_NEW_EVENT', payload: newEvent });
     // ⬇ Send the user back:
-    // history.push('/dashboard');
+    history.push('/dashboard');
   } // End handleSubmit
   //#endregion ⬆⬆ Event handles above. 
 
@@ -97,19 +97,19 @@ export default function CreateKits() {
           <br /> <br />
 
           <TextField
-            label="Start Date?"
-            defaultValue={today}
+            helperText="Start Date?"
+            // value={today}
             onChange={event => handleChange('date_start', event.target.value)}
             required
             type="date"
             size="small"
-            defaultValue={today}
+            // defaultValue={today}
           />
           &nbsp;
 
           <TextField
-            label="End Date?"
-            defaultValue={today}
+            helperText="End Date?"
+            // value={today}
             onChange={event => handleChange('date_end', event.target.value)}
             required
             type="date"

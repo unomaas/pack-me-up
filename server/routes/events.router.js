@@ -165,6 +165,32 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     }) // End .catch
 }); // End PUT
+
+/** ⬇ DELETE /api/events/id:
+ * Router will send SQL query to delete entries in the DB.
+ */
+ router.delete('/:id', (req, res) => {
+  console.log('In /api/events/:id DELETE');
+  // ⬇ Declaring variables to send to SQL: 
+  const eventId = req.params.id;
+  const query = `
+    DELETE FROM "events" 
+    WHERE "id" = $1 AND "events".user_id = $2;
+  `; // End query
+  const values = [
+    eventId,
+    req.user.id
+  ]; // End values
+  pool.query(query, values)
+    .then(result => {
+      console.log('DELETE event result:', result.rows);
+      res.sendStatus(200);
+    }) // End .then
+    .catch(error => {
+      console.error('DELETE event error:', error);
+      res.sendStatus(500);
+    }) // End .catch
+}); // End DELETE
 //#endregion ⬆⬆ All CRUD routes above. 
 
 

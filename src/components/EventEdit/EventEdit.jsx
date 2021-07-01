@@ -8,7 +8,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Button, MenuItem, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { useStyles } from '../MuiStyling/MuiStyling';
+import swal from 'sweetalert';
 //#endregion ⬆⬆ Document setup above. 
 
 
@@ -25,7 +27,7 @@ export default function EventEdit() {
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } }),
-    dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
+      dispatch({ type: 'FETCH_EVENT_CATEGORIES' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -49,13 +51,41 @@ export default function EventEdit() {
     console.log('In handleSubmit, eventEdit:', eventEdit);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
-    // ⬇ Sending newPlant to our reducer: 
+    // ⬇ Sending data to our saga: 
     dispatch({ type: 'SUBMIT_EVENT_EDIT', payload: eventEdit });
-    // ⬇ Send user back to detail view:
+    // ⬇ Send user back to dashboard:
     history.push(`/eventdetail/${eventDetail.id}`);
   } // End handleSubmit
+
+  /** ⬇ handleDelete:
+   * When clicked, this will ask the user to confirm deletion then send to the dashboard. 
+   */
+  const handleDelete = event => {
+    console.log('In handleDelete, event:', eventDetail.name);
+    // ⬇ Don't submit until confirm:
+    event.preventDefault();
+    swal({
+      title: "This will delete this event!",
+      text: "Are you sure you wish to proceed?",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true,
+    }) // End config
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("This event has been deleted!", {
+            icon: "success",
+          });
+          // ⬇ Sending data to our saga: 
+          dispatch({ type: 'DELETE_EVENT', payload: eventDetail });
+          // ⬇ Send user back to dashboard:
+          history.push(`/dashboard`);
+        } // End if
+      }); // End swal
+  } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
+  
   console.log('eventDetail is:', eventDetail);
   // ⬇ Rendering:
   return (
@@ -69,8 +99,8 @@ export default function EventEdit() {
           <TextField
             label="Event Name?"
             InputProps="defaultValue"
-            value={eventEdit?.name}
-            // defaultValue={eventDetail?.name}
+            // value={eventEdit?.name}
+            defaultValue={eventEdit?.name}
             className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
             required
@@ -82,8 +112,8 @@ export default function EventEdit() {
 
           <TextField
             label="Event Category?"
-            value={eventDetail?.event_category}
-            // defaultValue={eventDetail?.event_category}
+            // value={eventDetail?.event_category}
+            defaultValue={eventEdit?.event_category}
             className={classes.select}
             onChange={event => handleChange('event_category', event.target.value)}
             required
@@ -98,9 +128,8 @@ export default function EventEdit() {
 
           <TextField
             label="Description?"
-            value={eventEdit?.description}
-            // defaultValue={eventDetail?.description}
             // value={eventEdit?.description}
+            defaultValue={eventEdit?.description}
             className={classes.input}
             onChange={event => handleChange('description', event.target.value)}
             required
@@ -111,8 +140,8 @@ export default function EventEdit() {
           <br /> <br />
 
           <TextField
-            label="Start Date?"
-            value={today}
+            helperText="Start Date?"
+            // value={today}
             // defaultValue={eventDetail?.date_start}
             onChange={event => handleChange('date_start', event.target.value)}
             required
@@ -122,8 +151,8 @@ export default function EventEdit() {
           &nbsp;
 
           <TextField
-            label="End Date?"
-            value={today}
+            helperText="End Date?"
+            // value={today}
             // defaultValue={eventDetail?.date_end}
             onChange={event => handleChange('date_end', event.target.value)}
             required
@@ -153,6 +182,16 @@ export default function EventEdit() {
             size="small"
           >
             <CheckCircleOutlineIcon />
+          </Button> &nbsp;
+
+          <Button
+            name="delete"
+            onClick={handleDelete}
+            variant="outlined"
+            color="secondary"
+            size="small"
+          >
+            <DeleteForeverIcon />
           </Button>
         </form>
 

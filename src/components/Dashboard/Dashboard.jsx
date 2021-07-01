@@ -33,21 +33,6 @@ export default function Dashboard() {
 
   //#region ⬇⬇ Event handlers below:
 
-  // const handleCreateKit = () => {
-  //   console.log('In handleCreateKit');
-  //   history.push(`/createkit`);
-  // }; // End handleCreateKit
-
-  // const handleCreateEvent = () => {
-  //   console.log('In handleCreateEvent');
-  //   history.push(`/createevent`);
-  // }; // End handleCreateEvent
-
-  // const handleStartPacking = () => {
-  //   console.log('In handleStartPacking');
-  //   history.push(`/packing`);
-  // }; // End handleStartPacking
-
   //#endregion ⬆⬆ Event handles above. 
 
 
