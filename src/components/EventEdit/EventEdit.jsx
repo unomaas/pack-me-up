@@ -108,10 +108,11 @@ export default function EventEdit() {
 
         <form onSubmit={handleSubmit}>
           <TextField
+            // Input Label Props. 
+            InputLabelProps={{ shrink: eventEdit.name }}
             label="Event Name?"
-            InputProps="defaultValue"
-            // value={eventEdit?.name}
-            defaultValue={eventEdit?.name}
+            value={eventEdit?.name}
+            // defaultValue={eventEdit?.name}
             className={classes.input}
             onChange={event => handleChange('name', event.target.value)}
             required
@@ -123,8 +124,10 @@ export default function EventEdit() {
 
           <TextField
             label="Event Category?"
-            // value={eventDetail?.event_category}
-            defaultValue={eventEdit?.event_category}
+            value={eventDetail?.event_category}
+            // defaultValue={eventEdit?.event_category}
+            //MAKE THE VALUE ON .MAP MATCH THE VALUE OF ABOVE.
+            //CHANGE THE COMPONENT TO SELECT INSTEAD OF TEXTFIELD. 
             className={classes.select}
             onChange={event => handleChange('event_category', event.target.value)}
             required
@@ -138,9 +141,10 @@ export default function EventEdit() {
           <br /> <br />
 
           <TextField
+            InputLabelProps={{ shrink: eventEdit.description }}
             label="Description?"
-            // value={eventEdit?.description}
-            defaultValue={eventEdit?.description}
+            value={eventEdit?.description}
+            // defaultValue={eventEdit?.description}
             className={classes.input}
             onChange={event => handleChange('description', event.target.value)}
             required

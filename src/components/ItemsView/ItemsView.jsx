@@ -23,7 +23,7 @@ export default function ItemsView({ kit }) {
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   // const [blankInput, setBlankInput] = useState('');
-  const [newItem, setNewItem] = useState({});
+  const [newItem, setNewItem] = useState({name: ''});
 
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
@@ -57,7 +57,7 @@ export default function ItemsView({ kit }) {
       }
     });
     // ⬇ Clearing inputs after submit:
-    // setNewItem({});
+    setNewItem({name: ''});
   } // End handleSubmit
 
   /** ⬇ handleDelete:
@@ -92,7 +92,7 @@ export default function ItemsView({ kit }) {
                 <form onSubmit={handleSubmit}>
                   <TextField
                     label="Add a new Item?"
-                    // value={newItem}
+                    value={newItem.name}
                     className={classes.input}
                     onChange={event => handleChange('name', event.target.value)}
                     required
