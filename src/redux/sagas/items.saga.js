@@ -32,14 +32,16 @@ function* fetchAllItems(action) {
 } // End fetchAllItems
 
 function* addNewItem(action) {
-  Í
   console.log('In addNewItem Saga, action:', action.payload);
+    // ⬇ Declaring variable to hold kitId:
+    const kitId = action.payload.kit_id;
+    console.log('kitId is:', kitId);
   try {
     // ⬇ Calling to server to load data:
-    const response = yield axios.post('/api/items', action.payload);
+    const response = yield axios.post(`/api/items/${kitId}`, action.payload);
     console.log('addNewItem response:', response.data);
-    // ⬇ GET to refresh data:
-    yield put({ type: 'FETCH_ALL_ITEMS' });
+    // ⬇ GET to refresh data, have to use response.data to get kit_id:
+    yield put({ type: 'FETCH_ALL_ITEMS', payload: { id: response.data } });
   } // End try
   catch (error) {
     console.error('addNewItem error:', error);

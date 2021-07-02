@@ -15,7 +15,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM "items" 
-    WHERE "items".kit_id = $1 AND "items".user_id = $2;
+    WHERE "items".kit_id = $1 AND "items".user_id = $2
+    ORDER BY "items".name ASC;
   `; // End query
   const values = [
     req.params.id,
@@ -37,8 +38,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 /** ⬇ POST /api/items:
  * Router function to handle the POST part of the server-side logic.  Will send SQL query to add a new item to the DB.
  */
-router.post('/', (req, res) => {
-  console.log('In api/items POST');
+router.post('/:id', (req, res) => {
+  console.log('In POST api/items/:id', req.body, req.params, req.user);
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     INSERT INTO "items" ("name", "kit_id", "user_id")
@@ -46,13 +47,14 @@ router.post('/', (req, res) => {
   `; // End query
   const values = [
     req.body.name,
-    req.params.id,
+    req.body.kit_id,
     req.user.id
   ]; // End values
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
-      console.log('POST items result:', result);
+      console.log('POST items result:', result.rows);
+      res.send(req.body.kit_id);
       res.sendStatus(201);
     }) // End .then
     // ⬇ Catch for first query:
