@@ -22,6 +22,7 @@ export default function ItemsView({ kit }) {
   const classes = useStyles();
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
+  // const [blankInput, setBlankInput] = useState('');
   const [newItem, setNewItem] = useState({});
 
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
@@ -56,7 +57,7 @@ export default function ItemsView({ kit }) {
       }
     });
     // ⬇ Clearing inputs after submit:
-    // setNewItem("");
+    // setNewItem({});
   } // End handleSubmit
 
   /** ⬇ handleDelete:
