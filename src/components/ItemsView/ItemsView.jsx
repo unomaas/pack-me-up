@@ -55,37 +55,16 @@ export default function ItemsView({ kit }) {
         kit_id: params.id
       }
     });
-    // ⬇ Send user back to detail view:
-    // history.push(`/kitdetail/${kitDetail.id}`);
+    // ⬇ Clearing inputs after submit:
+    // setNewItem("");
   } // End handleSubmit
 
   /** ⬇ handleDelete:
-   * When clicked, this will ask the user to confirm deletion then send to the dashboard. 
+   * When clicked, this will delete the clicked item. 
    */
   const handleDelete = item => {
     console.log('In handleDelete, item:', item);
     dispatch({ type: 'DELETE_ITEM', payload: item });
-
-    // ⬇ Don't submit until confirm:
-    // event.preventDefault();
-    // swal({
-    //   title: "This will delete this kit!",
-    //   text: "Are you sure you wish to proceed?",
-    //   icon: "warning",
-    //   buttons: ["Cancel", "Delete"],
-    //   dangerMode: true,
-    // }) // End config
-    //   .then((willDelete) => {
-    //     if (willDelete) {
-    //       swal("This kit has been deleted!", {
-    //         icon: "success",
-    //       });
-    //       // ⬇ Sending data to our saga: 
-    //       dispatch({ type: 'DELETE_ITEM', payload: item });
-    //       // ⬇ Send user back to dashboard:
-    //       history.push(`/dashboard`);
-    //     } // End if
-    //   }); // End swal
   } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
@@ -112,6 +91,7 @@ export default function ItemsView({ kit }) {
                 <form onSubmit={handleSubmit}>
                   <TextField
                     label="Add a new Item?"
+                    // value={newItem}
                     className={classes.input}
                     onChange={event => handleChange('name', event.target.value)}
                     required
@@ -154,7 +134,7 @@ export default function ItemsView({ kit }) {
                 >
                   <Button
                     name="delete"
-                    onClick={item => handleDelete(item)}
+                    onClick={event => handleDelete(item)}
                     color="secondary"
                     size="small"
                   >

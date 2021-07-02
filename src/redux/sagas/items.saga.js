@@ -70,13 +70,14 @@ function* deleteSingleItem(action) {
   console.log('In deleteSingleItem Saga, action:', action.payload);
   // ⬇ Declaring variable to hold the ID:
   const itemId = action.payload.id;
+  const kitId = action.payload.kit_id;
   try {
     // ⬇ Sending the ID to server:
-    const response = yield axios.delete(`/api/items/${itemId}`, action.payload);
+    const response = yield axios.delete(`/api/items/${itemId}/${kitId}`, action.payload);
     // ⬇ Logging the response:
     console.log('deleteSingleItem response:', response.data);
-    // ⬇ GET to refresh data:
-    yield put({ type: 'FETCH_ALL_ITEMS' });
+    // ⬇ GET to refresh data, have to use response.data to get kit_id:
+    yield put({ type: 'FETCH_ALL_ITEMS', payload: { id: response.data } });
   } // End try
   catch (error) {
     console.error('deleteSingleItem error:', error);
