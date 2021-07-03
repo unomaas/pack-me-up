@@ -70,6 +70,16 @@ export default function EventDetail() {
         >
           <EditIcon />
         </Button>
+
+        <br /> <br />
+
+        <div className="Dashboard-kitlist">
+          <h2>Kit Data Here</h2>
+          {kits.map(kit => {
+            return <KitItem key={kit.id} kit={kit} />
+          })}
+        </div>
+
       </div>
 
     </div>
