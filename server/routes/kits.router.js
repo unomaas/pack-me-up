@@ -88,7 +88,13 @@ router.post('/', (req, res) => {
     INSERT INTO "kits" ("name", "description", "kit_category", "event_category", "user_id")
     VALUES ($1, $2, $3, $4, $5)
   `; // End query
-  const values = [req.body.name, req.body.description, req.body.kit_category, req.body.event_category, req.user.id];
+  const values = [
+    req.body.name, 
+    req.body.description, 
+    req.body.kit_category, 
+    req.body.event_category, 
+    req.user.id
+  ]; // End values
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
