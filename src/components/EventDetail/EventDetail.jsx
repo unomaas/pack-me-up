@@ -1,6 +1,7 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './EventDetail.css';
+import KitItemEvents from '../KitItem/KitItemEvents';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,9 +18,12 @@ export default function EventDetail() {
   const history = useHistory();
   const params = useParams();
   const eventDetail = useSelector((store) => store.eventsReducer.eventsDetailReducer);
+  const kits = useSelector((store) => store.kitsReducer.kitsReducer);
+
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_ALL_KITS' });
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -73,10 +77,10 @@ export default function EventDetail() {
 
         <br /> <br />
 
-        <div className="Dashboard-kitlist">
-          <h2>Kit Data Here</h2>
+        <div className="EventDetail-kitlist">
+          <h3>Which Kits will you bring?</h3>
           {kits.map(kit => {
-            return <KitItem key={kit.id} kit={kit} />
+            return <KitItemEvents key={kit.id} kit={kit} />
           })}
         </div>
 

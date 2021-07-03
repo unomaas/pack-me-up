@@ -2,10 +2,12 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+
 //#endregion ⬆⬆ Document setup above. 
 
 
-export default function KitItem({ kit }) {
+export default function KitItemEvents({ kit }) {
   //#region ⬇⬇ All state variables below:
   // const dispatch = useDispatch();
   const history = useHistory();
@@ -26,10 +28,22 @@ export default function KitItem({ kit }) {
 
   // ⬇ Rendering:
   return (
-    <div className="KitItem-wrapper" key={kit?.id} onClick={() => history.push(`/kitdetail/${kit.id}`)}>
+    <div className="KitItemEvents-wrapper" key={kit?.id}>
 
       <div className="KitItem-name">
-        <p>{kit?.name}</p>
+        {kit?.name}
+        <Button
+          color="primary"
+          size="small"
+        >
+          Add
+        </Button>
+        <Button
+          color="secondary"
+          size="small"
+        >
+          Remove
+        </Button>
       </div>
 
     </div>

@@ -135,7 +135,7 @@ export default function ItemsView({ kit }) {
                 >
                   <Button
                     name="delete"
-                    onClick={event => handleDelete(item)}
+                    onClick={() => handleDelete(item)}
                     color="secondary"
                     size="small"
                   >
