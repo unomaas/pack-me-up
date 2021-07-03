@@ -5,7 +5,7 @@ import './EventEdit.css';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, MenuItem, TextField } from '@material-ui/core';
+import { Button, MenuItem, TextField, Select } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -124,8 +124,8 @@ export default function EventEdit() {
 
           <TextField
             label="Event Category?"
-            value={eventDetail?.event_category}
-            // defaultValue={eventEdit?.event_category}
+            value={eventEdit?.event_category}
+            // defaultValue={eventEdit?.name}
             //MAKE THE VALUE ON .MAP MATCH THE VALUE OF ABOVE.
             //CHANGE THE COMPONENT TO SELECT INSTEAD OF TEXTFIELD. 
             className={classes.select}
@@ -155,7 +155,9 @@ export default function EventEdit() {
           <br /> <br />
 
           <TextField
-            helperText="Start Date?"
+            label="Start Date?"
+            InputLabelProps={{ shrink: true }}
+            // helperText="Start Date?"
             // value={today}
             // defaultValue={eventDetail?.date_start}
             onChange={event => handleChange('date_start', event.target.value)}
@@ -166,7 +168,9 @@ export default function EventEdit() {
           &nbsp;
 
           <TextField
-            helperText="End Date?"
+            label="End Date?"
+            InputLabelProps={{ shrink: true }}
+            // helperText="End Date?"
             // value={today}
             // defaultValue={eventDetail?.date_end}
             onChange={event => handleChange('date_end', event.target.value)}

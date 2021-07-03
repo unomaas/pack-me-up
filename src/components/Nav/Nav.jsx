@@ -27,17 +27,19 @@ function Nav() {
 
       <Link to="/home">
         {/* <h2 className="nav-title">Prime Solo Project</h2> */}
-        <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="50"></img>
+        <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="43"></img>
       </Link>
 
       <div className='nav-title'>
         {/* <p className="nav-title" >Pack Me Up!</p> */}
-        Pack Me Up!
+        {/* Pack Me Up! */}
+        <img className='header-logo' src="./images/PMUWhiteReg-01.svg" height="65" />
+
       </div>
 
-      <div>
+      {/* <div>
         <img className='header-logo' src="./images/suitcase-white.png" height="50" />
-      </div>
+      </div> */}
 
       <div>
         <Link className="navLink" to={loginLinkData.path}>

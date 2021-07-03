@@ -97,18 +97,22 @@ export default function CreateKits() {
           <br /> <br />
 
           <TextField
-            helperText="Start Date?"
+            label="Start Date?"
+            InputLabelProps={{ shrink: true }}
+            // helperText="Start Date?"
             // value={today}
             onChange={event => handleChange('date_start', event.target.value)}
             required
             type="date"
             size="small"
-            // defaultValue={today}
+          // defaultValue={today}
           />
           &nbsp;
 
           <TextField
-            helperText="End Date?"
+            label="End Date?"
+            InputLabelProps={{ shrink: true }}
+            // helperText="End Date?"
             // value={today}
             onChange={event => handleChange('date_end', event.target.value)}
             required
