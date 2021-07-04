@@ -7,6 +7,7 @@ import axios from 'axios';
 // ⬇ Root eventsKits:
 function* eventsKits() {
   yield takeEvery('FETCH_EVENTS_KITS', fetchEventsKits);
+  yield takeEvery('ADD_EVENTS_KITS', addEventsKits);
 
 } // End eventsKits
 
@@ -29,6 +30,22 @@ function* fetchEventsKits(action) {
   } // End catch
 } // End fetchEventsKits
 
+function* addEventsKits(action) {
+  console.log('In addEventsKits Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold kitId:
+  const eventId = action.payload.event_id;
+  console.log('eventId is:', eventId);
+  try {
+    // ⬇ Calling to server to load data:
+    const response = yield axios.post(`/api/eventsKits/${eventId}`, action.payload);
+    console.log('addEventsKits response:', response.data);
+    // ⬇ GET to refresh data, have to use response.data to get event_id:
+    yield put({ type: 'FETCH_EVENTS_KITS', payload: { id: response.data } });
+  } // End try
+  catch (error) {
+    console.error('addEventsKits error:', error);
+  } // End catch
+} // End addEventsKits
 
 //#endregion ⬆⬆ eventsKits functions above. 
 

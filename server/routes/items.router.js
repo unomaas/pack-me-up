@@ -59,8 +59,8 @@ router.post('/:id', (req, res) => {
     }) // End .then
     // ⬇ Catch for first query:
     .catch(error => {
-      console.error('Error in POST items:', error);
-      res.sendStatus(500)
+      console.error('POST items error:', error);
+      res.sendStatus(500);
     }); // End .catch
 }) // End POST
 

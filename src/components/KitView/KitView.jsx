@@ -23,7 +23,8 @@ export default function KitView({ event }) {
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
-  const [kitToAdd, setKitToAdd] = useState({});
+  const addedKits = useSelector((store) => store.eventsKitsReducer);
+  const [kitToAdd, setKitToAdd] = useState();
 
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
@@ -48,20 +49,16 @@ export default function KitView({ event }) {
    */
   const handleSubmit = kitToAdd => {
     console.log('In handleSubmit, kitToAdd:', kitToAdd);
-
-    // Might have to do an if statement to check if it's empty: 
-
-    // ⬇ Don't refresh until submit:
-    // event.preventDefault();
-    // ⬇ Sending data to our saga: 
-    // dispatch({
-    //   type: 'ADD_NEW_ITEM', payload: {
-    //     name: newItem.name,
-    //     kit_id: params.id
-    //   }
-    // });
-    // ⬇ Clearing inputs after submit:
-    // setNewItem({name: ''});
+    // ⬇ Don't submit if they haven't selected: 
+    if (kitToAdd) {
+      // ⬇ Sending data to our saga: 
+      dispatch({
+        type: 'ADD_EVENTS_KITS', payload: {
+          kit_id: kitToAdd.kit_id,
+          event_id: params.id
+        }
+      });
+    } // End if
   } // End handleSubmit
 
   /** ⬇ handleDelete:
@@ -138,7 +135,7 @@ export default function KitView({ event }) {
               </TableCell>
             </StyledTableRow>
 
-            {kits.map((kit) => (
+            {addedKits.map((kit) => (
               <StyledTableRow key={kit.id}>
                 <TableCell
                   component="th"

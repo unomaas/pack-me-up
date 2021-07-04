@@ -42,28 +42,28 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
  * Router function to handle the POST part of the server-side logic.  Will send SQL query to add a new item to the DB.
  */
 router.post('/:id', (req, res) => {
-  console.log('In POST api/eventsKits/:id');
+  console.log('In POST api/eventsKits/:id', req.body, req.params, req.user);
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    INSERT INTO "items" ("name", "kit_id", "user_id")
+    INSERT INTO "events_kits" ("event_id", "kit_id", "user_id")
     VALUES ($1, $2, $3)
   `; // End query
   const values = [
-    req.body.name,
     req.params.id,
+    req.body.kit_id,
     req.user.id
   ]; // End values
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
-      console.log('POST items result:', result.rows);
+      console.log('POST eventsKits result:', result.rows);
       // ⬇ Sending back the kit id to refresh with:
       res.send(req.params.id);
     }) // End .then
     // ⬇ Catch for first query:
     .catch(error => {
-      console.error('Error in POST items:', error);
-      res.sendStatus(500)
+      console.error('POST eventsKits error:', error);
+      res.sendStatus(500);
     }); // End .catch
 }) // End POST
 
