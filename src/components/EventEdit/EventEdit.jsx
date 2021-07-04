@@ -185,7 +185,7 @@ export default function EventEdit() {
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/eventdetail/${eventDetail.id}`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

@@ -18,7 +18,7 @@ export default function CreateKits() {
   const history = useHistory();
   const classes = useStyles();
   const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
-  const [newEvent, setNewEvent] = useState({});
+  const [newEvent, setNewEvent] = useState({}); // TODO: Set default values so that you can have the default dates be set to today and not have to catch an on change.  Then explore if this would help in other areas of the app.  
   const today = new Date().toISOString().substring(0, 10);
   // ⬇ GET on page load:
   useEffect(() => {
@@ -125,7 +125,7 @@ export default function CreateKits() {
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/dashboard`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

@@ -1,7 +1,7 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './EventDetail.css';
-import KitItemEvents from '../KitItem/KitItemEvents';
+import KitItem from '../KitItem/KitItem';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,6 +29,9 @@ export default function EventDetail() {
 
 
   //#region ⬇⬇ Event handlers below:
+  // const testLog = (kit) => {
+  //   console.log('In testLog, kit:', kit);
+  // }
 
   //#endregion ⬆⬆ Event handles above. 
 
@@ -58,7 +61,8 @@ export default function EventDetail() {
 
       <div>
         <Button
-          onClick={() => history.push(`/dashboard`)}
+          name="back"
+          onClick={() => history.goBack()}
           variant="outlined"
           color="secondary"
           size="small"
@@ -67,6 +71,7 @@ export default function EventDetail() {
         </Button> &nbsp;
 
         <Button
+          name="edit"
           onClick={() => history.push(`/eventedit/${eventDetail?.id}`)}
           variant="outlined"
           color="primary"
@@ -80,7 +85,24 @@ export default function EventDetail() {
         <div className="EventDetail-kitlist">
           <h3>Which Kits will you bring?</h3>
           {kits.map(kit => {
-            return <KitItemEvents key={kit.id} kit={kit} />
+            return <span>
+              <KitItem key={kit.id} kit={kit} />
+              <Button
+                name="add"
+                // onClick={() => testLog(kit)}
+                color="primary"
+                size="small"
+              >
+                Add
+              </Button>
+              <Button
+                name="remove"
+                color="secondary"
+                size="small"
+              >
+                Remove
+              </Button>
+            </span>
           })}
         </div>
 

@@ -32,18 +32,6 @@ export default function KitItemEvents({ kit }) {
 
       <div className="KitItem-name">
         {kit?.name}
-        <Button
-          color="primary"
-          size="small"
-        >
-          Add
-        </Button>
-        <Button
-          color="secondary"
-          size="small"
-        >
-          Remove
-        </Button>
       </div>
 
     </div>
