@@ -6,6 +6,7 @@ import userSaga from './user.saga';
 import kitsSaga from './kits.saga';
 import eventsSaga from './events.saga';
 import itemsSaga from './items.saga';
+import eventsKitsSaga from './eventsKitsSaga';
 //#endregion ⬆⬆ All document setup above. 
 
 
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     userSaga(),
     kitsSaga(),
     eventsSaga(),
-    itemsSaga()
+    itemsSaga(),
+    eventsKitsSaga()
   ]); // End yield all
 } // End rootSaga

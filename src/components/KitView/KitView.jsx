@@ -23,14 +23,13 @@ export default function KitView({ event }) {
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
-
-  // const [blankInput, setBlankInput] = useState('');
-  const [newItem, setNewItem] = useState({ name: '' });
+  const [kitToAdd, setKitToAdd] = useState({});
 
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_ALL_KITS' });
+    dispatch({ type: 'FETCH_ALL_KITS' })
+    //, dispatch({ type: 'FETCH_EVENTS_KITS', payload: params.id })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -39,16 +38,16 @@ export default function KitView({ event }) {
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
-  // const handleChange = (key, value) => {
-  //   console.log('In handleChange, key/value:', key, '/', value);
-  //   setNewItem({ ...newItem, [key]: value });
-  // }; // End handleChange
+  const handleChange = (key, value) => {
+    console.log('In handleChange, key/value:', key, '/', value);
+    setKitToAdd({ ...kitToAdd, [key]: value });
+  }; // End handleChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
    */
-  const handleAdd = kit => {
-    console.log('In handleAdd, kit:', kit);
+  const handleSubmit = kitToAdd => {
+    console.log('In handleSubmit, kitToAdd:', kitToAdd);
     // ⬇ Don't refresh until submit:
     // event.preventDefault();
     // ⬇ Sending data to our saga: 
@@ -60,12 +59,12 @@ export default function KitView({ event }) {
     // });
     // ⬇ Clearing inputs after submit:
     // setNewItem({name: ''});
-  } // End handleAdd
+  } // End handleSubmit
 
   /** ⬇ handleDelete:
    * When clicked, this will delete the clicked item. 
    */
-  const handleRemove = item => {
+  const handleRemove = kit => {
     console.log('In handleRemove, kit:', kit);
     // dispatch({ type: 'DELETE_ITEM', payload: item });
   } // End handleDelete
@@ -111,7 +110,7 @@ export default function KitView({ event }) {
                 <TextField
                   label="Add a Kit?"
                   className={classes.select}
-                  // onChange={event => handleChange('event_category', event.target.value)}
+                  onChange={event => handleChange('kit_id', event.target.value)}
                   required
                   select
                   size="small"
@@ -127,7 +126,7 @@ export default function KitView({ event }) {
               >
                 <Button
                   name="submit"
-                  onClick={() => handleAdd(kit)}
+                  onClick={() => handleSubmit(kitToAdd)}
                   color="primary"
                   size="small"
                 >
