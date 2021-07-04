@@ -2,6 +2,7 @@
 // ⬇ File setup: 
 import './EventDetail.css';
 import KitItem from '../KitItem/KitItem';
+import KitView from '../KitView/KitView';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -82,8 +83,11 @@ export default function EventDetail() {
 
         <br /> <br />
 
-        <div className="EventDetail-kitlist">
-          <h3>Which Kits will you bring?</h3>
+        <KitView event={eventDetail} />
+
+
+        {/* <div className="EventDetail-kitlist">
+          <h3>Add Kits to bring:</h3>
           {kits.map(kit => {
             return <span>
               <KitItem key={kit.id} kit={kit} />
@@ -104,7 +108,7 @@ export default function EventDetail() {
               </Button>
             </span>
           })}
-        </div>
+        </div> */}
 
       </div>
 

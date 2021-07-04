@@ -1,7 +1,7 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './KitDetail.css';
-import ItemsView from '../ItemsView/ItemsView';
+import ItemView from '../ItemView/ItemView';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -78,7 +78,7 @@ export default function KitDetail() {
 
         <br /> <br />
 
-        <ItemsView kit={kitDetail} />
+        <ItemView kit={kitDetail} />
 
       </div>
 

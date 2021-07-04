@@ -1,6 +1,6 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
-import './ItemsView.css';
+// import './ItemView.css';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
@@ -15,20 +15,22 @@ import { useStyles, theme, StyledTableCell, StyledTableRow } from '../MuiStyling
 
 
 
-export default function ItemsView({ kit }) {
+export default function KitView({ kit }) {
   //#region ⬇⬇ All state variables below:
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
+  const kits = useSelector((store) => store.kitsReducer.kitsReducer);
+
   // const [blankInput, setBlankInput] = useState('');
   const [newItem, setNewItem] = useState({name: ''});
 
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_ALL_KITS', payload: { id: params.id } });
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -37,18 +39,18 @@ export default function ItemsView({ kit }) {
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
-  const handleChange = (key, value) => {
-    console.log('In handleChange, key/value:', key, '/', value);
-    setNewItem({ ...newItem, [key]: value });
-  }; // End handleChange
+  // const handleChange = (key, value) => {
+  //   console.log('In handleChange, key/value:', key, '/', value);
+  //   setNewItem({ ...newItem, [key]: value });
+  // }; // End handleChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
    */
-  const handleSubmit = event => {
-    console.log('In handleSubmit, newItem:', newItem);
+  const handleAdd = kit => {
+    console.log('In handleAdd, newItem:', kit);
     // ⬇ Don't refresh until submit:
-    event.preventDefault();
+    // event.preventDefault();
     // ⬇ Sending data to our saga: 
     dispatch({
       type: 'ADD_NEW_ITEM', payload: {
@@ -57,13 +59,13 @@ export default function ItemsView({ kit }) {
       }
     });
     // ⬇ Clearing inputs after submit:
-    setNewItem({name: ''});
-  } // End handleSubmit
+    // setNewItem({name: ''});
+  } // End handleAdd
 
   /** ⬇ handleDelete:
    * When clicked, this will delete the clicked item. 
    */
-  const handleDelete = item => {
+  const handleRemove = item => {
     console.log('In handleDelete, item:', item);
     dispatch({ type: 'DELETE_ITEM', payload: item });
   } // End handleDelete
@@ -80,7 +82,7 @@ export default function ItemsView({ kit }) {
           <TableHead>
             <TableRow>
               <StyledTableCell className={classes.tableHeader} colSpan={3} align="center">
-                {kit.name}'s Items:
+                Select Kits to Bring With:
               </StyledTableCell>
             </TableRow>
           </TableHead>
@@ -94,7 +96,7 @@ export default function ItemsView({ kit }) {
                     label="Add a new Item?"
                     value={newItem.name}
                     className={classes.input}
-                    onChange={event => handleChange('name', event.target.value)}
+                    // onChange={event => handleChange('name', event.target.value)}
                     required
                     type="search"
                     inputProps={{ maxLength: 50 }}
