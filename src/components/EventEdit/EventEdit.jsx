@@ -77,7 +77,7 @@ export default function EventEdit() {
     event.preventDefault();
     swal({
       title: "This will delete this event!",
-      text: "Are you sure you wish to proceed?",
+      text: "Do you wish to proceed?",
       icon: "warning",
       buttons: ["Cancel", "Delete"],
       dangerMode: true,
@@ -185,7 +185,7 @@ export default function EventEdit() {
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/eventdetail/${eventDetail.id}`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

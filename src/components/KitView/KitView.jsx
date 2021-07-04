@@ -1,11 +1,11 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
-import './ItemsView.css';
+// import './ItemView.css';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -15,20 +15,22 @@ import { useStyles, theme, StyledTableCell, StyledTableRow } from '../MuiStyling
 
 
 
-export default function ItemsView({ kit }) {
+export default function KitView({ event }) {
   //#region ⬇⬇ All state variables below:
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
-  // const [blankInput, setBlankInput] = useState('');
-  const [newItem, setNewItem] = useState({name: ''});
+  const kits = useSelector((store) => store.kitsReducer.kitsReducer);
+  const addedKits = useSelector((store) => store.eventsKitsReducer);
+  const [kitToAdd, setKitToAdd] = useState();
 
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_EVENTS_KITS', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_ALL_KITS' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -39,33 +41,32 @@ export default function ItemsView({ kit }) {
    */
   const handleChange = (key, value) => {
     console.log('In handleChange, key/value:', key, '/', value);
-    setNewItem({ ...newItem, [key]: value });
+    setKitToAdd({ ...kitToAdd, [key]: value });
   }; // End handleChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
    */
-  const handleSubmit = event => {
-    console.log('In handleSubmit, newItem:', newItem);
-    // ⬇ Don't refresh until submit:
-    event.preventDefault();
-    // ⬇ Sending data to our saga: 
-    dispatch({
-      type: 'ADD_NEW_ITEM', payload: {
-        name: newItem.name,
-        kit_id: params.id
-      }
-    });
-    // ⬇ Clearing inputs after submit:
-    setNewItem({name: ''});
+  const handleSubmit = kitToAdd => {
+    console.log('In handleSubmit, kitToAdd:', kitToAdd);
+    // ⬇ Don't submit if they haven't selected: 
+    if (kitToAdd) {
+      // ⬇ Sending data to our saga: 
+      dispatch({
+        type: 'ADD_EVENTS_KITS', payload: {
+          kit_id: kitToAdd.kit_id,
+          event_id: params.id
+        }
+      });
+    } // End if
   } // End handleSubmit
 
   /** ⬇ handleDelete:
    * When clicked, this will delete the clicked item. 
    */
-  const handleDelete = item => {
-    console.log('In handleDelete, item:', item);
-    dispatch({ type: 'DELETE_ITEM', payload: item });
+  const handleRemove = kit => {
+    console.log('In handleRemove, kit:', kit);
+    dispatch({ type: 'DELETE_EVENTS_KITS', payload: kit });
   } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
@@ -80,7 +81,7 @@ export default function ItemsView({ kit }) {
           <TableHead>
             <TableRow>
               <StyledTableCell className={classes.tableHeader} colSpan={3} align="center">
-                {kit.name}'s Items:
+                Select Kits to Bring With:
               </StyledTableCell>
             </TableRow>
           </TableHead>
@@ -89,18 +90,35 @@ export default function ItemsView({ kit }) {
 
             <StyledTableRow>
               <TableCell>
-                <form onSubmit={handleSubmit}>
-                  <TextField
+                {/* <TextField
                     label="Add a new Item?"
                     value={newItem.name}
                     className={classes.input}
-                    onChange={event => handleChange('name', event.target.value)}
+                    // onChange={event => handleChange('name', event.target.value)}
                     required
                     type="search"
                     inputProps={{ maxLength: 50 }}
                     size="small"
-                  />
-                </form>
+                  /> */}
+                {/* <Select
+                    name="kitlist"
+                    label="kit?"
+                  >
+                    
+                  </Select> */}
+
+                <TextField
+                  label="Add a Kit?"
+                  className={classes.select}
+                  onChange={event => handleChange('kit_id', event.target.value)}
+                  required
+                  select
+                  size="small"
+                >
+                  {kits?.map(kit => (
+                    <MenuItem key={kit.id} value={kit.id}>{kit.name}</MenuItem>
+                  ))}
+                </TextField>
               </TableCell>
               <TableCell
                 padding="none"
@@ -108,7 +126,7 @@ export default function ItemsView({ kit }) {
               >
                 <Button
                   name="submit"
-                  onClick={handleSubmit}
+                  onClick={() => handleSubmit(kitToAdd)}
                   color="primary"
                   size="small"
                 >
@@ -117,14 +135,14 @@ export default function ItemsView({ kit }) {
               </TableCell>
             </StyledTableRow>
 
-            {items.map((item) => (
-              <StyledTableRow key={item.id}>
+            {addedKits.map((kit) => (
+              <StyledTableRow key={kit.id}>
                 <TableCell
                   component="th"
                   scope="row"
                   className={classes.tableRows}
                 >
-                  {item.name}
+                  {kit.name}
                 </TableCell>
                 {/* <TableCell align="right">
                   Edit
@@ -135,7 +153,7 @@ export default function ItemsView({ kit }) {
                 >
                   <Button
                     name="delete"
-                    onClick={event => handleDelete(item)}
+                    onClick={() => handleRemove(kit)}
                     color="secondary"
                     size="small"
                   >
@@ -144,6 +162,7 @@ export default function ItemsView({ kit }) {
                 </TableCell>
               </StyledTableRow>
             ))}
+
           </TableBody>
 
         </Table>

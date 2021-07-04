@@ -123,7 +123,7 @@ export default function CreateKits() {
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/dashboard`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

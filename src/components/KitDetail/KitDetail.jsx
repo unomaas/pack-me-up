@@ -1,7 +1,7 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './KitDetail.css';
-import ItemsView from '../ItemsView/ItemsView';
+import ItemView from '../ItemView/ItemView';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +29,7 @@ export default function KitDetail() {
 
   //#endregion ⬆⬆ Event handles above. 
 
-  
+
   // ⬇ Rendering:
   return (
     <div className="KitDetail-wrapper" key={kitDetail?.id}>
@@ -55,7 +55,10 @@ export default function KitDetail() {
 
       <div>
         <Button
-          onClick={() => history.push(`/dashboard`)}
+          name="back"
+          onClick={() => history.goBack()}
+          // onClick={() => history.push(`/dashboard`)}
+
           variant="outlined"
           color="secondary"
           size="small"
@@ -64,6 +67,7 @@ export default function KitDetail() {
         </Button> &nbsp;
 
         <Button
+          name="edit"
           onClick={() => history.push(`/kitedit/${kitDetail?.id}`)}
           variant="outlined"
           color="primary"
@@ -74,7 +78,7 @@ export default function KitDetail() {
 
         <br /> <br />
 
-        <ItemsView kit={kitDetail} />
+        <ItemView kit={kitDetail} />
 
       </div>
 

@@ -1,0 +1,14 @@
+.swal-title, .swal-text {
+  font-family: 'opendyslexicregular', 'Roboto', sans-serif;
+}
+
+.swal-title {
+  font-size: 24px;
+  color: black;
+}
+
+.swal-text {
+  font-size: 16px;
+  color: black;
+}
+

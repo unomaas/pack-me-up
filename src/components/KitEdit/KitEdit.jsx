@@ -163,7 +163,7 @@ export default function KitEdit() {
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/kitdetail/${kitDetail.id}`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

@@ -1,6 +1,8 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './EventDetail.css';
+import KitItem from '../KitItem/KitItem';
+import KitView from '../KitView/KitView';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,14 +19,19 @@ export default function EventDetail() {
   const history = useHistory();
   const params = useParams();
   const eventDetail = useSelector((store) => store.eventsReducer.eventsDetailReducer);
+  const kits = useSelector((store) => store.kitsReducer.kitsReducer);
+
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
 
   //#region ⬇⬇ Event handlers below:
+  // const testLog = (kit) => {
+  //   console.log('In testLog, kit:', kit);
+  // }
 
   //#endregion ⬆⬆ Event handles above. 
 
@@ -54,7 +61,8 @@ export default function EventDetail() {
 
       <div>
         <Button
-          onClick={() => history.push(`/dashboard`)}
+          name="back"
+          onClick={() => history.goBack()}
           variant="outlined"
           color="secondary"
           size="small"
@@ -63,6 +71,7 @@ export default function EventDetail() {
         </Button> &nbsp;
 
         <Button
+          name="edit"
           onClick={() => history.push(`/eventedit/${eventDetail?.id}`)}
           variant="outlined"
           color="primary"
@@ -73,12 +82,32 @@ export default function EventDetail() {
 
         <br /> <br />
 
-        <div className="Dashboard-kitlist">
-          <h2>Kit Data Here</h2>
+        <KitView event={eventDetail} />
+
+
+        {/* <div className="EventDetail-kitlist">
+          <h3>Add Kits to bring:</h3>
           {kits.map(kit => {
-            return <KitItem key={kit.id} kit={kit} />
+            return <span>
+              <KitItem key={kit.id} kit={kit} />
+              <Button
+                name="add"
+                // onClick={() => testLog(kit)}
+                color="primary"
+                size="small"
+              >
+                Add
+              </Button>
+              <Button
+                name="remove"
+                color="secondary"
+                size="small"
+              >
+                Remove
+              </Button>
+            </span>
           })}
-        </div>
+        </div> */}
 
       </div>
 
