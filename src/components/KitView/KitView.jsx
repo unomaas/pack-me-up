@@ -28,8 +28,8 @@ export default function KitView({ event }) {
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_ALL_KITS' })
-    //, dispatch({ type: 'FETCH_EVENTS_KITS', payload: params.id })
+    dispatch({ type: 'FETCH_EVENTS_KITS', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_ALL_KITS' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -48,6 +48,9 @@ export default function KitView({ event }) {
    */
   const handleSubmit = kitToAdd => {
     console.log('In handleSubmit, kitToAdd:', kitToAdd);
+
+    // Might have to do an if statement to check if it's empty: 
+
     // ⬇ Don't refresh until submit:
     // event.preventDefault();
     // ⬇ Sending data to our saga: 

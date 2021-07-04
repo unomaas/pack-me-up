@@ -11,12 +11,15 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * Router function to handle the GET part of the server-side logic.  Will send SQL query to pull all of the entries from the DB to update on the DOM.
  */
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  console.log('In GET /api/items/:id');
+  console.log('In GET /api/eventsKits/:id');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    SELECT * FROM "items" 
-    WHERE "items".kit_id = $1 AND "items".user_id = $2
-    ORDER BY "items".name ASC;
+    SELECT "events_kits".id, "events_kits".event_id, "events".name, "events".event_category, "events_kits".kit_id, "kits".name, "kits".kit_category, "kits".event_category, "events_kits".is_packed
+    FROM kits
+    JOIN events_kits on kits.id = events_kits.kit_id
+    JOIN events ON events.id = events_kits.event_id
+    WHERE "events".id = $1 AND events.user_id = $2
+    ORDER BY "kits".event_category ASC;
   `; // End query
   const values = [
     req.params.id,
@@ -25,13 +28,13 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
-      console.log('GET all items result:', result.rows);
+      console.log('GET eventsKits result:', result.rows);
       // ⬇ Sends back the results in an object, we always want rows:
       res.send(result.rows);
     }) // End .then
     .catch(error => {
-      console.error('Error with GET all:', error);
-      res.sendStatus(500)
+      console.error('GET eventsKits error:', error);
+      res.sendStatus(500);
     }); // End .catch
 }); // End GET
 
@@ -39,7 +42,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
  * Router function to handle the POST part of the server-side logic.  Will send SQL query to add a new item to the DB.
  */
 router.post('/:id', (req, res) => {
-  console.log('In POST api/items/:id');
+  console.log('In POST api/eventsKits/:id');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     INSERT INTO "items" ("name", "kit_id", "user_id")

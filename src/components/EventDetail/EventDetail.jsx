@@ -23,8 +23,7 @@ export default function EventDetail() {
 
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } }),
-      dispatch({ type: 'FETCH_ALL_KITS' });
+    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 

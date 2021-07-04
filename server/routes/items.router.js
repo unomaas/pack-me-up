@@ -31,7 +31,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     }) // End .then
     .catch(error => {
       console.error('Error with GET all:', error);
-      res.sendStatus(500)
+      res.sendStatus(500);
     }); // End .catch
 }); // End GET
 
