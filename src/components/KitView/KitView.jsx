@@ -66,7 +66,7 @@ export default function KitView({ event }) {
    */
   const handleRemove = kit => {
     console.log('In handleRemove, kit:', kit);
-    // dispatch({ type: 'DELETE_ITEM', payload: item });
+    dispatch({ type: 'DELETE_EVENTS_KITS', payload: kit });
   } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 

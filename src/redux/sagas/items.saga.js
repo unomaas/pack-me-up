@@ -73,7 +73,7 @@ function* deleteSingleItem(action) {
   const kitId = action.payload.kit_id;
   try {
     // ⬇ Sending the ID to server:
-    const response = yield axios.delete(`/api/items/${itemId}/${kitId}`, action.payload);
+    const response = yield axios.delete(`/api/items/${itemId}/${kitId}`);
     // ⬇ Logging the response:
     console.log('deleteSingleItem response:', response.data);
     // ⬇ GET to refresh data, have to use response.data to get kit_id:

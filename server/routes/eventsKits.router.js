@@ -99,23 +99,23 @@ router.put('/:id', (req, res) => {
 /** ⬇ DELETE /api/items/id:
  * Router will send SQL query to delete entries in the DB.
  */
-router.delete('/:id/:kit_id', (req, res) => {
-  console.log('In /api/items/:id/:kit_id DELETE', req.body, req.params, req.user);
+router.delete('/:id/:event_id', (req, res) => {
+  console.log('In /api/eventsKits/:id/:event_id DELETE', req.body, req.params, req.user);
   // ⬇ Declaring variables to send to SQL: 
-  const itemId = req.params.id;
-  const kitId = req.params.kit_id;
+  const eventsKitsId = req.params.id;
+  const eventId = req.params.event_id;
   const query = `
-    DELETE FROM "items" 
-    WHERE "id" = $1 AND "items".user_id = $2;
+    DELETE FROM "events_kits" 
+    WHERE "id" = $1 AND "events_kits".user_id = $2;
   `; // End query
   const values = [
-    itemId,
+    eventsKitsId,
     req.user.id
   ]; // End values
   pool.query(query, values)
     .then(result => {
       console.log('DELETE item result:', result.rows);
-      res.send(kitId);
+      res.send(eventId);
     }) // End .then
     .catch(error => {
       console.error('DELETE item error:', error);
