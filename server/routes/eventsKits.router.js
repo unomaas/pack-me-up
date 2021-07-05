@@ -14,7 +14,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   console.log('In GET /api/eventsKits/:id');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    SELECT "events_kits".id, "events_kits".event_id, "events".name, "events".event_category, "events".date_start, "events_kits".kit_id, "kits".name, "kits".kit_category, "kits".event_category, "events_kits".is_packed
+    SELECT "events_kits".id, "events_kits".event_id, "events".name, "events".event_category, "events_kits".kit_id, "kits".name, "kits".kit_category, "kits".event_category, "events_kits".is_packed
     FROM kits
     JOIN events_kits on kits.id = events_kits.kit_id
     JOIN events ON events.id = events_kits.event_id
