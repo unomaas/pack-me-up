@@ -14,9 +14,10 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
   console.log('In GET /api/items/:id');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    SELECT * FROM "items" 
+    SELECT * 
+    FROM "items" 
     WHERE "items".kit_id = $1 AND "items".user_id = $2
-    ORDER BY "items".name ASC;
+    ORDER BY "items".item_name ASC;
   `; // End query
   const values = [
     req.params.id,
@@ -42,11 +43,11 @@ router.post('/:id', (req, res) => {
   console.log('In POST api/items/:id');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    INSERT INTO "items" ("name", "kit_id", "user_id")
+    INSERT INTO "items" ("item_name", "kit_id", "user_id")
     VALUES ($1, $2, $3)
   `; // End query
   const values = [
-    req.body.name,
+    req.body.item_name,
     req.params.id,
     req.user.id
   ]; // End values
@@ -73,11 +74,11 @@ router.put('/:id', (req, res) => {
   const itemId = req.body.id;
   const query = `
     UPDATE "items" 
-    SET "name" = $1
+    SET "item_name" = $1
     WHERE "id" = $2 AND "items".user_id = $3;
   `; // End query
   const values = [
-    req.body.name,
+    req.body.item_name,
     itemId,
     req.user.id
   ]; // End values

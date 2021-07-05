@@ -36,8 +36,8 @@ export default function KitDetail() {
 
       <div>
         <h2>{kitDetail?.id}</h2>
-        <h2>{kitDetail?.name}</h2>
-        <h2>{kitDetail?.description}</h2>
+        <h2>{kitDetail?.kit_name}</h2>
+        <h2>{kitDetail?.kit_description}</h2>
       </div>
 
       {/* <img

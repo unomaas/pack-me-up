@@ -90,7 +90,7 @@ export default function PackingDetail() {
         size="small"
       >
         {addedKits?.map(kit => (
-          <MenuItem key={kit.kit_id} value={kit.kit_id}>{kit.name}</MenuItem>
+          <MenuItem key={kit.kit_id} value={kit.kit_id}>{kit.kit_name}</MenuItem>
         ))}
       </TextField>
 

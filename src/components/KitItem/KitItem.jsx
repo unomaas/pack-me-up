@@ -29,7 +29,7 @@ export default function KitItem({ kit }) {
     <div className="KitItem-wrapper" key={kit?.id} >
 
       <div className="KitItem-name">
-        <span onClick={() => history.push(`/kitdetail/${kit.id}`)}>{kit?.name}</span>
+        <span onClick={() => history.push(`/kitdetail/${kit.id}`)}>{kit?.kit_name}</span>
       </div>
 
     </div>

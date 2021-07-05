@@ -61,7 +61,7 @@ export default function KitEdit() {
    * When clicked, this will ask the user to confirm deletion then send to the dashboard. 
    */
   const handleDelete = event => {
-    console.log('In handleDelete, kit:', kitEdit.name);
+    console.log('In handleDelete, kit:', kitEdit.kit_name);
     // ⬇ Don't submit until confirm:
     event.preventDefault();
     swal({
@@ -79,7 +79,7 @@ export default function KitEdit() {
           // ⬇ Sending data to our saga: 
           dispatch({ type: 'DELETE_KIT', payload: kitEdit });
           // ⬇ Send user back to dashboard:
-          // history.push(`/dashboard`);
+          history.push(`/dashboard`);
         } // End if
       }); // End swal
   } // End handleDelete
@@ -97,9 +97,9 @@ export default function KitEdit() {
         <form onSubmit={handleSubmit}>
           <TextField
             label="Kit Name?"
-            defaultValue={kitDetail?.name}
+            defaultValue={kitDetail?.kit_name}
             className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
+            onChange={event => handleChange('kit_name', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
@@ -118,16 +118,16 @@ export default function KitEdit() {
             value={kitsCategories?.id}
           >
             {kitsCategories?.map(kitCategory => (
-              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
+              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.kit_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
 
           <TextField
             label="Description?"
-            defaultValue={kitDetail?.description}
+            defaultValue={kitDetail?.kit_description}
             className={classes.input}
-            onChange={event => handleChange('description', event.target.value)}
+            onChange={event => handleChange('kit_description', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 255 }}
@@ -146,7 +146,7 @@ export default function KitEdit() {
             value={eventsCategories?.id}
           >
             {eventsCategories?.map(eventCategory => (
-              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
+              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.event_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />

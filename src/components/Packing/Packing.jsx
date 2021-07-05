@@ -85,7 +85,7 @@ export default function Packing() {
         size="small"
       >
         {events?.map(event => (
-          <MenuItem key={event.id} value={event.id}>{event.name}</MenuItem>
+          <MenuItem key={event.id} value={event.id}>{event.event_name}</MenuItem>
         ))}
       </TextField>
 

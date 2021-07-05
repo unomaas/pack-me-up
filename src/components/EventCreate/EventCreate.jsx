@@ -63,7 +63,7 @@ export default function CreateKits() {
           <TextField
             label="Event Name?"
             className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
+            onChange={event => handleChange('event_name', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
@@ -80,7 +80,7 @@ export default function CreateKits() {
             size="small"
           >
             {eventsCategories?.map(eventCategory => (
-              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
+              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.event_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
@@ -88,7 +88,7 @@ export default function CreateKits() {
           <TextField
             label="Description?"
             className={classes.input}
-            onChange={event => handleChange('description', event.target.value)}
+            onChange={event => handleChange('event_description', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}

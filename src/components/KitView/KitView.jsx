@@ -116,7 +116,7 @@ export default function KitView({ event }) {
                   size="small"
                 >
                   {kits?.map(kit => (
-                    <MenuItem key={kit.id} value={kit.id}>{kit.name}</MenuItem>
+                    <MenuItem key={kit.id} value={kit.id}>{kit.kit_name}</MenuItem>
                   ))}
                 </TextField>
               </TableCell>
@@ -142,7 +142,7 @@ export default function KitView({ event }) {
                   scope="row"
                   className={classes.tableRows}
                 >
-                  {kit.name}
+                  {kit.kit_name}
                 </TableCell>
                 {/* <TableCell align="right">
                   Edit

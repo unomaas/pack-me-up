@@ -23,7 +23,7 @@ export default function ItemView({ kit }) {
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   // const [blankInput, setBlankInput] = useState('');
-  const [newItem, setNewItem] = useState({name: ''});
+  const [newItem, setNewItem] = useState({item_name: ''});
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
@@ -51,12 +51,12 @@ export default function ItemView({ kit }) {
     // ⬇ Sending data to our saga: 
     dispatch({
       type: 'ADD_NEW_ITEM', payload: {
-        name: newItem.name,
+        item_name: newItem.item_name,
         kit_id: params.id
       }
     });
     // ⬇ Clearing inputs after submit:
-    setNewItem({name: ''});
+    setNewItem({item_name: ''});
   } // End handleSubmit
 
   /** ⬇ handleDelete:
@@ -79,7 +79,7 @@ export default function ItemView({ kit }) {
           <TableHead>
             <TableRow>
               <StyledTableCell className={classes.tableHeader} colSpan={3} align="center">
-                {kit.name}'s Items:
+                {kit.kit_name}'s Items:
               </StyledTableCell>
             </TableRow>
           </TableHead>
@@ -91,9 +91,9 @@ export default function ItemView({ kit }) {
                 <form onSubmit={handleSubmit}>
                   <TextField
                     label="Add a new Item?"
-                    value={newItem.name}
+                    value={newItem.item_name}
                     className={classes.input}
-                    onChange={event => handleChange('name', event.target.value)}
+                    onChange={event => handleChange('item_name', event.target.value)}
                     required
                     type="search"
                     inputProps={{ maxLength: 50 }}
@@ -123,7 +123,7 @@ export default function ItemView({ kit }) {
                   scope="row"
                   className={classes.tableRows}
                 >
-                  {item.name}
+                  {item.item_name}
                 </TableCell>
                 {/* <TableCell align="right">
                   Edit

@@ -72,7 +72,7 @@ export default function EventEdit() {
    * When clicked, this will ask the user to confirm deletion then send to the dashboard. 
    */
   const handleDelete = event => {
-    console.log('In handleDelete, event:', eventDetail.name);
+    console.log('In handleDelete, event:', eventDetail.event_name);
     // ⬇ Don't submit until confirm:
     event.preventDefault();
     swal({
@@ -109,12 +109,12 @@ export default function EventEdit() {
         <form onSubmit={handleSubmit}>
           <TextField
             // Input Label Props. 
-            InputLabelProps={{ shrink: eventEdit.name }}
+            InputLabelProps={{ shrink: eventEdit.event_name }}
             label="Event Name?"
-            value={eventEdit?.name}
+            value={eventEdit?.event_name}
             // defaultValue={eventEdit?.name}
             className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
+            onChange={event => handleChange('event_name', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
@@ -135,18 +135,18 @@ export default function EventEdit() {
             size="small"
           >
             {eventsCategories?.map(eventCategory => (
-              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
+              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.event_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
 
           <TextField
-            InputLabelProps={{ shrink: eventEdit.description }}
+            InputLabelProps={{ shrink: eventEdit.event_description }}
             label="Description?"
-            value={eventEdit?.description}
+            value={eventEdit?.event_description}
             // defaultValue={eventEdit?.description}
             className={classes.input}
-            onChange={event => handleChange('description', event.target.value)}
+            onChange={event => handleChange('event_description', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
