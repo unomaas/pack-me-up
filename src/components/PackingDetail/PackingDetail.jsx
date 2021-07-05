@@ -1,6 +1,7 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './PackingDetail.css';
+import ItemView from '../ItemView/ItemView';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
@@ -41,9 +42,13 @@ export default function PackingDetail() {
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
-  const handleChange = (key, value) => {
-    console.log('In handleChange, key/value:', key, '/', value);
-    setKitToPackFor({ ...kitToPackFor, [key]: value });
+  const handleChange = (kit) => {
+    console.log('In handleChange, kit:', kit);
+    // setKitToPackFor({ ...kitToPackFor, [key]: value });
+    setKitToPackFor(kit);
+    // dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.kit_id } });
+    setShowTable(true);
+
   }; // End handleChange
 
   /** ⬇ handleSubmit:
@@ -62,7 +67,7 @@ export default function PackingDetail() {
     //   });
     // } // End if
     // ⬇ Show table of items after submit:
-    // setShowTable(true);
+    setShowTable(true);
   } // End handleSubmit
 
   /** ⬇ handleDelete:
@@ -79,18 +84,22 @@ export default function PackingDetail() {
   return (
     <div className="PackingDetail-wrapper">
 
-      <h2>Select a Kit to Start Packing:</h2>
+      {/* <h2>Packing for {addedKits[0].event_name}</h2>
+      <h3>Select a Kit to start packing:</h3> */}
+      <h2>Select a Kit to start packing:</h2>
 
       <TextField
         label="Select Kit"
         className={classes.select}
-        onChange={event => handleChange('kit_id', event.target.value)}
+        // onChange={() => handleChange('kit_id', event.target.value)}
+        onChange={event => handleChange(event.target.value)}
+
         required
         select
         size="small"
       >
         {addedKits?.map(kit => (
-          <MenuItem key={kit.kit_id} value={kit.kit_id}>{kit.kit_name}</MenuItem>
+          <MenuItem key={kit.kit_id} value={kit}>{kit.kit_name}</MenuItem>
         ))}
       </TextField>
 
@@ -106,6 +115,16 @@ export default function PackingDetail() {
       </Button>
 
       <br /> <br />
+
+      <div>
+        {showTable ? (
+          // If showTable is true: 
+          <ItemView kit={kitToPackFor} />
+        ) : (
+          // If showTable is false: 
+          <></>
+        )}
+      </div>
 
     </div>
   )
