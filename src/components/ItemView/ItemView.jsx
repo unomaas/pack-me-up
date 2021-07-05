@@ -68,7 +68,7 @@ export default function ItemView({ kit }) {
   } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
-  // console.log('***ITEMVIEW KIT IS***:', kit);
+  console.log('***ITEMVIEW KIT IS***:', kit);
   // ⬇ Rendering:
   return (
     <div className="ItemsView-wrapper">

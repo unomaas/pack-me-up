@@ -11,7 +11,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * Router function to handle the GET part of the server-side logic.  Will send SQL query to pull all of the entries from the DB to update on the DOM.
  */
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  console.log('In GET /api/items/:id');
+  console.log('In GET /api/items/:id', req.body, req.params, req.user);
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * 
