@@ -45,8 +45,13 @@ export default function PackingDetail() {
   const handleChange = (kit) => {
     console.log('In handleChange, kit:', kit);
     // setKitToPackFor({ ...kitToPackFor, [key]: value });
-    setKitToPackFor(kit);
-    // dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.kit_id } });
+    // setKitToPackFor(kit);
+    setKitToPackFor(kit)
+    setKitToPackFor({
+      ...kit, id: kit.kit_id
+    });
+    console.log('In handleChange, changed kit:', kitToPackFor);
+    dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.kit_id } });
     setShowTable(true);
 
   }; // End handleChange
@@ -103,7 +108,7 @@ export default function PackingDetail() {
         ))}
       </TextField>
 
-      <Button
+      {/* <Button
         name="eventSubmit"
         onClick={() => handleSubmit(kitToPackFor)}
         // onClick={() => history.push(`/packingfor/${eventToPackFor.event_id}`)}
@@ -112,14 +117,14 @@ export default function PackingDetail() {
         variant="outlined"
       >
         <CheckCircleOutlineIcon />
-      </Button>
+      </Button> */}
 
       <br /> <br />
 
       <div>
         {showTable ? (
           // If showTable is true: 
-          <ItemView kit={kitToPackFor} />
+          <ItemView kit={kitToPackFor} /> // TODO: Change this to have only one ID to reference, possibly making a new container to pass into it with only those values. 
         ) : (
           // If showTable is false: 
           <></>

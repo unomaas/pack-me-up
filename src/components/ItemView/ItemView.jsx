@@ -27,7 +27,7 @@ export default function ItemView({ kit }) {
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.id } });
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -52,7 +52,7 @@ export default function ItemView({ kit }) {
     dispatch({
       type: 'ADD_NEW_ITEM', payload: {
         item_name: newItem.item_name,
-        kit_id: params.id
+        kit_id: kit.id
       }
     });
     // ⬇ Clearing inputs after submit:
@@ -68,7 +68,7 @@ export default function ItemView({ kit }) {
   } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
-
+  // console.log('***ITEMVIEW KIT IS***:', kit);
   // ⬇ Rendering:
   return (
     <div className="ItemsView-wrapper">
