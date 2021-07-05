@@ -24,7 +24,9 @@ export default function PackingDetail() {
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
   const addedKits = useSelector((store) => store.eventsKitsReducer);
-  const [kitToAdd, setKitToAdd] = useState();
+  const [kitToPackFor, setKitToPackFor] = useState();
+  const [showTable, setShowTable] = useState(false);
+
 
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
@@ -41,24 +43,26 @@ export default function PackingDetail() {
    */
   const handleChange = (key, value) => {
     console.log('In handleChange, key/value:', key, '/', value);
-    setKitToAdd({ ...kitToAdd, [key]: value });
+    setKitToPackFor({ ...kitToPackFor, [key]: value });
   }; // End handleChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
    */
-  const handleSubmit = kitToAdd => {
-    console.log('In handleSubmit, kitToAdd:', kitToAdd);
+  const handleSubmit = kitToPackFor => {
+    console.log('In handleSubmit, kitToPackFor:', kitToPackFor);
     // ⬇ Don't submit if they haven't selected: 
-    if (kitToAdd) {
-      // ⬇ Sending data to our saga: 
-      dispatch({
-        type: 'ADD_EVENTS_KITS', payload: {
-          kit_id: kitToAdd.kit_id,
-          event_id: params.id
-        }
-      });
-    } // End if
+    // if (kitToAdd) {
+    //   // ⬇ Sending data to our saga: 
+    //   dispatch({
+    //     type: 'ADD_EVENTS_KITS', payload: {
+    //       kit_id: kitToAdd.kit_id,
+    //       event_id: params.id
+    //     }
+    //   });
+    // } // End if
+    // ⬇ Show table of items after submit:
+    // setShowTable(true);
   } // End handleSubmit
 
   /** ⬇ handleDelete:
@@ -73,8 +77,36 @@ export default function PackingDetail() {
 
   // ⬇ Rendering:
   return (
-    <div>
-      
+    <div className="PackingDetail-wrapper">
+
+      <h2>Select a Kit to Start Packing:</h2>
+
+      <TextField
+        label="Select Kit"
+        className={classes.select}
+        onChange={event => handleChange('kit_id', event.target.value)}
+        required
+        select
+        size="small"
+      >
+        {addedKits?.map(kit => (
+          <MenuItem key={kit.kit_id} value={kit.kit_id}>{kit.name}</MenuItem>
+        ))}
+      </TextField>
+
+      <Button
+        name="eventSubmit"
+        onClick={() => handleSubmit(kitToPackFor)}
+        // onClick={() => history.push(`/packingfor/${eventToPackFor.event_id}`)}
+        color="primary"
+        size="small"
+        variant="outlined"
+      >
+        <CheckCircleOutlineIcon />
+      </Button>
+
+      <br /> <br />
+
     </div>
   )
 }

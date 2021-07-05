@@ -38,15 +38,15 @@ export default function Packing() {
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
-  const handleEventChange = (key, value) => {
-    console.log('In handleEventChange, key/value:', key, '/', value);
+  const handleChange = (key, value) => {
+    console.log('In handleChange, key/value:', key, '/', value);
     setEventToPackFor({ ...eventToPackFor, [key]: value });
   }; // End handleChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
    */
-  const handleEventSubmit = () => {
+  const handleSubmit = () => {
     console.log('In handleEventSubmit, kitToAdd:', eventToPackFor);
     // ⬇ Don't submit if they haven't selected: 
     if (eventToPackFor) {
@@ -77,9 +77,9 @@ export default function Packing() {
       <h2>Select an Event to Pack For:</h2>
 
       <TextField
-        label="Which event?"
+        label="Select Event"
         className={classes.select}
-        onChange={event => handleEventChange('event_id', event.target.value)}
+        onChange={event => handleChange('event_id', event.target.value)}
         required
         select
         size="small"

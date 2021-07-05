@@ -79,7 +79,7 @@ export default function KitEdit() {
           // ⬇ Sending data to our saga: 
           dispatch({ type: 'DELETE_KIT', payload: kitEdit });
           // ⬇ Send user back to dashboard:
-          history.push(`/dashboard`);
+          // history.push(`/dashboard`);
         } // End if
       }); // End swal
   } // End handleDelete
