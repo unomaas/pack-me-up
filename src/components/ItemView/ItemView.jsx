@@ -10,6 +10,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import WorkIcon from '@material-ui/icons/Work';
 import { useStyles, theme, StyledTableCell, StyledTableRow } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
 
@@ -23,12 +24,12 @@ export default function ItemView({ kit }) {
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   // const [blankInput, setBlankInput] = useState('');
-  const [newItem, setNewItem] = useState({item_name: ''});
+  const [newItem, setNewItem] = useState({ item_name: '' });
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
-  useEffect(() => {
-    dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.id } });
-  }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
+  // useEffect(() => {
+  //   dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.id } });
+  // }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
 
@@ -48,15 +49,18 @@ export default function ItemView({ kit }) {
     console.log('In handleSubmit, newItem:', newItem);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
-    // ⬇ Sending data to our saga: 
-    dispatch({
-      type: 'ADD_NEW_ITEM', payload: {
-        item_name: newItem.item_name,
-        kit_id: kit.id
-      }
-    });
+    // ⬇ Don't submit if they haven't selected: 
+    if (newItem.item_name) {
+      // ⬇ Sending data to our saga: 
+      dispatch({
+        type: 'ADD_NEW_ITEM', payload: {
+          item_name: newItem.item_name,
+          kit_id: kit.id
+        }
+      });
+    }
     // ⬇ Clearing inputs after submit:
-    setNewItem({item_name: ''});
+    setNewItem({ item_name: '' });
   } // End handleSubmit
 
   /** ⬇ handleDelete:
@@ -86,68 +90,170 @@ export default function ItemView({ kit }) {
 
           <TableBody>
 
-            <StyledTableRow>
-              <TableCell>
-                <form onSubmit={handleSubmit}>
-                  <TextField
-                    label="Add a new Item?"
-                    value={newItem.item_name}
-                    className={classes.input}
-                    onChange={event => handleChange('item_name', event.target.value)}
-                    required
-                    type="search"
-                    inputProps={{ maxLength: 50 }}
-                    size="small"
-                  />
-                </form>
-              </TableCell>
-              <TableCell
-                padding="none"
-                align="right"
-              >
-                <Button
-                  name="submit"
-                  onClick={handleSubmit}
-                  color="primary"
-                  size="small"
-                >
-                  <CheckCircleOutlineIcon />
-                </Button>
-              </TableCell>
-            </StyledTableRow>
 
-            {items.map((item) => (
-              <StyledTableRow key={item.id}>
-                <TableCell
-                  component="th"
-                  scope="row"
-                  className={classes.tableRows}
-                >
-                  {item.item_name}
+            {/* {kit.event_id ? (
+              <StyledTableRow>
+                <TableCell colSpan={2}>
+                  <form onSubmit={handleSubmit}>
+                    <TextField
+                      label="Add a new Item?"
+                      value={newItem.item_name}
+                      className={classes.input}
+                      onChange={event => handleChange('item_name', event.target.value)}
+                      required
+                      type="search"
+                      inputProps={{ maxLength: 50 }}
+                      size="small"
+                    />
+                  </form>
                 </TableCell>
-                {/* <TableCell align="right">
-                  Edit
-                </TableCell> */}
                 <TableCell
                   padding="none"
                   align="right"
                 >
                   <Button
-                    name="delete"
-                    onClick={() => handleDelete(item)}
-                    color="secondary"
+                    name="submit"
+                    onClick={handleSubmit}
+                    color="primary"
                     size="small"
                   >
-                    <DeleteForeverIcon />
+                    <CheckCircleOutlineIcon />
                   </Button>
                 </TableCell>
               </StyledTableRow>
-            ))}
+            ) : (
+              <StyledTableRow>
+                <TableCell>
+                  <form onSubmit={handleSubmit}>
+                    <TextField
+                      label="Add a new Item?"
+                      value={newItem.item_name}
+                      className={classes.input}
+                      onChange={event => handleChange('item_name', event.target.value)}
+                      required
+                      type="search"
+                      inputProps={{ maxLength: 50 }}
+                      size="small"
+                    />
+                  </form>
+                </TableCell>
+                <TableCell
+                  padding="none"
+                  align="right"
+                >
+                  <Button
+                    name="submit"
+                    onClick={handleSubmit}
+                    color="primary"
+                    size="small"
+                  >
+                    <CheckCircleOutlineIcon />
+                  </Button>
+                </TableCell>
+              </StyledTableRow>)} */}
+            <StyledTableRow>
+
+              {kit.event_id ? (
+                <TableCell colspan={2}>
+                  <form onSubmit={handleSubmit}>
+                    <TextField
+                      label="Add a new Item?"
+                      value={newItem.item_name}
+                      className={classes.input}
+                      onChange={event => handleChange('item_name', event.target.value)}
+                      required
+                      type="search"
+                      inputProps={{ maxLength: 50 }}
+                      size="small"
+                    />
+                  </form>
+                </TableCell>
+              ) : (
+                <TableCell>
+                  <form onSubmit={handleSubmit}>
+                    <TextField
+                      label="Add a new Item?"
+                      value={newItem.item_name}
+                      className={classes.input}
+                      onChange={event => handleChange('item_name', event.target.value)}
+                      required
+                      type="search"
+                      inputProps={{ maxLength: 50 }}
+                      size="small"
+                    />
+                  </form>
+                </TableCell>
+              )}
+              {/* <TableCell colspan={2}> */}
+              {/* <form onSubmit={handleSubmit}>
+                <TextField
+                  label="Add a new Item?"
+                  value={newItem.item_name}
+                  className={classes.input}
+                  onChange={event => handleChange('item_name', event.target.value)}
+                  required
+                  type="search"
+                  inputProps={{ maxLength: 50 }}
+                  size="small"
+                />
+              </form>
+                  </TableCell> */}
+            <TableCell
+              padding="none"
+              align="right"
+            >
+              <Button
+                name="submit"
+                onClick={handleSubmit}
+                color="primary"
+                size="small"
+              >
+                <CheckCircleOutlineIcon />
+              </Button>
+            </TableCell>
+            </StyledTableRow>
+
+          {items.map((item) => (
+            <StyledTableRow key={item.id}>
+              <TableCell
+                component="th"
+                scope="row"
+                className={classes.tableRows}
+              >
+                {item.item_name}
+              </TableCell>
+
+              {kit.event_id ? (
+                <TableCell align="right">
+                  <WorkIcon />
+                </TableCell>
+              ) : (
+                <></>
+              )}
+              {/* <TableCell align="right">
+                  <WorkIcon />
+                </TableCell>  */}
+
+              <TableCell
+                padding="none"
+                align="right"
+              >
+                <Button
+                  name="delete"
+                  onClick={() => handleDelete(item)}
+                  color="secondary"
+                  size="small"
+                >
+                  <DeleteForeverIcon />
+                </Button>
+              </TableCell>
+            </StyledTableRow>
+          ))}
           </TableBody>
 
         </Table>
       </TableContainer>
 
-    </div>
+    </div >
   )
 }
