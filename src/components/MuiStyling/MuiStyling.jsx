@@ -22,6 +22,17 @@ const useStyles = makeStyles({
   },
   tableRows: {
     fontSize: '.9em'
+  },
+  tableCells: {
+    width: '40px',
+    minWidth: '40px',
+    maxWidth: '40px'
+  },
+  buttons: {
+    maxWidth: '40px', 
+    maxHeight: '40px', 
+    minWidth: '40px', 
+    minHeight: '40px'
   }
 }); // End useStyles
 

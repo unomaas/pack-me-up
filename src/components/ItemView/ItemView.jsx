@@ -89,71 +89,11 @@ export default function ItemView({ kit }) {
           </TableHead>
 
           <TableBody>
-
-
-            {/* {kit.event_id ? (
-              <StyledTableRow>
-                <TableCell colSpan={2}>
-                  <form onSubmit={handleSubmit}>
-                    <TextField
-                      label="Add a new Item?"
-                      value={newItem.item_name}
-                      className={classes.input}
-                      onChange={event => handleChange('item_name', event.target.value)}
-                      required
-                      type="search"
-                      inputProps={{ maxLength: 50 }}
-                      size="small"
-                    />
-                  </form>
-                </TableCell>
-                <TableCell
-                  padding="none"
-                  align="right"
-                >
-                  <Button
-                    name="submit"
-                    onClick={handleSubmit}
-                    color="primary"
-                    size="small"
-                  >
-                    <CheckCircleOutlineIcon />
-                  </Button>
-                </TableCell>
-              </StyledTableRow>
-            ) : (
-              <StyledTableRow>
-                <TableCell>
-                  <form onSubmit={handleSubmit}>
-                    <TextField
-                      label="Add a new Item?"
-                      value={newItem.item_name}
-                      className={classes.input}
-                      onChange={event => handleChange('item_name', event.target.value)}
-                      required
-                      type="search"
-                      inputProps={{ maxLength: 50 }}
-                      size="small"
-                    />
-                  </form>
-                </TableCell>
-                <TableCell
-                  padding="none"
-                  align="right"
-                >
-                  <Button
-                    name="submit"
-                    onClick={handleSubmit}
-                    color="primary"
-                    size="small"
-                  >
-                    <CheckCircleOutlineIcon />
-                  </Button>
-                </TableCell>
-              </StyledTableRow>)} */}
             <StyledTableRow>
 
+              {/* ⬇ Conditional rendering for the "Packed" button, depending on whether or not we're in the Packing View or Kits Detailed View:  */}
               {kit.event_id ? (
+                // If we're at the Packing View: 
                 <TableCell colspan={2}>
                   <form onSubmit={handleSubmit}>
                     <TextField
@@ -169,6 +109,7 @@ export default function ItemView({ kit }) {
                   </form>
                 </TableCell>
               ) : (
+                // If we're at the Kits Detailed View: 
                 <TableCell>
                   <form onSubmit={handleSubmit}>
                     <TextField
@@ -184,71 +125,74 @@ export default function ItemView({ kit }) {
                   </form>
                 </TableCell>
               )}
-              {/* <TableCell colspan={2}> */}
-              {/* <form onSubmit={handleSubmit}>
-                <TextField
-                  label="Add a new Item?"
-                  value={newItem.item_name}
-                  className={classes.input}
-                  onChange={event => handleChange('item_name', event.target.value)}
-                  required
-                  type="search"
-                  inputProps={{ maxLength: 50 }}
-                  size="small"
-                />
-              </form>
-                  </TableCell> */}
-            <TableCell
-              padding="none"
-              align="right"
-            >
-              <Button
-                name="submit"
-                onClick={handleSubmit}
-                color="primary"
-                size="small"
-              >
-                <CheckCircleOutlineIcon />
-              </Button>
-            </TableCell>
-            </StyledTableRow>
-
-          {items.map((item) => (
-            <StyledTableRow key={item.id}>
-              <TableCell
-                component="th"
-                scope="row"
-                className={classes.tableRows}
-              >
-                {item.item_name}
-              </TableCell>
-
-              {kit.event_id ? (
-                <TableCell align="right">
-                  <WorkIcon />
-                </TableCell>
-              ) : (
-                <></>
-              )}
-              {/* <TableCell align="right">
-                  <WorkIcon />
-                </TableCell>  */}
 
               <TableCell
                 padding="none"
                 align="right"
               >
                 <Button
-                  name="delete"
-                  onClick={() => handleDelete(item)}
-                  color="secondary"
+                  name="submit"
+                  onClick={handleSubmit}
+                  color="primary"
                   size="small"
+                  className={classes.buttons}
                 >
-                  <DeleteForeverIcon />
+                  <CheckCircleOutlineIcon />
                 </Button>
               </TableCell>
             </StyledTableRow>
-          ))}
+
+            {items.map((item) => (
+              <StyledTableRow key={item.id}>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  className={classes.tableRows}
+                >
+                  {item.item_name}
+                </TableCell>
+
+                {/* ⬇ Conditional rendering for the Packed button: */}
+                {kit.event_id ? (
+                  // If we're at the Packing View: 
+                  <TableCell
+                    padding="none"
+                    align="right"
+                    // style={{ width: '.1px' }}
+                    className={classes.tableCells}
+
+                  >
+                    <Button
+                      color="primary"
+                      size="small"
+                      className={classes.buttons}
+                    >
+                      <WorkIcon />
+                    </Button>
+                  </TableCell>
+                ) : (
+                  // If we're at the Kits Detailed View: 
+                  <></>
+                )}
+
+                <TableCell
+                  padding="none"
+                  align="right"
+                  // style={{ width: '.1px' }}
+                  className={classes.tableCells}
+                >
+                  <Button
+                    name="delete"
+                    onClick={() => handleDelete(item)}
+                    color="secondary"
+                    size="small"
+                    className={classes.buttons}
+                  >
+                    <DeleteForeverIcon />
+                  </Button>
+                </TableCell>
+              </StyledTableRow>
+            ))}
           </TableBody>
 
         </Table>
