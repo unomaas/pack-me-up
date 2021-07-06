@@ -24,6 +24,7 @@ export default function PackingDetail() {
   const params = useParams();
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
+  const events = useSelector((store) => store.eventsReducer.eventsReducer);
   const addedKits = useSelector((store) => store.eventsKitsReducer);
   const [kitToPackFor, setKitToPackFor] = useState();
   const [showTable, setShowTable] = useState(false);
@@ -33,6 +34,7 @@ export default function PackingDetail() {
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS_KITS', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_ALL_EVENTS' }),
       dispatch({ type: 'FETCH_ALL_KITS' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
@@ -42,18 +44,18 @@ export default function PackingDetail() {
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
-  const handleChange = (kit) => {
-    console.log('In handleChange, kit:', kit);
+  const handleKitChange = (kit) => {
+    console.log('In handleKitChange, kit:', kit);
     // setKitToPackFor({ ...kitToPackFor, [key]: value });
     // setKitToPackFor(kit);
     setKitToPackFor(kit)
     setKitToPackFor({
       ...kit, id: kit.kit_id
     });
-    console.log('In handleChange, changed kit:', kitToPackFor);
+    // console.log('In handleChange, changed kit:', kitToPackFor);
     dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.kit_id } });
     setShowTable(true);
-  }; // End handleChange
+  }; // End handleKitChange
 
   /** ⬇ handleSubmit:
    * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
@@ -96,8 +98,7 @@ export default function PackingDetail() {
         label="Select Kit"
         className={classes.select}
         // onChange={() => handleChange('kit_id', event.target.value)}
-        onChange={event => handleChange(event.target.value)}
-
+        onChange={event => handleKitChange(event.target.value)}
         required
         select
         size="small"
@@ -124,8 +125,8 @@ export default function PackingDetail() {
         {showTable ? (
           // If showTable is true: 
           <>
-            <ItemView kit={kitToPackFor} /> 
-            <br /> 
+            <ItemView kit={kitToPackFor} />
+            <br />
             <Button>
               Mark All as Packed
             </Button>

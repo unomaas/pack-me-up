@@ -93,7 +93,7 @@ function App() {
               <EventEdit />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/packing">
+            <ProtectedRoute exact path="/packingfor">
               <Packing />
             </ProtectedRoute>
 

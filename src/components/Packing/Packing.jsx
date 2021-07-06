@@ -22,17 +22,11 @@ export default function Packing() {
   const classes = useStyles();
   const params = useParams();
   const events = useSelector((store) => store.eventsReducer.eventsReducer);
-  const [eventToPackFor, setEventToPackFor] = useState();
-  const addedKits = useSelector((store) => store.eventsKitsReducer);
-
-  // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    // dispatch({ type: 'FETCH_EVENTS_KITS', payload: { id: params.id } }),
     dispatch({ type: 'FETCH_ALL_EVENTS' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
-
 
   //#region ⬇⬇ Event handlers below:
   /** ⬇ handleChange:
@@ -40,34 +34,10 @@ export default function Packing() {
    */
   const handleChange = (event) => {
     console.log('In handleChange, event:', event);
-    setEventToPackFor(event);
-    console.log('eventToPackFor is:', eventToPackFor);
+    history.push(`/packingfor/${event.id}`);
+    // setEventToPackFor(event);
+    // console.log('eventToPackFor is:', eventToPackFor);
   }; // End handleChange
-
-  /** ⬇ handleSubmit:
-   * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
-   */
-  const handleSubmit = () => {
-    console.log('In handleEventSubmit, kitToAdd:', eventToPackFor);
-    // ⬇ Don't submit if they haven't selected: 
-    if (eventToPackFor) {
-      // ⬇ Sending data to our saga: 
-      dispatch({
-        type: 'FETCH_EVENTS_KITS',
-        payload: {
-          id: eventToPackFor.event_id
-        } // End payload
-      }) // End dispatch
-    } // End if
-  } // End handleSubmit
-
-  /** ⬇ handleDelete:
-   * When clicked, this will delete the clicked item. 
-   */
-  const handleRemove = kit => {
-    console.log('In handleRemove, kit:', kit);
-    dispatch({ type: 'DELETE_EVENTS_KITS', payload: kit });
-  } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -89,21 +59,6 @@ export default function Packing() {
           <MenuItem key={event.id} value={event}>{event.event_name}</MenuItem>
         ))}
       </TextField>
-
-      <Button
-        name="eventSubmit"
-        // onClick={() => handleEventSubmit(eventToPackFor)}
-        onClick={() => history.push(`/packingfor/${eventToPackFor.event_id}`)}
-        color="primary"
-        size="small"
-        variant="outlined"
-      >
-        <CheckCircleOutlineIcon />
-      </Button>
-
-      <br /> <br />
-
-
 
     </div>
   )

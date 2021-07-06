@@ -66,7 +66,7 @@ export default function Dashboard() {
 
         <Button
           name="packing"
-          onClick={() => history.push(`/packing`)}
+          onClick={() => history.push(`/packingfor`)}
           variant="outlined"
           size="small"
         >
