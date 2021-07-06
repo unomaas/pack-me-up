@@ -53,7 +53,6 @@ export default function PackingDetail() {
     console.log('In handleChange, changed kit:', kitToPackFor);
     dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.kit_id } });
     setShowTable(true);
-
   }; // End handleChange
 
   /** ⬇ handleSubmit:
@@ -124,7 +123,13 @@ export default function PackingDetail() {
       <div>
         {showTable ? (
           // If showTable is true: 
-          <ItemView kit={kitToPackFor} /> // TODO: Change this to have only one ID to reference, possibly making a new container to pass into it with only those values. 
+          <>
+            <ItemView kit={kitToPackFor} /> 
+            <br /> 
+            <Button>
+              Mark All as Packed
+            </Button>
+          </>
         ) : (
           // If showTable is false: 
           <></>

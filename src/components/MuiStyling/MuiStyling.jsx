@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     fontSize: '1.2em'
   },
   tableRows: {
-    fontSize: '.9em',
+    fontSize: '.8em',
   },
   tableCells: {
     width: '40px',
@@ -47,13 +47,11 @@ const useStyles = makeStyles({
     maxWidth: '40px'
   },
   buttons: {
+    width: '40px',
     maxWidth: '40px', 
     maxHeight: '40px', 
     minWidth: '40px', 
     minHeight: '40px'
-  },
-  itemPacked: {
-    backgroundColor: theme.palette.success.light
   }
 }); // End useStyles
 

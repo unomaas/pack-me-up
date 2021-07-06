@@ -38,9 +38,10 @@ export default function Packing() {
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
-  const handleChange = (key, value) => {
-    console.log('In handleChange, key/value:', key, '/', value);
-    setEventToPackFor({ ...eventToPackFor, [key]: value });
+  const handleChange = (event) => {
+    console.log('In handleChange, event:', event);
+    setEventToPackFor(event);
+    console.log('eventToPackFor is:', eventToPackFor);
   }; // End handleChange
 
   /** ⬇ handleSubmit:
@@ -79,13 +80,13 @@ export default function Packing() {
       <TextField
         label="Select Event"
         className={classes.select}
-        onChange={event => handleChange('event_id', event.target.value)}
+        onChange={event => handleChange(event.target.value)}
         required
         select
         size="small"
       >
         {events?.map(event => (
-          <MenuItem key={event.id} value={event.id}>{event.event_name}</MenuItem>
+          <MenuItem key={event.id} value={event}>{event.event_name}</MenuItem>
         ))}
       </TextField>
 
