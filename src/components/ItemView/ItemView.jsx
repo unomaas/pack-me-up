@@ -25,6 +25,8 @@ export default function ItemView({ kit }) {
   const items = useSelector((store) => store.itemsReducer);
   // const [blankInput, setBlankInput] = useState('');
   const [newItem, setNewItem] = useState({ item_name: '' });
+  const itemIsPacked = items?.item_is_packed;
+  const [isPacked, setIsPacked] = useState(itemIsPacked);
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   // useEffect(() => {
@@ -78,6 +80,8 @@ export default function ItemView({ kit }) {
    * When clicked, this will update the packed status of the item. 
    */
   const handlePacked = (item) => {
+    console.log('isPacked is:', isPacked);
+
     console.log('In handlePacked, item:', item);
     dispatch({ type: 'FLIP_IS_PACKED', payload: item });
   } // End handlePacked
@@ -158,9 +162,9 @@ export default function ItemView({ kit }) {
             {items.map((item) => (
               <StyledTableRow
                 key={item.id}
-                className="ItemsView-packed"
+                // ⬇ If item is packed, highlight the cell and strike the text: 
+                className={item.item_is_packed ? "ItemsView-packed" : null}
               >
-                
                 <TableCell
                   component="th"
                   scope="row"
@@ -183,13 +187,7 @@ export default function ItemView({ kit }) {
                       onClick={() => handlePacked(item)}
                     >
                       {/* ⬇ Conditional rendering for showing the Packed/Unpacked button: */}
-                      {item.item_is_packed ? (
-                        // ⬇ If item is packed:
-                        <WorkOffIcon />
-                      ) : (
-                        // ⬇ If item is not packed (default value):
-                        <WorkIcon />
-                      )}
+                      {item.item_is_packed ? <WorkOffIcon /> : <WorkIcon />}
                       {/* ⬆ End Packed/Unpacked button conditional rendering. */}
                     </Button>
                   </TableCell>
@@ -214,7 +212,6 @@ export default function ItemView({ kit }) {
                   </Button>
                 </TableCell>
               </StyledTableRow>
-
             ))}
           </TableBody>
 
