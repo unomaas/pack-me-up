@@ -104,8 +104,8 @@ export default function ItemView({ kit }) {
 
               {/* ⬇ Conditional rendering for the "Packed" button, depending on whether or not we're in the Packing View or Kits Detailed View:  */}
               {kit.event_id ? (
-                // If we're at the Packing View: 
-                <TableCell colspan={2}>
+                // ⬇ If we're at the Packing View: 
+                <TableCell colSpan={2}>
                   <form onSubmit={handleSubmit}>
                     <TextField
                       label="Add a new Item?"
@@ -120,7 +120,7 @@ export default function ItemView({ kit }) {
                   </form>
                 </TableCell>
               ) : (
-                // If we're at the Kits Detailed View: 
+                // ⬇ If we're at the Kits Detailed View: 
                 <TableCell>
                   <form onSubmit={handleSubmit}>
                     <TextField
@@ -136,6 +136,7 @@ export default function ItemView({ kit }) {
                   </form>
                 </TableCell>
               )}
+              {/* ⬆ End kit.event_id ? conditional rendering. */}
 
               <TableCell
                 padding="none"
@@ -153,8 +154,13 @@ export default function ItemView({ kit }) {
               </TableCell>
             </StyledTableRow>
 
+            {/* ⬇ Row for each item: */}
             {items.map((item) => (
-              <StyledTableRow key={item.id}>
+              <StyledTableRow
+                key={item.id}
+                className="ItemsView-packed"
+              >
+                
                 <TableCell
                   component="th"
                   scope="row"
@@ -162,8 +168,7 @@ export default function ItemView({ kit }) {
                 >
                   {item.item_name}
                 </TableCell>
-
-                {/* ⬇ Conditional rendering for the Packed button: */}
+                {/* ⬇ Conditional rendering for showing the Packed table cell: */}
                 {kit.event_id ? (
                   // ⬇ If we're at the Packing View: 
                   <TableCell
@@ -177,7 +182,7 @@ export default function ItemView({ kit }) {
                       className={classes.buttons}
                       onClick={() => handlePacked(item)}
                     >
-
+                      {/* ⬇ Conditional rendering for showing the Packed/Unpacked button: */}
                       {item.item_is_packed ? (
                         // ⬇ If item is packed:
                         <WorkOffIcon />
@@ -185,16 +190,15 @@ export default function ItemView({ kit }) {
                         // ⬇ If item is not packed (default value):
                         <WorkIcon />
                       )}
-
-                      {/* <WorkIcon /> */}
+                      {/* ⬆ End Packed/Unpacked button conditional rendering. */}
                     </Button>
                   </TableCell>
                 ) : (
                   // ⬇ If we're at the Kits Detailed View: 
                   <></>
                 )}
-
-                <TableCell
+                {/* ⬆ End Packed table cell conditional rendering. */}
+                < TableCell
                   padding="none"
                   align="right"
                   className={classes.tableCells}
@@ -210,11 +214,12 @@ export default function ItemView({ kit }) {
                   </Button>
                 </TableCell>
               </StyledTableRow>
+
             ))}
           </TableBody>
 
         </Table>
-      </TableContainer>
+      </TableContainer >
 
     </div >
   )

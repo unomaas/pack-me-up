@@ -14,3 +14,8 @@ td {
   margin: 0;
   padding: 0;
 } */
+
+.ItemsView-packed {
+  background-color: lightgreen !important;
+  text-decoration-line: line-through;
+}
