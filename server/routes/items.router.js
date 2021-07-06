@@ -68,17 +68,17 @@ router.post('/:id', (req, res) => {
 /** ⬇ PUT /api/items/id:
  * Router will send SQL query to edit entries in the DB.
  */
-router.put('/:id', (req, res) => {
-  console.log('In /api/items/:id PUT');
+router.put('/:id/:kit_id', (req, res) => {
+  console.log('In /api/items/:id/:kit_id PUT', req.body, req.params, req.user);
   // ⬇ Declaring variables to send to SQL: 
   const itemId = req.body.id;
+  const kitId = { id: req.body.kit_id };
   const query = `
     UPDATE "items" 
-    SET "item_name" = $1
-    WHERE "id" = $2 AND "items".user_id = $3;
+    SET "item_is_packed" = NOT "item_is_packed"
+    WHERE "id" = $1 AND "items".user_id = $2;
   `; // End query
   const values = [
-    req.body.item_name,
     itemId,
     req.user.id
   ]; // End values
@@ -86,7 +86,7 @@ router.put('/:id', (req, res) => {
   pool.query(query, values)
     .then(result => {
       console.log('PUT item result:', result.rows);
-      res.send(req.params.id);
+      res.send(kitId);
     }) // End .then
     .catch(error => {
       console.error('PUT item error:', error);

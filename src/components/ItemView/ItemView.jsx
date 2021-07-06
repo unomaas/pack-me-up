@@ -22,7 +22,7 @@ export default function ItemView({ kit }) {
   const history = useHistory();
   const classes = useStyles();
   const params = useParams();
-  const items = useSelector((store) => store.itemsReducer.itemsReducer);
+  const items = useSelector((store) => store.itemsReducer);
   // const [blankInput, setBlankInput] = useState('');
   const [newItem, setNewItem] = useState({ item_name: '' });
   // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
@@ -49,7 +49,7 @@ export default function ItemView({ kit }) {
     console.log('In handleSubmit, newItem:', newItem);
     // ⬇ Don't refresh until submit:
     event.preventDefault();
-    // ⬇ Don't submit if they haven't selected: 
+    // ⬇ Don't submit if they haven't entered text: 
     if (newItem.item_name) {
       // ⬇ Sending data to our saga: 
       dispatch({
@@ -79,7 +79,7 @@ export default function ItemView({ kit }) {
    */
   const handlePacked = (item) => {
     console.log('In handlePacked, item:', item);
-    // dispatch({ type: 'DELETE_ITEM', payload: item });
+    dispatch({ type: 'FLIP_IS_PACKED', payload: item });
   } // End handlePacked
   //#endregion ⬆⬆ Event handles above. 
 
@@ -178,11 +178,11 @@ export default function ItemView({ kit }) {
                       onClick={() => handlePacked(item)}
                     >
 
-                      {kit.kit_is_packed ? (
-                        // ⬇ If kit is packed:
+                      {item.item_is_packed ? (
+                        // ⬇ If item is packed:
                         <WorkOffIcon />
                       ) : (
-                        // ⬇ If kit is not packed (default value):
+                        // ⬇ If item is not packed (default value):
                         <WorkIcon />
                       )}
 

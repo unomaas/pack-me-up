@@ -8,7 +8,7 @@ import axios from 'axios';
 function* itemSaga() {
   yield takeEvery('FETCH_ALL_ITEMS', fetchAllItems);
   yield takeEvery('ADD_NEW_ITEM', addNewItem);
-  yield takeEvery('SUBMIT_ITEM_EDIT', editSingleItem);
+  yield takeEvery('FLIP_IS_PACKED', packSingleItem);
   yield takeEvery('DELETE_ITEM', deleteSingleItem);
 } // End itemSaga
 
@@ -33,9 +33,9 @@ function* fetchAllItems(action) {
 
 function* addNewItem(action) {
   console.log('In addNewItem Saga, action:', action.payload);
-    // ⬇ Declaring variable to hold kitId:
-    const kitId = action.payload.kit_id;
-    console.log('kitId is:', kitId);
+  // ⬇ Declaring variable to hold kitId:
+  const kitId = action.payload.kit_id;
+  console.log('kitId is:', kitId);
   try {
     // ⬇ Calling to server to load data:
     const response = yield axios.post(`/api/items/${kitId}`, action.payload);
@@ -48,23 +48,24 @@ function* addNewItem(action) {
   } // End catch
 } // End addNewItem
 
-function* editSingleItem(action) {
-  console.log('In editSingleItem Saga, action:', action.payload);
+function* packSingleItem(action) {
+  console.log('In packSingleItem Saga, action:', action.payload);
   // ⬇ Declaring variable to hold the ID:
   const itemId = action.payload.id;
+  const kitId = action.payload.kit_id;
   console.log('itemId is:', itemId);
   try {
     // ⬇ Sending the ID to server:
-    const response = yield axios.put(`/api/items/${itemId}`, action.payload);
+    const response = yield axios.put(`/api/items/${itemId}/${kitId}`, action.payload);
     // ⬇ Logging the response:
-    console.log('editSingleItem response:', response.data);
-    // ⬇ Clearing the edit reducer:
-    yield put({ type: 'CLEAR_EDIT' });
+    console.log('packSingleItem response:', response.data);
+    // ⬇ GET to refresh data, have to use response.data to get kit_id:
+    yield put({ type: 'FETCH_ALL_ITEMS', payload: response.data });
   } // End try
   catch (error) {
-    console.error('editSingleItem error:', error);
+    console.error('packSingleItem error:', error);
   } // End catch
-} // End editSingleItem
+} // End packSingleItem
 
 function* deleteSingleItem(action) {
   console.log('In deleteSingleItem Saga, action:', action.payload);
