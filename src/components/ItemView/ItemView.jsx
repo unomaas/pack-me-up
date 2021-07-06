@@ -9,8 +9,8 @@ import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContaine
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import WorkIcon from '@material-ui/icons/Work';
+import DeleteIcon from '@material-ui/icons/Delete'; import WorkIcon from '@material-ui/icons/Work';
+import WorkOffIcon from '@material-ui/icons/WorkOff';
 import { useStyles, theme, StyledTableCell, StyledTableRow } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
 
@@ -68,11 +68,22 @@ export default function ItemView({ kit }) {
    */
   const handleDelete = item => {
     console.log('In handleDelete, item:', item);
+    // ⬇ Set the input to the item name in case of edit or accident:
+    setNewItem({ item_name: item.item_name });
+    // ⬇ Delete item from DB:
     dispatch({ type: 'DELETE_ITEM', payload: item });
   } // End handleDelete
+
+  /** ⬇ handlePacked:
+   * When clicked, this will update the packed status of the item. 
+   */
+  const handlePacked = (item) => {
+    console.log('In handlePacked, item:', item);
+    // dispatch({ type: 'DELETE_ITEM', payload: item });
+  } // End handlePacked
   //#endregion ⬆⬆ Event handles above. 
 
-  console.log('***ITEMVIEW KIT IS***:', kit);
+  // console.log('***ITEMVIEW KIT IS***:', kit);
   // ⬇ Rendering:
   return (
     <div className="ItemsView-wrapper">
@@ -154,31 +165,38 @@ export default function ItemView({ kit }) {
 
                 {/* ⬇ Conditional rendering for the Packed button: */}
                 {kit.event_id ? (
-                  // If we're at the Packing View: 
+                  // ⬇ If we're at the Packing View: 
                   <TableCell
                     padding="none"
                     align="right"
-                    // style={{ width: '.1px' }}
                     className={classes.tableCells}
-
                   >
                     <Button
                       color="primary"
                       size="small"
                       className={classes.buttons}
+                      onClick={() => handlePacked(item)}
                     >
-                      <WorkIcon />
+
+                      {kit.kit_is_packed ? (
+                        // ⬇ If kit is packed:
+                        <WorkOffIcon />
+                      ) : (
+                        // ⬇ If kit is not packed (default value):
+                        <WorkIcon />
+                      )}
+
+                      {/* <WorkIcon /> */}
                     </Button>
                   </TableCell>
                 ) : (
-                  // If we're at the Kits Detailed View: 
+                  // ⬇ If we're at the Kits Detailed View: 
                   <></>
                 )}
 
                 <TableCell
                   padding="none"
                   align="right"
-                  // style={{ width: '.1px' }}
                   className={classes.tableCells}
                 >
                   <Button
@@ -188,7 +206,7 @@ export default function ItemView({ kit }) {
                     size="small"
                     className={classes.buttons}
                   >
-                    <DeleteForeverIcon />
+                    <DeleteIcon />
                   </Button>
                 </TableCell>
               </StyledTableRow>
