@@ -31,17 +31,6 @@ export default function EventEdit() {
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const request = await
-  //       dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } });
-  //       dispatch({ type: 'FETCH_EVENT_CATEGORIES' });
-  //       console.log(request);
-  //       return request;
-  //   }
-  //   fetchData();
-  // }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
-
 
   //#region ⬇⬇ Event handlers below:
   /** ⬇ handleChange:
@@ -97,7 +86,6 @@ export default function EventEdit() {
   //#endregion ⬆⬆ Event handles above. 
 
 
-  console.log('eventDetail is:', eventDetail);
   // ⬇ Rendering:
   return (
     <div className="EventEdit-wrapper">

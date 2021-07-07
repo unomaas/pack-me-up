@@ -4,29 +4,22 @@
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select } from '@material-ui/core';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useParams } from 'react-router-dom';
+import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import { useStyles, theme, StyledTableCell, StyledTableRow } from '../MuiStyling/MuiStyling';
+import { useStyles, StyledTableCell, StyledTableRow } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
-
 
 
 export default function KitView({ event }) {
   //#region ⬇⬇ All state variables below:
   const dispatch = useDispatch();
-  const history = useHistory();
   const classes = useStyles();
   const params = useParams();
-  const items = useSelector((store) => store.itemsReducer.itemsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
   const addedKits = useSelector((store) => store.eventsKitsReducer);
   const [kitToAdd, setKitToAdd] = useState();
-
-  // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS_KITS', payload: { id: params.id } }),
@@ -53,11 +46,12 @@ export default function KitView({ event }) {
     if (kitToAdd) {
       // ⬇ Sending data to our saga: 
       dispatch({
-        type: 'ADD_EVENTS_KITS', payload: {
+        type: 'ADD_EVENTS_KITS', 
+        payload: {
           kit_id: kitToAdd.kit_id,
           event_id: params.id
-        }
-      });
+        } // End payload
+      }); // End dispatch
     } // End if
   } // End handleSubmit
 
@@ -90,22 +84,6 @@ export default function KitView({ event }) {
 
             <StyledTableRow>
               <TableCell>
-                {/* <TextField
-                    label="Add a new Item?"
-                    value={newItem.name}
-                    className={classes.input}
-                    // onChange={event => handleChange('name', event.target.value)}
-                    required
-                    type="search"
-                    inputProps={{ maxLength: 50 }}
-                    size="small"
-                  /> */}
-                {/* <Select
-                    name="kitlist"
-                    label="kit?"
-                  >
-                    
-                  </Select> */}
 
                 <TextField
                   label="Add a Kit?"
@@ -144,9 +122,7 @@ export default function KitView({ event }) {
                 >
                   {kit.kit_name}
                 </TableCell>
-                {/* <TableCell align="right">
-                  Edit
-                </TableCell> */}
+
                 <TableCell
                   padding="none"
                   align="right"

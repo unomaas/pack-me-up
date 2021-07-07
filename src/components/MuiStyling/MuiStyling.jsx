@@ -1,7 +1,4 @@
 import { makeStyles, createMuiTheme, withStyles, TableCell, TableRow } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
-import { green } from '@material-ui/core/colors';
-import { StrikethroughS } from '@material-ui/icons';
 
 
 // ⬇ Material-ui Theme: 
@@ -12,12 +9,14 @@ const theme = createMuiTheme({
   },
 }) // End theme
 
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
   }
 }))(TableCell);
+
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
@@ -26,6 +25,7 @@ const StyledTableRow = withStyles((theme) => ({
     },
   },
 }))(TableRow);
+
 
 // ⬇ Material-ui Classes: 
 const useStyles = makeStyles({
@@ -54,5 +54,6 @@ const useStyles = makeStyles({
     minHeight: '40px'
   }
 }); // End useStyles
+
 
 export { useStyles, theme, StyledTableCell, StyledTableRow };

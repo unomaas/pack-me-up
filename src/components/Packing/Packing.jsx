@@ -3,16 +3,11 @@
 import './Packing.css';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Select } from '@material-ui/core';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import { useStyles, theme, StyledTableCell, StyledTableRow } from '../MuiStyling/MuiStyling';
+import { MenuItem, TextField } from '@material-ui/core';
+import { useStyles } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
-
 
 
 export default function Packing() {
@@ -28,6 +23,7 @@ export default function Packing() {
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
+  
   //#region ⬇⬇ Event handlers below:
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
@@ -35,8 +31,6 @@ export default function Packing() {
   const handleChange = (event) => {
     console.log('In handleChange, event:', event);
     history.push(`/packingfor/${event.id}`);
-    // setEventToPackFor(event);
-    // console.log('eventToPackFor is:', eventToPackFor);
   }; // End handleChange
   //#endregion ⬆⬆ Event handles above. 
 

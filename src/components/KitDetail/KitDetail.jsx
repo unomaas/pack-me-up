@@ -58,8 +58,6 @@ export default function KitDetail() {
         <Button
           name="back"
           onClick={() => history.goBack()}
-          // onClick={() => history.push(`/dashboard`)}
-
           variant="outlined"
           color="secondary"
           size="small"

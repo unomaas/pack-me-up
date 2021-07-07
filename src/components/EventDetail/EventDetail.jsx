@@ -1,7 +1,6 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './EventDetail.css';
-import KitItem from '../KitItem/KitItem';
 import KitView from '../KitView/KitView';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
@@ -19,8 +18,6 @@ export default function EventDetail() {
   const history = useHistory();
   const params = useParams();
   const eventDetail = useSelector((store) => store.eventsReducer.eventsDetailReducer);
-  const kits = useSelector((store) => store.kitsReducer.kitsReducer);
-
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } })
@@ -29,10 +26,6 @@ export default function EventDetail() {
 
 
   //#region ⬇⬇ Event handlers below:
-  // const testLog = (kit) => {
-  //   console.log('In testLog, kit:', kit);
-  // }
-
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -83,31 +76,6 @@ export default function EventDetail() {
         <br /> <br />
 
         <KitView event={eventDetail} />
-
-
-        {/* <div className="EventDetail-kitlist">
-          <h3>Add Kits to bring:</h3>
-          {kits.map(kit => {
-            return <span>
-              <KitItem key={kit.id} kit={kit} />
-              <Button
-                name="add"
-                // onClick={() => testLog(kit)}
-                color="primary"
-                size="small"
-              >
-                Add
-              </Button>
-              <Button
-                name="remove"
-                color="secondary"
-                size="small"
-              >
-                Remove
-              </Button>
-            </span>
-          })}
-        </div> */}
 
       </div>
 

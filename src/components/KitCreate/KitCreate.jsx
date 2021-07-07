@@ -109,17 +109,8 @@ export default function CreateKits() {
               <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.event_cat_name}</MenuItem>
             ))}
           </TextField>
+          
           <br /> <br />
-
-          {/* <TextField
-            label="Add a New Kit Category?"
-            className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
-            required
-            type="search"
-            inputProps={{ maxLength: 50 }}
-          />
-          <br /> <br /> */}
 
           <Button
             name="cancel"
