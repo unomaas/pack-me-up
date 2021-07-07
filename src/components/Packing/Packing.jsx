@@ -35,8 +35,6 @@ export default function Packing() {
   const handleChange = (event) => {
     console.log('In handleChange, event:', event);
     history.push(`/packingfor/${event.id}`);
-    // setEventToPackFor(event);
-    // console.log('eventToPackFor is:', eventToPackFor);
   }; // End handleChange
   //#endregion ⬆⬆ Event handles above. 
 
