@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     fontSize: '1.2em'
   },
   tableRows: {
-    fontSize: '.8em',
+    fontSize: '.9em',
   },
   tableCells: {
     width: '40px',

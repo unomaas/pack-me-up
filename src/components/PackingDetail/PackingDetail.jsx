@@ -102,6 +102,28 @@ export default function PackingDetail() {
     console.log('In handleUnpackAll, kit:', kit);
     dispatch({ type: 'UNPACK_ALL_ITEMS', payload: kit });
   } // End handleUnpackAll  
+
+  const handleEventPacked = kit => {
+    console.log('In handleEventPacked, kits:', kit);
+    swal({
+      title: "Are you packed and ready to go?",
+      text: "This will set reset all of your items packed status!",
+      icon: "info",
+      buttons: ["Cancel", "Confirm"],
+      // dangerMode: true,
+    }) // End config
+      .then((eventPacked) => {
+        if (eventPacked) {
+          swal("Great! Enjoy your event!", {
+            icon: "success",
+          });
+          // ⬇ Sending data to our saga: 
+          dispatch({ type: 'CLEAR_ALL_ITEMS', payload: kit });
+          // ⬇ Send user back to dashboard:
+          history.push(`/dashboard`);
+        } // End if
+      }); // End swal
+  } // End handleEventPacked  
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -171,12 +193,13 @@ export default function PackingDetail() {
             <br />
             <Button
               onClick={() => handleUnpackAll(kitToPackFor)}
-
             >
               Unpack All
             </Button>
             <br />
-            <Button>
+            <Button
+              onClick={() => handleEventPacked(kitToPackFor)}
+            >
               Done Packing for this Event!
             </Button>
           </>

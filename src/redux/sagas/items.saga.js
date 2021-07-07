@@ -11,7 +11,8 @@ function* itemSaga() {
   yield takeEvery('FLIP_IS_PACKED', packSingleItem);
   yield takeEvery('DELETE_ITEM', deleteSingleItem);
   yield takeEvery('PACK_ALL_ITEMS', packAllItems);
-  yield takeEvery('UNPACK_ALL_ITEMS', unpackAllItems)
+  yield takeEvery('UNPACK_ALL_ITEMS', unpackAllItems);
+  yield takeEvery('CLEAR_ALL_ITEMS', clearAllItems);
 } // End itemSaga
 
 
@@ -116,6 +117,21 @@ function* unpackAllItems(action) {
     console.error('unpackAllItems error:', error);
   } // End catch
 } // End unpackAllItems
+
+function* clearAllItems(action) {
+  console.log('In clearAllItems Saga, action:', action.payload);
+  try {
+    // ⬇ Sending the ID to server:
+    const response = yield axios.put(`/api/items/eventpacked`, action.payload);
+    // ⬇ Logging the response:
+    console.log('clearAllItems response:', response.data);
+    // ⬇ GET to refresh data, have to use response.data to get kit_id:
+    yield put({ type: 'FETCH_ALL_ITEMS', payload: response.data });
+  } // End try
+  catch (error) {
+    console.error('clearAllItems error:', error);
+  } // End catch
+} // End clearAllItems
 //#endregion ⬆⬆ itemSaga functions above. 
 
 

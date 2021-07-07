@@ -150,6 +150,33 @@ router.put('/unpackall', (req, res) => {
     }) // End .catch
 }); // End PUT
 
+/** ⬇ PUT /api/items/id:
+ * Router will send SQL query to edit entries in the DB.
+ */
+ router.put('/eventpacked', (req, res) => {
+  console.log('In /api/items/eventpacked PUT', req.body, req.params, req.user);
+  // ⬇ Declaring variables to send to SQL: 
+  const kitId = req.body.id;
+  const query = `
+    UPDATE "items"
+    SET "item_is_packed" = FALSE
+    WHERE "user_id" = $1;
+ `; // End query
+  const values = [
+    req.user.id
+  ]; // End values
+  // ⬇ Sending query to DB:
+  pool.query(query, values)
+    .then(result => {
+      console.log('PUT all items result:', result);
+      res.send({ id: kitId });
+    }) // End .then
+    .catch(error => {
+      console.error('PUT all items error:', error);
+      res.sendStatus(500);
+    }) // End .catch
+}); // End PUT
+
 /** ⬇ DELETE /api/items/id:
  * Router will send SQL query to delete entries in the DB.
  */
