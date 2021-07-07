@@ -50,7 +50,6 @@ export default function Dashboard() {
           onClick={() => history.push(`/createkit`)}
           variant="outlined"
           size="small"
-
         >
           Create Kits
         </Button>

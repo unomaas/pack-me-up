@@ -25,6 +25,7 @@ export default function PackingDetail() {
   const items = useSelector((store) => store.itemsReducer.itemsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
   const events = useSelector((store) => store.eventsReducer.eventsReducer);
+  const eventDetail = useSelector((store) => store.eventsReducer.eventsDetailReducer);
   const addedKits = useSelector((store) => store.eventsKitsReducer);
   const [kitToPackFor, setKitToPackFor] = useState();
   const [showTable, setShowTable] = useState(false);
@@ -34,6 +35,7 @@ export default function PackingDetail() {
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS_KITS', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } }),
       dispatch({ type: 'FETCH_ALL_EVENTS' }),
       dispatch({ type: 'FETCH_ALL_KITS' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
@@ -41,6 +43,13 @@ export default function PackingDetail() {
 
 
   //#region ⬇⬇ Event handlers below:
+  const handleEventChange = (event) => {
+    console.log('In handleEventChange, event:', event);
+    history.push(`/packingfor/${event.id}`);
+    // setEventToPackFor(event);
+    // console.log('eventToPackFor is:', eventToPackFor);
+  }; // End handleEventChange
+
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
@@ -48,12 +57,12 @@ export default function PackingDetail() {
     console.log('In handleKitChange, kit:', kit);
     // setKitToPackFor({ ...kitToPackFor, [key]: value });
     // setKitToPackFor(kit);
+
+    // ⬇ Overwriting addedKits.id with kit.kit_id for ItemView component:
     setKitToPackFor(kit)
-    setKitToPackFor({
-      ...kit, id: kit.kit_id
-    });
-    // console.log('In handleChange, changed kit:', kitToPackFor);
+    setKitToPackFor({ ...kit, id: kit.kit_id });
     dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: kit.kit_id } });
+    // ⬇ Show the content once Kit is selected:
     setShowTable(true);
   }; // End handleKitChange
 
@@ -83,6 +92,11 @@ export default function PackingDetail() {
     console.log('In handleRemove, kit:', kit);
     dispatch({ type: 'DELETE_EVENTS_KITS', payload: kit });
   } // End handleDelete
+
+  const handlePackAll = kit => {
+    console.log('In handlePackAll, kit:', kit);
+    dispatch({ type: 'PACK_ALL_ITEMS', payload: kit });
+  } // End handlePackAll  
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -90,9 +104,26 @@ export default function PackingDetail() {
   return (
     <div className="PackingDetail-wrapper">
 
-      {/* <h2>Packing for {addedKits[0].event_name}</h2>
-      <h3>Select a Kit to start packing:</h3> */}
-      <h2>Select a Kit to start packing:</h2>
+      <h2>Now Packing For:</h2>
+
+      <h3>{eventDetail.event_name}</h3>
+
+      {/* <TextField
+        label="Select Event"
+        className={classes.select}
+        onChange={event => handleEventChange(event.target.value)}
+        defaultValue={eventDetail.id}
+        // value={eventDetail.id}
+        required
+        select
+        size="small"
+      >
+        {events?.map(event => (
+          <MenuItem key={event.id} value={event}>{event.event_name}</MenuItem>
+        ))}
+      </TextField> */}
+
+      <h2>Select a Kit to Pack:</h2>
 
       <TextField
         label="Select Kit"
@@ -127,8 +158,18 @@ export default function PackingDetail() {
           <>
             <ItemView kit={kitToPackFor} />
             <br />
+            <Button
+              onClick={() => handlePackAll(kitToPackFor)}
+            >
+              Pack All
+            </Button>
+            <br />
             <Button>
-              Mark All as Packed
+              Unpack All
+            </Button>
+            <br />
+            <Button>
+              Done Packing for this Event!
             </Button>
           </>
         ) : (

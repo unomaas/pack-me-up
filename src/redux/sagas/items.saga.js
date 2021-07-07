@@ -10,6 +10,8 @@ function* itemSaga() {
   yield takeEvery('ADD_NEW_ITEM', addNewItem);
   yield takeEvery('FLIP_IS_PACKED', packSingleItem);
   yield takeEvery('DELETE_ITEM', deleteSingleItem);
+  yield takeEvery('PACK_ALL_ITEMS', packAllItems);
+  yield takeEvery('UNPACK_ALL_ITEMS', unpackAllItems)
 } // End itemSaga
 
 
@@ -84,6 +86,41 @@ function* deleteSingleItem(action) {
     console.error('deleteSingleItem error:', error);
   } // End catch
 } // End deleteSingleItem
+
+function* packAllItems(action) {
+  console.log('In packAllItems Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold the ID:
+  const kitId = action.payload.kit_id;
+  try {
+    // ⬇ Sending the ID to server:
+    const response = yield axios.put(`/api/items/packall/${kitId}`, action.payload);
+    // ⬇ Logging the response:
+    console.log('packAllItems response:', response.data);
+    // ⬇ GET to refresh data, have to use response.data to get kit_id:
+    yield put({ type: 'FETCH_ALL_ITEMS', payload: response.data });
+  } // End try
+  catch (error) {
+    console.error('packAllItems error:', error);
+  } // End catch
+} // End packAllItems
+
+function* unpackAllItems(action) {
+  console.log('In unpackAllItems Saga, action:', action.payload);
+  // ⬇ Declaring variable to hold the ID:
+  const kitId = action.payload.kit_id;
+  console.log('itemId is:', itemId);
+  try {
+    // ⬇ Sending the ID to server:
+    const response = yield axios.put(`/api/items/unpackall/${kitId}`, action.payload);
+    // ⬇ Logging the response:
+    console.log('unpackAllItems response:', response.data);
+    // ⬇ GET to refresh data, have to use response.data to get kit_id:
+    yield put({ type: 'FETCH_ALL_ITEMS', payload: response.data });
+  } // End try
+  catch (error) {
+    console.error('unpackAllItems error:', error);
+  } // End catch
+} // End unpackAllItems
 //#endregion ⬆⬆ itemSaga functions above. 
 
 
