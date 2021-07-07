@@ -4,12 +4,10 @@ import './Dashboard.css';
 import KitItem from '../KitItem/KitItem';
 import EventItem from '../EventItem/EventItem';
 // ⬇ Dependent functionality:
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, TextField } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { Button } from '@material-ui/core';
 //#endregion ⬆⬆ Document setup above. 
 
 
@@ -17,8 +15,6 @@ export default function Dashboard() {
   //#region ⬇⬇ All state variables below:
   const dispatch = useDispatch();
   const history = useHistory();
-  const params = useParams();
-  const user = useSelector((store) => store.user);
   const events = useSelector((store) => store.eventsReducer.eventsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
   // ⬇ GET on page load:
@@ -73,14 +69,14 @@ export default function Dashboard() {
       </div>
 
       <div className="Dashboard-kitlist">
-        <h2>Kit Data Here</h2>
+        <h2>List of Your Kits:</h2>
         {kits.map(kit => {
           return <KitItem key={kit.id} kit={kit} />
         })}
       </div>
 
       <div className="Dashboard-eventlist">
-        <h2>Event Data Here</h2>
+        <h2>List of Your Events:</h2>
         {events.map(event => {
           return <EventItem key={event.id} event={event} />
         })}

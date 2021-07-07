@@ -25,6 +25,7 @@
 }
 
 .navLink {
+  font-family: opendyslexicregular;
   display: inline-block;
   color: white;
   background-color: #1266F1;
@@ -40,9 +41,10 @@
   outline: 0;
 }
 
-.navLink:hover {
-  background-color: #008183;
-}
+/* .navLink:hover {
+  background-color: white;
+  color: red;
+} */
 
 .header-image {
   padding-left: 13px;
