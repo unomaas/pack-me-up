@@ -14,7 +14,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('In /api/events GET all');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    SELECT * FROM events 
+    SELECT * 
+    FROM events 
     WHERE events.user_id = $1
     ORDER BY "events".id ASC;
   `; // End query
@@ -40,7 +41,7 @@ router.get('/categories', rejectUnauthenticated, (req, res) => {
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM "event_categories"
-    ORDER BY "name" ASC
+    ORDER BY "event_cat_name" ASC
   `;
   // ⬇ Sending query to DB:
   pool.query(query)
@@ -86,12 +87,12 @@ router.post('/', (req, res) => {
   console.log('In api/events POST');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    INSERT INTO "events" ("name", "description", "event_category", "date_start", "date_end", "user_id")
+    INSERT INTO "events" ("event_name", "event_description", "event_category", "date_start", "date_end", "user_id")
     VALUES ($1, $2, $3, $4, $5, $6)
   `; // End query
   const values = [
-    req.body.name, 
-    req.body.description, 
+    req.body.event_name, 
+    req.body.event_description, 
     req.body.event_category, 
     req.body.date_start, 
     req.body.date_end, 
@@ -117,10 +118,10 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
   console.log('In /api/events/categories POST');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    INSERT INTO "event_categories" ("name")
+    INSERT INTO "event_categories" ("event_cat_name")
     VALUES ($1)
   `;
-  const values = [req.body.name];
+  const values = [req.body.event_cat_name];
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
@@ -143,12 +144,12 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
   const eventId = req.params.id;
   const query = `
     UPDATE "events" 
-    SET "name" = $1, "description" = $2, "event_category" = $3, "date_start" = $4, "date_end" = $5
+    SET "event_name" = $1, "event_description" = $2, "event_category" = $3, "date_start" = $4, "date_end" = $5
     WHERE "id" = $6 AND "events".user_id = $7; 
   `; // End query
   const values = [
-    req.body.name, // $1
-    req.body.description, // $2
+    req.body.event_name, // $1
+    req.body.event_description, // $2
     req.body.event_category, // $3
     req.body.date_start, // $4
     req.body.date_end, // $5

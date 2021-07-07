@@ -50,7 +50,6 @@ export default function Dashboard() {
           onClick={() => history.push(`/createkit`)}
           variant="outlined"
           size="small"
-
         >
           Create Kits
         </Button>
@@ -66,7 +65,7 @@ export default function Dashboard() {
 
         <Button
           name="packing"
-          onClick={() => history.push(`/packing`)}
+          onClick={() => history.push(`/packingfor`)}
           variant="outlined"
           size="small"
         >

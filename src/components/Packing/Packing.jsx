@@ -21,60 +21,45 @@ export default function Packing() {
   const history = useHistory();
   const classes = useStyles();
   const params = useParams();
-  const items = useSelector((store) => store.itemsReducer.itemsReducer);
-  const kits = useSelector((store) => store.kitsReducer.kitsReducer);
-  const addedKits = useSelector((store) => store.eventsKitsReducer);
-  const [kitToAdd, setKitToAdd] = useState();
-
-  // const itemsEdit = useSelector((store) => store.itemsEditReducer.itemsEditReducer);
+  const events = useSelector((store) => store.eventsReducer.eventsReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_EVENTS_KITS' }),
-      dispatch({ type: 'FETCH_ALL_KITS' })
+    dispatch({ type: 'FETCH_ALL_EVENTS' })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
-
 
   //#region ⬇⬇ Event handlers below:
   /** ⬇ handleChange:
    * When the user types, this will set their input to the reducer with keys for each field. 
    */
-  const handleChange = (key, value) => {
-    console.log('In handleChange, key/value:', key, '/', value);
-    setKitToAdd({ ...kitToAdd, [key]: value });
+  const handleChange = (event) => {
+    console.log('In handleChange, event:', event);
+    history.push(`/packingfor/${event.id}`);
+    // setEventToPackFor(event);
+    // console.log('eventToPackFor is:', eventToPackFor);
   }; // End handleChange
-
-  /** ⬇ handleSubmit:
-   * When clicked, this will submit the new movie to the DB and send the user back to the home page. 
-   */
-  const handleSubmit = kitToAdd => {
-    console.log('In handleSubmit, kitToAdd:', kitToAdd);
-    // ⬇ Don't submit if they haven't selected: 
-    if (kitToAdd) {
-      // ⬇ Sending data to our saga: 
-      dispatch({
-        type: 'ADD_EVENTS_KITS', payload: {
-          kit_id: kitToAdd.kit_id,
-          event_id: params.id
-        }
-      });
-    } // End if
-  } // End handleSubmit
-
-  /** ⬇ handleDelete:
-   * When clicked, this will delete the clicked item. 
-   */
-  const handleRemove = kit => {
-    console.log('In handleRemove, kit:', kit);
-    dispatch({ type: 'DELETE_EVENTS_KITS', payload: kit });
-  } // End handleDelete
   //#endregion ⬆⬆ Event handles above. 
 
 
   // ⬇ Rendering:
   return (
-    <div>
-      
+    <div className="Packing-wrapper">
+
+      <h2>Select an Event to Pack For:</h2>
+
+      <TextField
+        label="Select Event"
+        className={classes.select}
+        onChange={event => handleChange(event.target.value)}
+        required
+        select
+        size="small"
+      >
+        {events?.map(event => (
+          <MenuItem key={event.id} value={event}>{event.event_name}</MenuItem>
+        ))}
+      </TextField>
+
     </div>
   )
 }

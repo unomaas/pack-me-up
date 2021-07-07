@@ -20,7 +20,8 @@ export default function KitDetail() {
   const kitDetail = useSelector((store) => store.kitsReducer.kitsDetailReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_SINGLE_KIT', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_SINGLE_KIT', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: params.id } });
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -36,8 +37,8 @@ export default function KitDetail() {
 
       <div>
         <h2>{kitDetail?.id}</h2>
-        <h2>{kitDetail?.name}</h2>
-        <h2>{kitDetail?.description}</h2>
+        <h2>{kitDetail?.kit_name}</h2>
+        <h2>{kitDetail?.kit_description}</h2>
       </div>
 
       {/* <img

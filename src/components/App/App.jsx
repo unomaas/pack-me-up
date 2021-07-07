@@ -13,6 +13,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import KitCreate from '../KitCreate/KitCreate';
 import EventCreate from '../EventCreate/EventCreate';
 import Packing from '../Packing/Packing';
+import PackingDetail from '../PackingDetail/PackingDetail';
 import EventDetail from '../EventDetail/EventDetail';
 import KitDetail from '../KitDetail/KitDetail';
 import EventEdit from '../EventEdit/EventEdit';
@@ -92,8 +93,12 @@ function App() {
               <EventEdit />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/packing">
+            <ProtectedRoute exact path="/packingfor">
               <Packing />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path="/packingfor/:id">
+              <PackingDetail />
             </ProtectedRoute>
 
             {/* // logged in shows InfoPage else shows LoginPage */}

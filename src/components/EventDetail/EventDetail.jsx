@@ -42,8 +42,8 @@ export default function EventDetail() {
 
       <div>
         <h2>{eventDetail?.id}</h2>
-        <h2>{eventDetail?.name}</h2>
-        <h2>{eventDetail?.description}</h2>
+        <h2>{eventDetail?.event_name}</h2>
+        <h2>{eventDetail?.event_description}</h2>
       </div>
 
       {/* <img
