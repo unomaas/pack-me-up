@@ -3,7 +3,7 @@
 import './KitEdit.css';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, MenuItem, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -150,16 +150,6 @@ export default function KitEdit() {
             ))}
           </TextField>
           <br /> <br />
-
-          {/* <TextField
-      label="Add a New Kit Category?"
-      className={classes.input}
-      onChange={event => handleChange('name', event.target.value)}
-      required
-      type="search"
-      inputProps={{ maxLength: 50 }}
-    />
-    <br /> <br /> */}
 
           <Button
             name="cancel"
