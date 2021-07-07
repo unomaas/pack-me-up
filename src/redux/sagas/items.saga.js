@@ -89,11 +89,9 @@ function* deleteSingleItem(action) {
 
 function* packAllItems(action) {
   console.log('In packAllItems Saga, action:', action.payload);
-  // ⬇ Declaring variable to hold the ID:
-  const kitId = action.payload.kit_id;
   try {
     // ⬇ Sending the ID to server:
-    const response = yield axios.put(`/api/items/packall/${kitId}`, action.payload);
+    const response = yield axios.put(`/api/items/packall`, action.payload);
     // ⬇ Logging the response:
     console.log('packAllItems response:', response.data);
     // ⬇ GET to refresh data, have to use response.data to get kit_id:
@@ -106,12 +104,9 @@ function* packAllItems(action) {
 
 function* unpackAllItems(action) {
   console.log('In unpackAllItems Saga, action:', action.payload);
-  // ⬇ Declaring variable to hold the ID:
-  const kitId = action.payload.kit_id;
-  console.log('itemId is:', itemId);
   try {
     // ⬇ Sending the ID to server:
-    const response = yield axios.put(`/api/items/unpackall/${kitId}`, action.payload);
+    const response = yield axios.put(`/api/items/unpackall`, action.payload);
     // ⬇ Logging the response:
     console.log('unpackAllItems response:', response.data);
     // ⬇ GET to refresh data, have to use response.data to get kit_id:

@@ -97,14 +97,14 @@ router.put('/:id/:kit_id', (req, res) => {
 /** ⬇ PUT /api/items/id:
  * Router will send SQL query to edit entries in the DB.
  */
-router.put('/packall/:kit_id', (req, res) => {
-  console.log('In /api/items/packall/:kit_id PUT', req.body, req.params, req.user);
+router.put('/packall', (req, res) => {
+  console.log('In /api/items/packall PUT', req.body, req.params, req.user);
   // ⬇ Declaring variables to send to SQL: 
-  const kitId = req.body.kit_id;
+  const kitId = req.body.id;
   const query = `
     UPDATE "items" 
     SET "item_is_packed" = TRUE
-    WHERE "kit_id" = $1 AND "items".user_id = $2;
+    WHERE "kit_id" = $1 AND "user_id" = $2;
   `; // End query
   const values = [
     kitId,
@@ -125,30 +125,30 @@ router.put('/packall/:kit_id', (req, res) => {
 /** ⬇ PUT /api/items/id:
  * Router will send SQL query to edit entries in the DB.
  */
-//  router.put('/unpackall/:kit_id', (req, res) => {
-//   console.log('In /api/items/unpackall/:kit_id PUT', req.body, req.params, req.user);
-//   // ⬇ Declaring variables to send to SQL: 
-//   const kitId = { id: req.body.kit_id };
-//   const query = `
-//     UPDATE "items" 
-//     SET "item_is_packed" = FALSE
-//     WHERE "kit_id" = $1 AND "items".user_id = $2;
-//   `; // End query
-//   const values = [
-//     kitId,
-//     req.user.id
-//   ]; // End values
-//   // ⬇ Sending query to DB:
-//   pool.query(query, values)
-//     .then(result => {
-//       console.log('PUT all items result:', result.rows);
-//       res.send(kitId);
-//     }) // End .then
-//     .catch(error => {
-//       console.error('PUT all items error:', error);
-//       res.sendStatus(500);
-//     }) // End .catch
-// }); // End PUT
+router.put('/unpackall', (req, res) => {
+  console.log('In /api/items/unpackall PUT', req.body, req.params, req.user);
+  // ⬇ Declaring variables to send to SQL: 
+  const kitId = req.body.id;
+  const query = `
+   UPDATE "items" 
+   SET "item_is_packed" = FALSE
+   WHERE "kit_id" = $1 AND "user_id" = $2;
+ `; // End query
+  const values = [
+    kitId,
+    req.user.id
+  ]; // End values
+  // ⬇ Sending query to DB:
+  pool.query(query, values)
+    .then(result => {
+      console.log('PUT all items result:', result);
+      res.send({ id: kitId });
+    }) // End .then
+    .catch(error => {
+      console.error('PUT all items error:', error);
+      res.sendStatus(500);
+    }) // End .catch
+}); // End PUT
 
 /** ⬇ DELETE /api/items/id:
  * Router will send SQL query to delete entries in the DB.

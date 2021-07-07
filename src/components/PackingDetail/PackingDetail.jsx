@@ -92,11 +92,16 @@ export default function PackingDetail() {
     console.log('In handleRemove, kit:', kit);
     dispatch({ type: 'DELETE_EVENTS_KITS', payload: kit });
   } // End handleDelete
-
+  
   const handlePackAll = kit => {
     console.log('In handlePackAll, kit:', kit);
     dispatch({ type: 'PACK_ALL_ITEMS', payload: kit });
   } // End handlePackAll  
+
+  const handleUnpackAll = kit => {
+    console.log('In handleUnpackAll, kit:', kit);
+    dispatch({ type: 'UNPACK_ALL_ITEMS', payload: kit });
+  } // End handleUnpackAll  
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -164,7 +169,10 @@ export default function PackingDetail() {
               Pack All
             </Button>
             <br />
-            <Button>
+            <Button
+              onClick={() => handleUnpackAll(kitToPackFor)}
+
+            >
               Unpack All
             </Button>
             <br />
