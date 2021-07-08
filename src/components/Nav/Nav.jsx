@@ -32,7 +32,7 @@ function Nav() {
         <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="43"></img>
       </Link>
 
-      <div className='nav-title'>
+      <div>
         <img className='header-logo' src="./images/PMUWhiteReg-01.svg" height="65" />
       </div>
 

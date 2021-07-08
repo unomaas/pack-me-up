@@ -13,16 +13,11 @@
   text-decoration: none;
 }
 
-.nav-title {
-  font-size: 1.5em;
+/* .nav-title {
   margin-block-start: 0;
   margin-block-end: 0;
-  /* font-weight: 700; */
   color: white;
-  /* padding-left: 10px; */
-  /* margin: 0; */
-  vertical-align: center;
-}
+} */
 
 .navLink {
   font-family: opendyslexicregular;
