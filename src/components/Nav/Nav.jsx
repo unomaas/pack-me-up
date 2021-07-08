@@ -1,11 +1,13 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './Nav.css';
+import NavDrawer from '../NavDrawer/NavDrawer';
 // ⬇ Dependent functionality:
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
+import MenuIcon from '@material-ui/icons/Menu';
 //#endregion ⬆⬆ Document setup above. 
 
 
@@ -28,9 +30,11 @@ function Nav() {
   return (
     <div className="nav">
 
-      <Link to="/home">
-        <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="43"></img>
-      </Link>
+      <div>
+        <Link to="/home">
+          <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="43"></img>
+        </Link>
+      </div>
 
       <div>
         <img className='header-logo' src="./images/PMUWhiteReg-01.svg" height="65" />
@@ -53,6 +57,10 @@ function Nav() {
         <Link className="navLink" to="/about">
           About
         </Link>
+      </div>
+
+      <div>
+        <NavDrawer />
       </div>
 
     </div>

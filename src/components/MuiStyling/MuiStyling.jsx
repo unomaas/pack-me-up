@@ -52,6 +52,13 @@ const useStyles = makeStyles({
     maxHeight: '40px', 
     minWidth: '40px', 
     minHeight: '40px'
+  },
+  navBarIcon: {
+    color: 'white',
+    fontSize: '1.75em'
+  },
+  navDrawer: {
+    backgroundColor: "blue"
   }
 }); // End useStyles
 
