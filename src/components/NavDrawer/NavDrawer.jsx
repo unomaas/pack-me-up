@@ -33,10 +33,11 @@ export default function NavDrawer() {
     <div className="NavDrawer-wrapper">
 
       <IconButton
-        onClick={() => setOpen(true)}
       >
         <MenuIcon
           className={classes.navBarIcon}
+          onClick={() => setOpen(true)}
+
         />
       </IconButton>
 

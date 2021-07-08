@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import MenuIcon from '@material-ui/icons/Menu';
+import { SwipeableDrawer, Button, List, ListItem, ListItemText, Divider, IconButton, Box } from '@material-ui/core';
+
 //#endregion ⬆⬆ Document setup above. 
 
 
@@ -30,21 +32,17 @@ function Nav() {
   return (
     <div className="nav">
 
-      <div>
-        <Link to="/home">
-          <img 
-            className='header-image' 
-            src="./images/GenLogoWEmbedded.svg" 
-            // height="43"
-          />
-        </Link>
-      </div>
+      <Box className='GenocchioImage-wrapper'>
+        <img
+          className='GenocchioImage'
+          src="./images/GenLogoWEmbedded.svg"
+        />
+      </Box>
 
-      <div>
-        <img 
-          className='header-logo' 
-          src="./images/PMUWhiteReg-01.svg" 
-          height="65" 
+      <div className='PackMeUpImage-wrapper'>
+        <img
+          className='PackMeUpImage'
+          src="./images/PMUWhiteReg-01.svg"
         />
       </div>
 
@@ -67,7 +65,7 @@ function Nav() {
         </Link>
       </div> */}
 
-      <div>
+      <div className='NavDrawer-wrapper'>
         <NavDrawer />
       </div>
 
