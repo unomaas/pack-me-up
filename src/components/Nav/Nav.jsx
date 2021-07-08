@@ -32,15 +32,23 @@ function Nav() {
 
       <div>
         <Link to="/home">
-          <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="43"></img>
+          <img 
+            className='header-image' 
+            src="./images/GenLogoWEmbedded.svg" 
+            // height="43"
+          />
         </Link>
       </div>
 
       <div>
-        <img className='header-logo' src="./images/PMUWhiteReg-01.svg" height="65" />
+        <img 
+          className='header-logo' 
+          src="./images/PMUWhiteReg-01.svg" 
+          height="65" 
+        />
       </div>
 
-      <div>
+      {/* <div>
         <Link className="navLink" to={loginLinkData.path}>
           {loginLinkData.text}
         </Link>
@@ -57,7 +65,7 @@ function Nav() {
         <Link className="navLink" to="/about">
           About
         </Link>
-      </div>
+      </div> */}
 
       <div>
         <NavDrawer />

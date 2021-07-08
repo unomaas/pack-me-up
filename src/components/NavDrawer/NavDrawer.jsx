@@ -54,7 +54,79 @@ export default function NavDrawer() {
 
           <Divider />
 
-          <List>
+          {user.id ? (
+            // If user is logged in:
+            <List>
+              <ListItem button onClick={() => history.push(`/dashboard`)}>
+                <HomeOutlinedIcon /> &nbsp;
+                <ListItemText primary={"Dashboard"} />
+              </ListItem>
+
+              <ListItem button onClick={() => history.push(`/createkit`)}>
+                <AddCircleOutlineOutlinedIcon /> &nbsp;
+                <ListItemText primary={"Create Kits"} />
+              </ListItem>
+
+              <ListItem button onClick={() => history.push(`/createevent`)}>
+                <AddBoxOutlinedIcon /> &nbsp;
+                <ListItemText primary={"Create Events"} />
+              </ListItem>
+
+              <ListItem button onClick={() => history.push(`/packingfor`)}>
+                <WorkOutlineOutlinedIcon /> &nbsp;
+                <ListItemText primary={"Start Packing!"} />
+              </ListItem>
+
+              <Divider />
+
+              <ListItem button onClick={() => history.push(`/info`)}>
+                <InfoOutlinedIcon /> &nbsp;
+                <ListItemText primary={"App Info"} />
+              </ListItem>
+
+              <ListItem button onClick={() => history.push(`/about`)}>
+                <HelpOutlineIcon /> &nbsp;
+                <ListItemText primary={"About Us"} />
+              </ListItem>
+
+              <Divider />
+
+              <ListItem button onClick={() => history.push(`/user`)}>
+                <PersonOutlineOutlinedIcon /> &nbsp;
+                <ListItemText primary={"Profile"} />
+              </ListItem>
+
+              <ListItem button onClick={() => dispatch({ type: 'LOGOUT' })}>
+                <ExitToAppIcon /> &nbsp;
+                <ListItemText primary={"Log Out"} />
+              </ListItem>
+
+            </List>
+          ) : (
+            // If user is not logged in:
+            <List>
+
+              <ListItem button onClick={() => history.push(`/about`)}>
+                <HelpOutlineIcon /> &nbsp;
+                <ListItemText primary={"About Us"} />
+              </ListItem>
+
+              <Divider />
+
+              <ListItem button onClick={() => history.push(`/registration`)}>
+                <PersonOutlineOutlinedIcon /> &nbsp;
+                <ListItemText primary={"Register"} />
+              </ListItem>
+
+              <ListItem button onClick={() => history.push(`/login`)}>
+                <ExitToAppIcon /> &nbsp;
+                <ListItemText primary={"Log In"} />
+              </ListItem>
+
+            </List>
+          )}
+
+          {/* <List>
             <ListItem button onClick={() => history.push(`/dashboard`)}>
               <HomeOutlinedIcon /> &nbsp;
               <ListItemText primary={"Dashboard"} />
@@ -99,7 +171,7 @@ export default function NavDrawer() {
               <ListItemText primary={"Log Out"} />
             </ListItem>
 
-          </List>
+          </List> */}
 
         </div>
       </SwipeableDrawer>

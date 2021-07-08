@@ -41,11 +41,16 @@
   color: red;
 } */
 
-.header-image {
+/* Genocchio Productions image: */
+.header-image { 
   padding-left: 13px;
   padding-top: 7px;
+  height: 20px;
+  max-height: 43px;
+  min-height: 20px;
 }
 
+/* Pack Me Up image: */
 .header-logo {
   padding-top: 18px;
 }
