@@ -4,6 +4,7 @@ import user from './user.reducer';
 import kitsReducer from './kits.reducer';
 import eventsReducer from './events.reducer';
 import itemsReducer from './items.reducer';
+import eventsKitsReducer from './eventsKits.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   kitsReducer,
   eventsReducer,
-  itemsReducer
+  itemsReducer,
+  eventsKitsReducer
 });
 
 export default rootReducer;

@@ -14,7 +14,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('In /api/kits GET all');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    SELECT * FROM "kits" 
+    SELECT * 
+    FROM "kits" 
     WHERE "kits".user_id = $1
     ORDER BY "kits".id ASC;
   `; // End query
@@ -40,7 +41,7 @@ router.get('/categories', rejectUnauthenticated, (req, res) => {
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
     SELECT * FROM "kit_categories" 
-    ORDER BY "name" ASC`;
+    ORDER BY "kit_cat_name" ASC`;
   // ⬇ Sending query to DB:
   pool.query(query)
     .then(result => {
@@ -85,10 +86,16 @@ router.post('/', (req, res) => {
   console.log('In api/kits POST');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    INSERT INTO "kits" ("name", "description", "kit_category", "event_category", "user_id")
+    INSERT INTO "kits" ("kit_name", "kit_description", "kit_category", "event_category", "user_id")
     VALUES ($1, $2, $3, $4, $5)
   `; // End query
-  const values = [req.body.name, req.body.description, req.body.kit_category, req.body.event_category, req.user.id];
+  const values = [
+    req.body.kit_name, 
+    req.body.kit_description, 
+    req.body.kit_category, 
+    req.body.event_category, 
+    req.user.id
+  ]; // End values
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
@@ -109,10 +116,10 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
   console.log('In /api/kits/categories POST');
   // ⬇ Declaring SQL commands to send to DB: 
   const query = `
-    INSERT INTO "kit_categories" ("name")
+    INSERT INTO "kit_categories" ("kit_cat_name")
     VALUES ($1)
   `;
-  const values = [req.body.name];
+  const values = [req.body.kit_cat_name];
   // ⬇ Sending query to DB:
   pool.query(query, values)
     .then(result => {
@@ -135,16 +142,16 @@ router.post('/categories', rejectUnauthenticated, (req, res) => {
   const kitId = req.params.id;
   const query = `
     UPDATE "kits" 
-    SET "name" = $1, "description" = $2, "kit_category" = $3, "event_category" = $4
+    SET "kit_name" = $1, "kit_description" = $2, "kit_category" = $3, "event_category" = $4
     WHERE "id" = $5 AND "kits".user_id = $6;
   `; // End query
   const values = [
-    req.body.name, // $1
-    req.body.description, // $2
-    req.body.kit_category, // $3
-    req.body.event_category, // $4
-    kitId, // $5
-    req.user.id // $6
+    req.body.kit_name, 
+    req.body.kit_description, 
+    req.body.kit_category, 
+    req.body.event_category, 
+    kitId, 
+    req.user.id 
   ]; // End values
   pool.query(query, values)
     .then(result => {

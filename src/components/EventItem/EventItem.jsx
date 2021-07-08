@@ -26,10 +26,10 @@ export default function EventItem({ event }) {
 
   // ⬇ Rendering:
   return (
-    <div className="EventItem-wrapper" key={event?.id} onClick={() => history.push(`/eventdetail/${event.id}`)}>
+    <div className="EventItem-wrapper" key={event?.id} >
 
       <div className="EventItem-name">
-        <p>{event?.name}</p>
+        <span onClick={() => history.push(`/eventdetail/${event.id}`)}>{event?.event_name}</span>
       </div>
 
     </div>

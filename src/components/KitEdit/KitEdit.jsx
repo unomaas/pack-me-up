@@ -3,7 +3,7 @@
 import './KitEdit.css';
 // ⬇ Dependent functionality:
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, MenuItem, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -61,7 +61,7 @@ export default function KitEdit() {
    * When clicked, this will ask the user to confirm deletion then send to the dashboard. 
    */
   const handleDelete = event => {
-    console.log('In handleDelete, kit:', kitEdit.name);
+    console.log('In handleDelete, kit:', kitEdit.kit_name);
     // ⬇ Don't submit until confirm:
     event.preventDefault();
     swal({
@@ -86,8 +86,6 @@ export default function KitEdit() {
   //#endregion ⬆⬆ Event handles above. 
 
 
-
-  console.log('kitDetail is:', kitDetail);
   // ⬇ Rendering:
   return (
     <div className="KitEdit-wrapper" key={kitDetail?.id}>
@@ -99,9 +97,9 @@ export default function KitEdit() {
         <form onSubmit={handleSubmit}>
           <TextField
             label="Kit Name?"
-            defaultValue={kitDetail?.name}
+            defaultValue={kitDetail?.kit_name}
             className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
+            onChange={event => handleChange('kit_name', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
@@ -120,16 +118,16 @@ export default function KitEdit() {
             value={kitsCategories?.id}
           >
             {kitsCategories?.map(kitCategory => (
-              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
+              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.kit_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
 
           <TextField
             label="Description?"
-            defaultValue={kitDetail?.description}
+            defaultValue={kitDetail?.kit_description}
             className={classes.input}
-            onChange={event => handleChange('description', event.target.value)}
+            onChange={event => handleChange('kit_description', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 255 }}
@@ -148,24 +146,14 @@ export default function KitEdit() {
             value={eventsCategories?.id}
           >
             {eventsCategories?.map(eventCategory => (
-              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
+              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.event_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
 
-          {/* <TextField
-      label="Add a New Kit Category?"
-      className={classes.input}
-      onChange={event => handleChange('name', event.target.value)}
-      required
-      type="search"
-      inputProps={{ maxLength: 50 }}
-    />
-    <br /> <br /> */}
-
           <Button
             name="cancel"
-            onClick={() => history.push(`/kitdetail/${kitDetail.id}`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

@@ -64,7 +64,7 @@ export default function CreateKits() {
           <TextField
             label="Kit Name?"
             className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
+            onChange={event => handleChange('kit_name', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
@@ -81,7 +81,7 @@ export default function CreateKits() {
             size="small"
           >
             {kitsCategories?.map(kitCategory => (
-              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.name}</MenuItem>
+              <MenuItem key={kitCategory.id} value={kitCategory.id}>{kitCategory.kit_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
@@ -89,7 +89,7 @@ export default function CreateKits() {
           <TextField
             label="Description?"
             className={classes.input}
-            onChange={event => handleChange('description', event.target.value)}
+            onChange={event => handleChange('kit_description', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 255 }}
@@ -106,24 +106,15 @@ export default function CreateKits() {
             size="small"
           >
             {eventsCategories?.map(eventCategory => (
-              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
+              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.event_cat_name}</MenuItem>
             ))}
           </TextField>
+          
           <br /> <br />
-
-          {/* <TextField
-            label="Add a New Kit Category?"
-            className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
-            required
-            type="search"
-            inputProps={{ maxLength: 50 }}
-          />
-          <br /> <br /> */}
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/dashboard`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

@@ -1,6 +1,7 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './KitDetail.css';
+import ItemView from '../ItemView/ItemView';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +20,8 @@ export default function KitDetail() {
   const kitDetail = useSelector((store) => store.kitsReducer.kitsDetailReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_SINGLE_KIT', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_SINGLE_KIT', payload: { id: params.id } }),
+      dispatch({ type: 'FETCH_ALL_ITEMS', payload: { id: params.id } });
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
@@ -28,15 +30,15 @@ export default function KitDetail() {
 
   //#endregion ⬆⬆ Event handles above. 
 
-  
+
   // ⬇ Rendering:
   return (
     <div className="KitDetail-wrapper" key={kitDetail?.id}>
 
       <div>
         <h2>{kitDetail?.id}</h2>
-        <h2>{kitDetail?.name}</h2>
-        <h2>{kitDetail?.description}</h2>
+        <h2>{kitDetail?.kit_name}</h2>
+        <h2>{kitDetail?.kit_description}</h2>
       </div>
 
       {/* <img
@@ -54,7 +56,8 @@ export default function KitDetail() {
 
       <div>
         <Button
-          onClick={() => history.push(`/dashboard`)}
+          name="back"
+          onClick={() => history.goBack()}
           variant="outlined"
           color="secondary"
           size="small"
@@ -63,6 +66,7 @@ export default function KitDetail() {
         </Button> &nbsp;
 
         <Button
+          name="edit"
           onClick={() => history.push(`/kitedit/${kitDetail?.id}`)}
           variant="outlined"
           color="primary"
@@ -70,6 +74,11 @@ export default function KitDetail() {
         >
           <EditIcon />
         </Button>
+
+        <br /> <br />
+
+        <ItemView kit={kitDetail} />
+
       </div>
 
     </div>

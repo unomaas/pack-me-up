@@ -18,7 +18,7 @@ export default function CreateKits() {
   const history = useHistory();
   const classes = useStyles();
   const eventsCategories = useSelector(store => store.eventsReducer.eventsCategoriesReducer);
-  const [newEvent, setNewEvent] = useState({});
+  const [newEvent, setNewEvent] = useState({}); // TODO: Set default values so that you can have the default dates be set to today and not have to catch an on change.  Then explore if this would help in other areas of the app.  
   const today = new Date().toISOString().substring(0, 10);
   // ⬇ GET on page load:
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function CreateKits() {
           <TextField
             label="Event Name?"
             className={classes.input}
-            onChange={event => handleChange('name', event.target.value)}
+            onChange={event => handleChange('event_name', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
@@ -80,7 +80,7 @@ export default function CreateKits() {
             size="small"
           >
             {eventsCategories?.map(eventCategory => (
-              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.name}</MenuItem>
+              <MenuItem key={eventCategory.id} value={eventCategory.id}>{eventCategory.event_cat_name}</MenuItem>
             ))}
           </TextField>
           <br /> <br />
@@ -88,7 +88,7 @@ export default function CreateKits() {
           <TextField
             label="Description?"
             className={classes.input}
-            onChange={event => handleChange('description', event.target.value)}
+            onChange={event => handleChange('event_description', event.target.value)}
             required
             type="search"
             inputProps={{ maxLength: 50 }}
@@ -97,18 +97,22 @@ export default function CreateKits() {
           <br /> <br />
 
           <TextField
-            helperText="Start Date?"
+            label="Start Date?"
+            InputLabelProps={{ shrink: true }}
+            // helperText="Start Date?"
             // value={today}
             onChange={event => handleChange('date_start', event.target.value)}
             required
             type="date"
             size="small"
-            // defaultValue={today}
+          // defaultValue={today}
           />
           &nbsp;
 
           <TextField
-            helperText="End Date?"
+            label="End Date?"
+            InputLabelProps={{ shrink: true }}
+            // helperText="End Date?"
             // value={today}
             onChange={event => handleChange('date_end', event.target.value)}
             required
@@ -121,7 +125,7 @@ export default function CreateKits() {
 
           <Button
             name="cancel"
-            onClick={() => history.push(`/dashboard`)}
+            onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
             size="small"

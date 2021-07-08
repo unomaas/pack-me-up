@@ -1,6 +1,7 @@
 //#region ⬇⬇ Document setup below: 
 // ⬇ File setup: 
 import './EventDetail.css';
+import KitView from '../KitView/KitView';
 // ⬇ Dependent functionality:
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,13 +20,12 @@ export default function EventDetail() {
   const eventDetail = useSelector((store) => store.eventsReducer.eventsDetailReducer);
   // ⬇ GET on page load:
   useEffect(() => {
-    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } });
+    dispatch({ type: 'FETCH_SINGLE_EVENT', payload: { id: params.id } })
   }, [params.id]); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
 
   //#region ⬇⬇ Event handlers below:
-
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -35,8 +35,8 @@ export default function EventDetail() {
 
       <div>
         <h2>{eventDetail?.id}</h2>
-        <h2>{eventDetail?.name}</h2>
-        <h2>{eventDetail?.description}</h2>
+        <h2>{eventDetail?.event_name}</h2>
+        <h2>{eventDetail?.event_description}</h2>
       </div>
 
       {/* <img
@@ -54,7 +54,8 @@ export default function EventDetail() {
 
       <div>
         <Button
-          onClick={() => history.push(`/dashboard`)}
+          name="back"
+          onClick={() => history.goBack()}
           variant="outlined"
           color="secondary"
           size="small"
@@ -63,6 +64,7 @@ export default function EventDetail() {
         </Button> &nbsp;
 
         <Button
+          name="edit"
           onClick={() => history.push(`/eventedit/${eventDetail?.id}`)}
           variant="outlined"
           color="primary"
@@ -70,6 +72,11 @@ export default function EventDetail() {
         >
           <EditIcon />
         </Button>
+
+        <br /> <br />
+
+        <KitView event={eventDetail} />
+
       </div>
 
     </div>

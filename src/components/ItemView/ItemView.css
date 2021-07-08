@@ -1,0 +1,21 @@
+.ItemsView-table {
+  min-width: 350px;
+  max-width: 450px;
+  margin: 0 auto;
+  /* padding: 0; */
+}
+
+/* .TDTest, .MuiTableCell-sizeSmall {
+  margin: 0;
+  padding: 0;
+} */
+/* 
+td {
+  margin: 0;
+  padding: 0;
+} */
+
+.ItemsView-packed {
+  background-color: lightgreen !important;
+  text-decoration-line: line-through;
+}

@@ -10,7 +10,10 @@ import { useSelector } from 'react-redux';
 
 
 function Nav() {
+  //#region ⬇⬇ All state variables below:
   const user = useSelector((store) => store.user);
+  //#endregion ⬆⬆ All state variables above. 
+
 
   let loginLinkData = {
     path: '/login',
@@ -26,17 +29,11 @@ function Nav() {
     <div className="nav">
 
       <Link to="/home">
-        {/* <h2 className="nav-title">Prime Solo Project</h2> */}
-        <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="50"></img>
+        <img className='header-image' src="./images/GenLogoWEmbedded.svg" height="43"></img>
       </Link>
 
-      <div className='nav-title'>
-        {/* <p className="nav-title" >Pack Me Up!</p> */}
-        Pack Me Up!
-      </div>
-
       <div>
-        <img className='header-logo' src="./images/suitcase-white.png" height="50" />
+        <img className='header-logo' src="./images/PMUWhiteReg-01.svg" height="65" />
       </div>
 
       <div>
