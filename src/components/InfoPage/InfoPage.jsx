@@ -8,7 +8,7 @@ import React from 'react';
 function InfoPage() {
   return (
     <div className="container">
-      <h2>Thanks for using and learning more about Pack Me Up!</h2>
+      <h2>Thanks for learning more about Pack Me Up!</h2>
       <h3>Technologies Used:</h3>
       <p>
         Material UI
