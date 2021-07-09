@@ -8,7 +8,23 @@ import React from 'react';
 function InfoPage() {
   return (
     <div className="container">
-      <p>Info Page</p>
+      <h2>Thanks for using and learning more about Pack Me Up!</h2>
+      <h3>Technologies Used:</h3>
+      <p>
+        Material UI
+        -	Axios
+        -	Express
+        -	Passport
+        -	React
+        -	Redux
+        -	Redux Saga
+        -	React Router
+        -	Sweet Alert
+        -	PostgreSQL
+        -	Node
+      </p>
+
+
     </div>
   );
 }
