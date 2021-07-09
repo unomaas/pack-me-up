@@ -1,18 +1,58 @@
-.nav {
-  /* flex box layout */
+.Nav-wrapper {
   display: flex;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
-
-  /* margin: 0 0 30px; */
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: center;
   background-color: #1266F1;
-  overflow: hidden;
 }
 
-.nav a {
-  text-decoration: none;
+.GenocchioImage-wrapper {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  height: 100%;
 }
+
+.GenocchioImage { 
+  max-height: 40px;
+  margin: 0 2.5em 0 12px;
+}
+
+.PackMeUpImage-wrapper {
+  width: 100%;
+}
+
+.PackMeUpImage {
+  max-height: 70px;
+  margin: auto;
+  margin-top: 15px;
+}
+
+.NavDrawer-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: auto;
+  /* display: flex; */
+  /* align-items: right;
+  align-content: right;
+  justify-content: right;
+  justify-items: right;
+  margin-left: auto; */
+}
+
+/* .NavDrawer-icon {
+  display: flex;
+  align-items: right;
+  align-content: right;
+  justify-content: right;
+  justify-items: right;
+  margin-left: auto;
+} */
+
+/* .nav a {
+  text-decoration: none;
+} */
 
 /* .nav-title {
   margin-block-start: 0;
@@ -20,7 +60,7 @@
   color: white;
 } */
 
-.navLink {
+/* .navLink {
   font-family: opendyslexicregular;
   display: inline-block;
   color: white;
@@ -30,12 +70,13 @@
   text-decoration: none;
   font-size: 15px;
 
-  /* these last two make the logout button in
-  the nav bar look like another link */
+
   border: none;
   cursor: pointer;
   outline: 0;
-}
+} */
+  /* these last two make the logout button in
+  the nav bar look like another link */
 
 /* .navLink:hover {
   background-color: white;
@@ -43,34 +84,3 @@
 } */
 
 /* Genocchio Productions image: */
-
-.GenocchioImage-wrapper {
-  /* max-height: 42px;
-  float: left; */
-  /* margin: 0px 20px; */
-  margin-right: 25px;
-  margin-left: 12px;
-}
-
-.GenocchioImage { 
-  /* padding-left: 13px;
-  padding-top: 7px;
-  max-width: 100%; */
-  height: 42px;
-}
-
-/* Pack Me Up image: */
-.PackMeUpImage-wrapper {
-  margin: 0px 25px;
-}
-
-.PackMeUpImage {
-  /* padding-top: 18px; */
-  height: 70px;
-}
-
-.NavDrawer-wrapper {
-  /* float: right; */
-  /* margin: 10px; */
-  margin-left: 25px;
-}

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import MenuIcon from '@material-ui/icons/Menu';
-import { SwipeableDrawer, Button, List, ListItem, ListItemText, Divider, IconButton, Box } from '@material-ui/core';
+import { SwipeableDrawer, Button, List, ListItem, ListItemText, Divider, IconButton, Box, Grid } from '@material-ui/core';
 
 //#endregion ⬆⬆ Document setup above. 
 
@@ -30,7 +30,7 @@ function Nav() {
   }
 
   return (
-    <div className="nav">
+    <div className="Nav-wrapper">
 
       <Box className='GenocchioImage-wrapper'>
         <img
@@ -66,7 +66,7 @@ function Nav() {
       </div> */}
 
       <div className='NavDrawer-wrapper'>
-        <NavDrawer />
+        <NavDrawer className="NavDrawer-icon" />
       </div>
 
     </div>

@@ -22,13 +22,20 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 export default function NavDrawer() {
-  const classes = useStyles();
+  //#region ⬇⬇ All state variables below:
   const [open, setOpen] = useState(false);
+  const classes = useStyles();
   const history = useHistory();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  //#endregion ⬆⬆ All state variables above. 
 
 
+  //#region ⬇⬇ Event handlers below:
+  //#endregion ⬆⬆ Event handles above. 
+
+
+  // ⬇ Rendering:
   return (
     <div className="NavDrawer-wrapper">
 
@@ -50,11 +57,13 @@ export default function NavDrawer() {
         <div className={'NavDrawer-menu'}>
           <Box>
             <img src="./images/PMUBlackIcon.svg" height="75"></img>
-            <br /> Pack Me Up!
+            <br />
+            Pack Me Up!
           </Box>
 
           <Divider />
 
+          {/* Conditioning rendering for what menu options are: */}
           {user.id ? (
             // If user is logged in:
             <List>
@@ -126,53 +135,7 @@ export default function NavDrawer() {
 
             </List>
           )}
-
-          {/* <List>
-            <ListItem button onClick={() => history.push(`/dashboard`)}>
-              <HomeOutlinedIcon /> &nbsp;
-              <ListItemText primary={"Dashboard"} />
-            </ListItem>
-
-            <ListItem button onClick={() => history.push(`/createkit`)}>
-              <AddCircleOutlineOutlinedIcon /> &nbsp;
-              <ListItemText primary={"Create Kits"} />
-            </ListItem>
-
-            <ListItem button onClick={() => history.push(`/createevent`)}>
-              <AddBoxOutlinedIcon /> &nbsp;
-              <ListItemText primary={"Create Events"} />
-            </ListItem>
-
-            <ListItem button onClick={() => history.push(`/packingfor`)}>
-              <WorkOutlineOutlinedIcon /> &nbsp;
-              <ListItemText primary={"Start Packing!"} />
-            </ListItem>
-
-            <Divider />
-
-            <ListItem button onClick={() => history.push(`/info`)}>
-              <InfoOutlinedIcon /> &nbsp;
-              <ListItemText primary={"App Info"} />
-            </ListItem>
-
-            <ListItem button onClick={() => history.push(`/about`)}>
-              <HelpOutlineIcon /> &nbsp;
-              <ListItemText primary={"About Us"} />
-            </ListItem>
-
-            <Divider />
-
-            <ListItem button onClick={() => history.push(`/user`)}>
-              <PersonOutlineOutlinedIcon /> &nbsp;
-              <ListItemText primary={"Profile"} />
-            </ListItem>
-
-            <ListItem button onClick={() => dispatch({ type: 'LOGOUT' })}>
-              <ExitToAppIcon /> &nbsp;
-              <ListItemText primary={"Log Out"} />
-            </ListItem>
-
-          </List> */}
+          {/* End conditional rendering for menu options. */}
 
         </div>
       </SwipeableDrawer>

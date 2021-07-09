@@ -7,6 +7,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import { useStyles } from '../MuiStyling/MuiStyling';
+// ⬇ Icons:
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import EditIcon from '@material-ui/icons/EditOutlined';
 //#endregion ⬆⬆ Document setup above. 
@@ -14,6 +16,7 @@ import EditIcon from '@material-ui/icons/EditOutlined';
 
 export default function KitDetail() {
   //#region ⬇⬇ All state variables below:
+  const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
@@ -27,7 +30,6 @@ export default function KitDetail() {
 
 
   //#region ⬇⬇ Event handlers below:
-
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -36,23 +38,16 @@ export default function KitDetail() {
     <div className="KitDetail-wrapper" key={kitDetail?.id}>
 
       <div>
-        <h2>{kitDetail?.id}</h2>
-        <h2>{kitDetail?.kit_name}</h2>
-        <h2>{kitDetail?.kit_description}</h2>
+        <h2>Viewing the Following Kit:</h2>
+        <h3>{kitDetail?.kit_name}</h3>
+        <h3>{kitDetail?.kit_description}</h3>
       </div>
 
       {/* <img
         className="movies-image"
         src={movieDetail?.poster}
         alt={movieDetail?.title}
-      />
-
-      <div className="MovieDetail-description">
-        <h3>Description:</h3>
-        <p>{movieDetail?.description}</p>
-        <h3>Genres:</h3>
-        <p>{movieDetail?.genres}</p>
-      </div> */}
+      /> */}
 
       <div>
         <Button
@@ -60,7 +55,7 @@ export default function KitDetail() {
           onClick={() => history.goBack()}
           variant="outlined"
           color="secondary"
-          size="small"
+          className={classes.buttons}
         >
           <ArrowBackIcon />
         </Button> &nbsp;
@@ -70,7 +65,7 @@ export default function KitDetail() {
           onClick={() => history.push(`/kitedit/${kitDetail?.id}`)}
           variant="outlined"
           color="primary"
-          size="small"
+          className={classes.buttons}
         >
           <EditIcon />
         </Button>
