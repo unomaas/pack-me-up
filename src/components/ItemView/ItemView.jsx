@@ -81,7 +81,7 @@ export default function ItemView({ kit }) {
    * When clicked, this will update the packed status of the item. 
    */
   const handlePacked = item => {
-    console.log('isPacked is:', isPacked);
+    console.log('In handlePacked, item:', item);
     dispatch({ type: 'FLIP_IS_PACKED', payload: item });
   } // End handlePacked
   //#endregion ⬆⬆ Event handles above. 

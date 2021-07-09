@@ -106,7 +106,7 @@ export default function KitView({ event }) {
                   name="submit"
                   onClick={() => handleSubmit(kitToAdd)}
                   color="primary"
-                  size="small"
+                  className={classes.buttons}
                 >
                   <CheckCircleOutlineIcon />
                 </Button>
@@ -131,7 +131,7 @@ export default function KitView({ event }) {
                     name="delete"
                     onClick={() => handleRemove(kit)}
                     color="secondary"
-                    size="small"
+                    className={classes.buttons}
                   >
                     <DeleteIcon />
                   </Button>
