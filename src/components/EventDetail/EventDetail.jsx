@@ -58,7 +58,7 @@ export default function EventDetail() {
       <div>
         <Button
           name="back"
-          onClick={() => history.goBack()}
+          onClick={() => history.push('/dashboard')}
           variant="outlined"
           color="secondary"
           className={classes.buttons}

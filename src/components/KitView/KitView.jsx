@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DeleteIcon from '@material-ui/icons/Delete'; 
 import { useStyles, StyledTableCell, StyledTableRow } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 
 
@@ -133,7 +133,7 @@ export default function KitView({ event }) {
                     color="secondary"
                     size="small"
                   >
-                    <DeleteForeverIcon />
+                    <DeleteIcon />
                   </Button>
                 </TableCell>
               </StyledTableRow>

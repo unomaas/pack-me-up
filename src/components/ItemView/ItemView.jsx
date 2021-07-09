@@ -9,7 +9,8 @@ import { Button, MenuItem, TextField, Table, TableBody, TableCell, TableContaine
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import DeleteIcon from '@material-ui/icons/Delete'; import WorkIcon from '@material-ui/icons/Work';
+import DeleteIcon from '@material-ui/icons/Delete'; 
+import WorkIcon from '@material-ui/icons/Work';
 import WorkOffIcon from '@material-ui/icons/WorkOff';
 import { useStyles, theme, StyledTableCell, StyledTableRow } from '../MuiStyling/MuiStyling';
 //#endregion ⬆⬆ Document setup above. 

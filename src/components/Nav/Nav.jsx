@@ -36,14 +36,28 @@ function Nav() {
         <img
           className='GenocchioImage'
           src="./images/GenLogoWEmbedded.svg"
+          alt="Genocchio Productions Logo"
         />
       </Box>
 
       <div className='PackMeUpImage-wrapper'>
-        <img
-          className='PackMeUpImage'
-          src="./images/PMUWhiteReg-01.svg"
-        />
+        {/* ⬇ Conditioning rendering to switch logos depending on login: */}
+        {user.id ? (
+          // ⬇If the user is logged in, show full logo:
+          <img
+            className='PackMeUpImage'
+            src="./images/PMUWhiteReg-01.svg"
+            alt="Pack Me Up Logo"
+          />
+        ) : (
+          // ⬇ If not logged in, show the icon logo: 
+          <img
+            className='PackMeUpImage'
+            src="./images/PMUWhiteIcon.svg"
+            alt="Pack Me Up Logo"
+          />
+        )}
+
       </div>
 
       {/* <div>
