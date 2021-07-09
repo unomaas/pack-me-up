@@ -38,8 +38,7 @@ export default function KitDetail() {
     <div className="KitDetail-wrapper" key={kitDetail?.id}>
 
       <div>
-        <h2>Viewing the Following Kit:</h2>
-        <h3>{kitDetail?.kit_name}</h3>
+        <h2>Viewing the {kitDetail?.kit_name} Kit</h2>
         <h3>{kitDetail?.kit_description}</h3>
       </div>
 
