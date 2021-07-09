@@ -35,9 +35,9 @@ function LandingPage() {
           </p>
 
           <p>
-            Personally designed from the ground-up by the professional people-person, Ryan Maas, member of the Genocchi cohort, first of his name, code of the Andals, and breaker of bugs.
+            Personally designed from the ground-up by the professional people-person, Ryan Maas, member of the Genocchi cohort, first of his name, coder of the Andals, and breaker of bugs.
           </p>
-          
+
         </div>
         <div className="grid-col grid-col_4">
           <RegisterForm />

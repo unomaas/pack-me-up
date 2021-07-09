@@ -48,11 +48,11 @@ export default function NavDrawer() {
         />
       </IconButton>
 
-      <SwipeableDrawer
+      <Drawer
         anchor="right"
         open={open}
         onClose={() => setOpen(false)}
-        onOpen={() => { }}
+        // onOpen={() => { }}
       >
         <div className={'NavDrawer-menu'}>
           <Box>
@@ -138,7 +138,7 @@ export default function NavDrawer() {
           {/* End conditional rendering for menu options. */}
 
         </div>
-      </SwipeableDrawer>
+      </Drawer>
 
     </div>
   )

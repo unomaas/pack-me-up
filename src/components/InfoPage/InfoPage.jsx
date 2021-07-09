@@ -23,6 +23,12 @@ function InfoPage() {
         -	PostgreSQL
         -	Node
       </p>
+      <h3>Toughest Challenge Overcame:</h3>
+      <p>Being able to re-use components and customize them with conditional rendering depending on which view we’re looking at, while keeping that data synchronous.</p>
+      <h3>Coming Soon:</h3>
+      <p>Ability to add friends and invite them to your events, more easily coordinate group activities.</p>
+      <h3>Special Thanks To:</h3>
+      <p>All of my classmates in the Genocchi cohort for helping me out over these last few weeks, and a huge thanks to our instructor Dane Smith, the Geppetto to us Genocchios, for giving us the tools to get where we are today.</p>
 
 
     </div>
