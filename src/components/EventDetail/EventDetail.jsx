@@ -7,6 +7,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import { useStyles } from '../MuiStyling/MuiStyling';
+// ⬇ Icons:
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import EditIcon from '@material-ui/icons/EditOutlined';
 //#endregion ⬆⬆ Document setup above. 
@@ -14,6 +16,8 @@ import EditIcon from '@material-ui/icons/EditOutlined';
 
 export default function EventDetail() {
   //#region ⬇⬇ All state variables below:
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const history = useHistory();
   const params = useParams();
@@ -34,9 +38,9 @@ export default function EventDetail() {
     <div className="EventDetail-wrapper" key={eventDetail?.id}>
 
       <div>
-        <h2>{eventDetail?.id}</h2>
-        <h2>{eventDetail?.event_name}</h2>
-        <h2>{eventDetail?.event_description}</h2>
+        <h2>Viewing the Following Event:</h2>
+        <h3>{eventDetail?.event_name}</h3>
+        <h3>{eventDetail?.event_description}</h3>
       </div>
 
       {/* <img
@@ -58,7 +62,7 @@ export default function EventDetail() {
           onClick={() => history.goBack()}
           variant="outlined"
           color="secondary"
-          size="small"
+          className={classes.buttons}
         >
           <ArrowBackIcon />
         </Button> &nbsp;
@@ -68,7 +72,7 @@ export default function EventDetail() {
           onClick={() => history.push(`/eventedit/${eventDetail?.id}`)}
           variant="outlined"
           color="primary"
-          size="small"
+          className={classes.buttons}
         >
           <EditIcon />
         </Button>

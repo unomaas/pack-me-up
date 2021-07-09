@@ -156,7 +156,7 @@ export default function KitEdit() {
             onClick={() => history.goBack()}
             variant="outlined"
             color="secondary"
-            size="small"
+            className={classes.buttons}
           >
             <ArrowBackIcon />
           </Button> &nbsp;
@@ -166,7 +166,7 @@ export default function KitEdit() {
             type="submit"
             variant="outlined"
             color="primary"
-            size="small"
+            className={classes.buttons}
           >
             <CheckCircleOutlineIcon />
           </Button> &nbsp;
@@ -176,7 +176,7 @@ export default function KitEdit() {
             onClick={handleDelete}
             variant="outlined"
             color="secondary"
-            size="small"
+            className={classes.buttons}
           >
             <DeleteForeverIcon />
           </Button>
