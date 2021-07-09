@@ -38,8 +38,7 @@ export default function EventDetail() {
     <div className="EventDetail-wrapper" key={eventDetail?.id}>
 
       <div>
-        <h2>Viewing the Following Event:</h2>
-        <h3>{eventDetail?.event_name}</h3>
+        <h2>Viewing the {eventDetail?.event_name} Event</h2>
         <h3>{eventDetail?.event_description}</h3>
       </div>
 
