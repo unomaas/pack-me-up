@@ -7,7 +7,7 @@ import EventItem from '../EventItem/EventItem';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 //#endregion ⬆⬆ Document setup above. 
 
 
@@ -24,6 +24,14 @@ export default function Dashboard() {
       dispatch({ type: 'CLEAR_DETAIL' }),
       dispatch({ type: 'CLEAR_EDIT' })
   }, []); // ⬅ Will re-run this effect if the URL changes. 
+  // useEffect(() => {
+  //   dispatch(
+  //     { type: 'FETCH_ALL_KITS' },
+  //     { type: 'FETCH_ALL_EVENTS' },
+  //     { type: 'CLEAR_DETAIL' },
+  //     { type: 'CLEAR_EDIT' }
+  //   )
+  // }, []); // ⬅ Will re-run this effect if the URL changes. 
   //#endregion ⬆⬆ All state variables above. 
 
 
