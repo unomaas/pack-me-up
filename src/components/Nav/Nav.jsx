@@ -44,18 +44,22 @@ function Nav() {
         {/* ⬇ Conditioning rendering to switch logos depending on login: */}
         {user.id ? (
           // ⬇If the user is logged in, show full logo:
-          <img
-            className='PackMeUpImage'
-            src="./images/PMUWhiteReg-01.svg"
-            alt="Pack Me Up Logo"
-          />
+          <Link to='/dashboard'>
+            <img
+              className='PackMeUpImage'
+              src="./images/PMUWhiteReg-01.svg"
+              alt="Pack Me Up Logo"
+            />
+          </Link>
         ) : (
           // ⬇ If not logged in, show the icon logo: 
-          <img
-            className='PackMeUpImage'
-            src="./images/PMUWhiteIcon.svg"
-            alt="Pack Me Up Logo"
-          />
+          <Link to='/home'>
+            <img
+              className='PackMeUpImage'
+              src="./images/PMUWhiteIcon.svg"
+              alt="Pack Me Up Logo"
+            />
+          </Link>
         )}
 
       </div>
