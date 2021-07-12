@@ -57,4 +57,4 @@ const kitsEditReducer = (state = [], action) => {
 //   kitsEditReducer
 // });
 
-export default kitsReducer();
+export default kitsReducer;
