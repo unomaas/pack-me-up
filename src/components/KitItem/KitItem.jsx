@@ -26,7 +26,8 @@ export default function KitItem({ kit }) {
 
   // ⬇ Rendering:
   return (
-    <div className="KitItem-wrapper" key={kit?.id} >
+    <div className="KitItem-wrapper" key={kit?.id} style={{cursor: "pointer"}}
+    >
 
       <div className="KitItem-name">
         <span onClick={() => history.push(`/kitdetail/${kit.id}`)}>{kit?.kit_name}</span>

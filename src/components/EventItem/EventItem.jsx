@@ -26,7 +26,8 @@ export default function EventItem({ event }) {
 
   // ⬇ Rendering:
   return (
-    <div className="EventItem-wrapper" key={event?.id} >
+    <div className="EventItem-wrapper" key={event?.id} style={{cursor: "pointer"}}
+    >
 
       <div className="EventItem-name">
         <span onClick={() => history.push(`/eventdetail/${event.id}`)}>{event?.event_name}</span>
