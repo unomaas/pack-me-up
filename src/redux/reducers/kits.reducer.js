@@ -50,9 +50,11 @@ const kitsEditReducer = (state = [], action) => {
 } // End kitsEdit Reducer
 
 
-export default combineReducers({
-  kitsReducer,
-  kitsCategoriesReducer,
-  kitsDetailReducer,
-  kitsEditReducer
-});
+// export default combineReducers({
+//   kitsReducer,
+//   kitsCategoriesReducer,
+//   kitsDetailReducer,
+//   kitsEditReducer
+// });
+
+export default kitsReducer();
