@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 // ⬇ kitsReducer:
-const kitsReducer = (state = [], action) => {
+export const kitsReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_ALL_KITS':
       return action.payload;
@@ -50,11 +50,11 @@ const kitsEditReducer = (state = [], action) => {
 } // End kitsEdit Reducer
 
 
-// export default combineReducers({
-//   kitsReducer,
-//   kitsCategoriesReducer,
-//   kitsDetailReducer,
-//   kitsEditReducer
-// });
+export default combineReducers({
+  kitsReducer,
+  kitsCategoriesReducer,
+  kitsDetailReducer,
+  kitsEditReducer
+});
 
-export default kitsReducer;
+// export default kitsReducer;

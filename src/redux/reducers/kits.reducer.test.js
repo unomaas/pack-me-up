@@ -1,5 +1,5 @@
 
-import kitsReducer from './kits.reducer';
+import { kitsReducer } from './kits.reducer';
 
 describe('KITS REDUCER TESTS', () => {
 
