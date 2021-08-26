@@ -1,10 +1,10 @@
-## Pack Me Up - Ryan's Solo Project
+# Pack Me Up - Ryan's Solo Project
 
 Thanks for looking into my solo project, the Pack Me Up web app! 
 
 
 
-# Description
+## Description:
 
 Duration: 2 Week Sprint
 
@@ -20,7 +20,7 @@ This project was initially a 2-week sprint as one of my finals for my software s
 
 
 
-## Prerequisites
+## Prerequisites:
 
 Node.js: https://nodejs.org/en/
 
@@ -28,7 +28,7 @@ PostgreSQL: https://www.postgresql.org/
 
 
 
-## Installation
+## Installation:
 
 To run this program, you will need to:
 
@@ -61,18 +61,18 @@ I strive to make my apps accessible to all!
 This specific app is dyslexia-friendly, with a custom font, "OpenDyslexia", added to the server. 
 
 
-### Built With
+### Built With:
 
 JavaScript/HTML/CSS, React, Redux, Redux Saga, React Router, Passport, Node.js, Express, SQL, Material-ui, Axios, PG. 
 
 
 
-### Acknowledgement
+### Acknowledgement:
 
 I'd like to give thanks to Dane Smith, and everyone in Prime Academy's Genocchi cohort for teaching me everything at Prime Digital Academy!  I wouldn't be here today without them.  
  
 
 
-### Support
+### Support:
 
 If you have suggestions, comments, or issues, please contact me at rdmjobs@live.com.  Thanks for reviewing my project!  Stay wonderful. <3
