@@ -22,9 +22,9 @@ This project was initially a 2-week sprint as one of my finals for my software s
 
 ## Prerequisites:
 
-Node.js: https://nodejs.org/en/
+- Node.js: https://nodejs.org/en/
 
-PostgreSQL: https://www.postgresql.org/
+- PostgreSQL: https://www.postgresql.org/
 
 
 
@@ -32,25 +32,25 @@ PostgreSQL: https://www.postgresql.org/
 
 To run this program, you will need to:
 
-[] Build the database in your SQL server with the code in "database.sql" file. 
+- [] Build the database in your SQL server with the code in "database.sql" file. 
 
-[] Run 'npm install' in your terminal to install the dependencies.
+- [] Run 'npm install' in your terminal to install the dependencies.
 
-[] Run 'npm run server' in one terminal, and 'npm run client' in another terminal.
+- [] Run 'npm run server' in one terminal, and 'npm run client' in another terminal.
 
 
 
-## Usage
+## Usage:
 
-#1. To use this app, start the server and client in your terminal.  React will navigate to http://localhost:3000/ in your browser.  
+- #1. To use this app, start the server and client in your terminal.  React will navigate to http://localhost:3000/ in your browser.  
 
-#2. The app will require the user to register, and then take them to the dashboard.  
+- #2. The app will require the user to register, and then take them to the dashboard.  
 
-#3. A user should start with creating different kits.  Upon creating, those kits will be populated on their dashboard.  They're able to see the detailed view by clicking on them, and adding items.  
+- #3. A user should start with creating different kits.  Upon creating, those kits will be populated on their dashboard.  They're able to see the detailed view by clicking on them, and adding items.  
 
-#4. Then the user should do the same with creating an event, clicking on it in the dashboard, and attaching kits to bring to it.
+- #4. Then the user should do the same with creating an event, clicking on it in the dashboard, and attaching kits to bring to it.
 
-#5. When ready to pack, the user will click the Packing button, which will prompt them to select the event, and then populate every kit attached to that event.  From there, the user can cross off each item as packed, and when ready, click the button to start the trip. 
+- #5. When ready to pack, the user will click the Packing button, which will prompt them to select the event, and then populate every kit attached to that event.  From there, the user can cross off each item as packed, and when ready, click the button to start the trip. 
 
 
 
