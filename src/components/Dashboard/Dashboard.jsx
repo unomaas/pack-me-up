@@ -36,6 +36,9 @@ export default function Dashboard() {
 
 
   //#region ⬇⬇ Event handlers below:
+  const handleFile = (event) => {
+    console.log('In handleFile, file:', event);
+  }; // End handleChange
   //#endregion ⬆⬆ Event handles above. 
 
 
@@ -73,6 +76,25 @@ export default function Dashboard() {
           size="small"
         >
           Start Packing!
+        </Button>
+      </div>
+
+      <div>
+        Test Test Test
+        <br />
+        <Button
+          variant="contained"
+          component="label"
+          // onClick={event => handleFile(event.target.value)}
+          onChange={event => handleFile(event.target.value)}
+        >
+          Upload File
+          <input
+            type="file"
+            hidden
+            style={{ display: 'none' }}
+
+          />
         </Button>
       </div>
 
