@@ -4,7 +4,7 @@ import './Dashboard.css';
 import KitItem from '../KitItem/KitItem';
 import EventItem from '../EventItem/EventItem';
 // ⬇ Dependent functionality:
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, IconButton } from '@material-ui/core';
@@ -17,6 +17,8 @@ export default function Dashboard() {
   const history = useHistory();
   const events = useSelector((store) => store.eventsReducer.eventsReducer);
   const kits = useSelector((store) => store.kitsReducer.kitsReducer);
+  const [selectedFile, setSelectedFile] = useState();
+  
   // ⬇ GET on page load:
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL_KITS' }),
@@ -38,9 +40,12 @@ export default function Dashboard() {
   //#region ⬇⬇ Event handlers below:
   const handleFile = (event) => {
     console.log('In handleFile, file:', event);
+    setSelectedFile(event);
+    console.log('selectedFile is:', selectedFile);
   }; // End handleChange
   //#endregion ⬆⬆ Event handles above. 
 
+  console.log('selectedFile is:', selectedFile);
 
   // ⬇ Rendering:
   return (
@@ -76,25 +81,6 @@ export default function Dashboard() {
           size="small"
         >
           Start Packing!
-        </Button>
-      </div>
-
-      <div>
-        Test Test Test
-        <br />
-        <Button
-          variant="contained"
-          component="label"
-          // onClick={event => handleFile(event.target.value)}
-          onChange={event => handleFile(event.target.value)}
-        >
-          Upload File
-          <input
-            type="file"
-            hidden
-            style={{ display: 'none' }}
-
-          />
         </Button>
       </div>
 
