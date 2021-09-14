@@ -3,6 +3,7 @@
 import './Dashboard.css';
 import KitItem from '../KitItem/KitItem';
 import EventItem from '../EventItem/EventItem';
+import KitCard from '../KitCard/KitCard';
 // ⬇ Dependent functionality:
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -88,6 +89,13 @@ export default function Dashboard() {
         <h2>List of Your Kits:</h2>
         {kits.map(kit => {
           return <KitItem key={kit.id} kit={kit} />
+        })}
+      </div>
+
+      <div>
+        <h2>Card Test</h2>
+        {kits.map(kit => {
+          return <KitCard key={kit.id} kit={kit} />
         })}
       </div>
 
